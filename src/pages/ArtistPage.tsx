@@ -1,16 +1,18 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { useGetArtistByIdQuery } from "../redux/features/apiDeezerSlice";
+import Playlists from "../components/artist/Playlists";
+import SimilarArtists from "../components/artist/SimilarArtists";
+import { useGetArtistByIdQuery, useGetArtistPlaylistsQuery, useGetRelatedArtistsQuery } from "../redux/features/apiDeezerSlice";
 
 
-const StyledArtistPage = styled('div')`
-    margin: 20px;
+const StyledArtistPage = styled(Container)`
+   margin-top: 100px;
 
     .artist {
         display: flex;
-        margin-left: 20px;
+        margin-bottom: 30px;
 
         .artist-img {
             max-width: 200px;
@@ -20,7 +22,7 @@ const StyledArtistPage = styled('div')`
             img {
                 width: 100%;
                 height: 100%;
-                border-radius: 50%;
+                border-radius: 100%;
             }
         }
 
@@ -38,21 +40,27 @@ const ArtistPage = () => {
 
     const { id } = useParams();
     const { data: artist, isLoading } = useGetArtistByIdQuery(id || '');
-    console.log('artist: ', artist);
+    const { data: relatedArtists } = useGetRelatedArtistsQuery(id || '');
+    const { data: playlistResponse } = useGetArtistPlaylistsQuery(id || '');
+
 
     return (
         <StyledArtistPage>
-          
-            <Box className="artist">
+
+            {artist && <Box className="artist">
                 <Box className="artist-img">
-                    <img src={artist?.picture_big} alt="artist-picture" />
+                    <img src={artist.picture_big} alt="artist-picture" />
                 </Box>
                 <Box className="artist-details">
                     <Typography variant="h5">{artist?.name}</Typography>
-                    <Typography variant="subtitle2" color="secondary"> {artist?.nb_fan} listeners</Typography>
-                    
+                    <Typography variant="subtitle2" color="secondary"> {new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
+
                 </Box>
-            </Box>
+            </Box>}
+
+
+            {relatedArtists && <SimilarArtists artists={relatedArtists.data} />}
+            {playlistResponse && <Playlists playlists={playlistResponse.data} />}
         </StyledArtistPage>
     )
 }
