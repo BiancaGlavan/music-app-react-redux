@@ -2,13 +2,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '../store';
 
 export interface IArtist {
+    id: number;
     name: string;
     picture_big: string;
     nb_album: number;
     nb_fan: number;
     picture: string;
     type: string;
-    id: number;
+
 }
 
 interface IRelatedArtistsResponse {
@@ -68,6 +69,51 @@ interface IArtistAlbumsResponse {
     total: number;
 }
 
+type IChartsArtist  = Omit<IArtist, "nb_fan" | "nb_album">;
+
+interface IChartsAlbum extends IAlbum {
+    artist: IChartsArtist;
+}
+
+interface IChartsPlaylist extends IPlaylist {
+    public: boolean;
+    nb_tracks: number;
+    creation_date: string;
+    type: string;
+}
+
+interface IChartsTrack {
+    id: number;
+    title: string;
+    duration: number;
+    preview: string;
+    artist: IChartsArtist;
+    album: IChartsAlbum;
+    type: string;
+}
+
+interface IChartsResponse {
+    albums: {
+        data: IChartsAlbum[];
+        total: number;
+    };
+    playlists: {
+        data: IChartsPlaylist[];
+        total: number;
+    };
+    artists: {
+        data: IChartsArtist[];
+        total: number;
+    };
+    tracks: {
+        data: IChartsTrack[];
+        total: number;
+    }
+    
+}
+
+
+
 export const deezerApi = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
@@ -90,6 +136,9 @@ export const deezerApi = createApi({
         getArtistAlbums: builder.query<IArtistAlbumsResponse, number | string>({
             query: (artistId: number | string) =>`artist/${artistId}/albums`
         }),
+        getCharts: builder.query<IChartsResponse, void>({
+            query: () => 'chart'
+        })
 
        
     }),
@@ -101,6 +150,7 @@ export const {
     useGetArtistPlaylistsQuery,
     useGetArtistAlbumsQuery,
     useGetArtistTopSongsQuery,
+    useGetChartsQuery,
 } = deezerApi;
 
 export default deezerApi;
