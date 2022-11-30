@@ -7,7 +7,29 @@ interface IPropsPlaylists {
 }
 
 const StyledPlaylists = styled('div')`
+  .title {
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
 
+  .artist-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .artist-details {
+    text-align: center;
+  }
+
+  .artist-picture {
+    max-width: 170px;
+     img {
+         width: 100%;
+         border-radius: 7px;
+         object-fit: cover;
+     }
+ }
 `;
 
 const Playlists = ({playlists}: IPropsPlaylists) => {
@@ -15,11 +37,11 @@ const Playlists = ({playlists}: IPropsPlaylists) => {
     <StyledPlaylists>
         <Typography className="title" variant="h5">Playlists</Typography>
         <Grid container spacing={10} >
-                {playlists.map((playlist) => <Grid item className="artist-container" key={playlist?.id}  xs={12} sm={8}  md={4} lg={3}>
+                {playlists.map((playlist) => <Grid item className="artist-container" key={playlist?.id}  xs={12} sm={6}  md={4} lg={3}>
                     <Box className="artist-picture">
-                        <img src={playlist?.picture} alt="artist picture" />
+                        <img src={playlist?.picture_medium} alt="artist picture" />
                     </Box>
-                    <Typography className="artist-details" variant="h6">{playlist?.title}</Typography>
+                    <Typography className="artist-details" variant="subtitle1">{playlist?.title}</Typography>
                     <Typography className="artist-details" variant="subtitle2" color="secondary">Created by {playlist?.user.name}</Typography>
                 </Grid>)}
             </Grid>

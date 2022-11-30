@@ -11,6 +11,7 @@ const StyledSimilarArtist = styled('div')`
 
     .title {
         margin-bottom: 30px;
+        margin-top: 30px;
       
     }
 
@@ -23,9 +24,7 @@ const StyledSimilarArtist = styled('div')`
             text-align: center;
         }
 
-        .name {
-
-        }
+    
       
     }
 
