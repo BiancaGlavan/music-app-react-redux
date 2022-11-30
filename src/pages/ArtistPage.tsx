@@ -1,10 +1,12 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Divider, Tab, Tabs, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
+import ArtistAlbums from "../components/artist/ArtistAlbums";
 import Playlists from "../components/artist/Playlists";
 import SimilarArtists from "../components/artist/SimilarArtists";
-import { useGetArtistByIdQuery, useGetArtistPlaylistsQuery, useGetRelatedArtistsQuery } from "../redux/features/apiDeezerSlice";
+import { useGetArtistAlbumsQuery, useGetArtistByIdQuery, useGetArtistPlaylistsQuery, useGetRelatedArtistsQuery } from "../redux/features/apiDeezerSlice";
 
 
 const StyledArtistPage = styled(Container)`
@@ -42,8 +44,12 @@ const ArtistPage = () => {
     const { data: artist, isLoading } = useGetArtistByIdQuery(id || '');
     const { data: relatedArtists } = useGetRelatedArtistsQuery(id || '');
     const { data: playlistResponse } = useGetArtistPlaylistsQuery(id || '');
+    const { data: albumsResponse } = useGetArtistAlbumsQuery(id || '');
+    const [activeTab, setActiveTab] = useState('overview');
 
-
+    const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+        setActiveTab(newValue);
+      };
     return (
         <StyledArtistPage>
 
@@ -57,10 +63,28 @@ const ArtistPage = () => {
 
                 </Box>
             </Box>}
-
-
-            {relatedArtists && <SimilarArtists artists={relatedArtists.data} />}
-            {playlistResponse && <Playlists playlists={playlistResponse.data} />}
+            <Box>
+                <Tabs
+                    value={activeTab}
+                    onChange={handleTabChange}
+                    aria-label="wrapped label tabs example"
+                >
+                    <Tab
+                        value="overview"
+                        label="Overview"
+                        wrapped
+                    />
+                    <Tab value="albums" label="Albums" />
+                    <Tab value="playlists" label="Playlists" />
+                    <Tab value="related" label="Similar Artists" />
+                </Tabs>
+                <Divider />
+            </Box>
+            {activeTab === 'overview' && <div>Overview Tab</div>}
+            {albumsResponse && activeTab === 'albums' && <ArtistAlbums albums={albumsResponse.data} />}
+            {relatedArtists && activeTab === 'related' && <SimilarArtists artists={relatedArtists.data} />}
+            {playlistResponse && activeTab === 'playlists' && <Playlists playlists={playlistResponse.data} />}
+            
         </StyledArtistPage>
     )
 }
