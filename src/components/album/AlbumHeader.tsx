@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import secondsToAlbumTime from "../../helpers/timeFormater";
 import { IAlbumResponse } from "../../redux/features/apiDeezerSlice";
 
@@ -52,8 +53,11 @@ const AlbumHeader = ({ album }: IPropsAlbumHeader) => {
                     {album.title}
                 </Typography>
                 <Box className="artist">
-                    <img className="artist-img" src={album.artist.picture} alt="" />
-                    <Typography variant="subtitle1">{album.artist.name}</Typography>
+                    <Link to={`/artists/${album.artist.id}`}>
+                        <img className="artist-img" src={album.artist.picture} alt="" /></Link>
+                    <Link to={`/artists/${album.artist.id}`}>
+                        <Typography variant="subtitle1">{album.artist.name}</Typography></Link>
+                   
                 </Box>
                 <Box className="album-details">
                     <Typography className="details" color="textSecondary" variant="caption">{album.nb_tracks} tracks</Typography>

@@ -44,6 +44,7 @@ const StyledTrack = styled(Paper)`
             border-radius: 20px;
             display: none;
             cursor: pointer;
+            
 
             .icon {
                 width: 100%;
