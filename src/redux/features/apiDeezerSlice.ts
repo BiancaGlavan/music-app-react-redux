@@ -42,7 +42,7 @@ interface ISongAlbum {
     cover_small: string;
 }
 
-interface ISong {
+export interface ISong {
     id: number;
     title: string;
     preview: string;
@@ -128,10 +128,11 @@ interface IGenresResponse {
     total: number;
 }
 
-interface IAlbumResponse {
+export interface IAlbumResponse {
     id: number;
     title: string;
     cover_medium: string;
+    cover_small: string;
     genres: {
         data: Omit<IGenre, 'picture_medium'>[];
     };
