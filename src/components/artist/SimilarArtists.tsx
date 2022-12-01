@@ -51,7 +51,7 @@ const SimilarArtists = ({ artists }: IPropsSimilarArtists) => {
                             <img src={artist.picture} alt="artist picture" />
                         </Box>
                         <Typography className="artist-details name" variant="subtitle1">{artist.name}</Typography>
-                        <Typography className="artist-details" variant="subtitle2" color="secondary">{new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
+                        <Typography className="artist-details" variant="subtitle2" color="textSecondary">{new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
                     </Link>
                 </Grid>)}
             </Grid>

@@ -59,7 +59,7 @@ const ArtistPage = () => {
                 </Box>
                 <Box className="artist-details">
                     <Typography variant="h5">{artist?.name}</Typography>
-                    <Typography variant="subtitle2" color="secondary"> {new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
+                    <Typography variant="subtitle2" color="textSecondary"> {new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
 
                 </Box>
             </Box>}

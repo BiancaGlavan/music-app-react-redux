@@ -45,7 +45,7 @@ const ArtistAlbums = ({albums}: IPropsArtistAlbums) => {
                         <img src={album?.cover_medium} alt="artist picture" />
                     </Box>
                     <Typography className="artist-details" variant="subtitle1">{album?.title}</Typography>
-                    <Typography className="artist-details" variant="subtitle2" color="secondary">Released on {album?.release_date}</Typography>
+                    <Typography className="artist-details" variant="subtitle2" color="textSecondary">Released on {album?.release_date}</Typography>
                 </Grid>)}
             </Grid>
     </StyledArtistAlbums>

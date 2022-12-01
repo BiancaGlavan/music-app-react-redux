@@ -34,7 +34,7 @@ interface IArtistPlaylistsResponse {
     total: number;
 }
 
-interface IAlbum {
+interface ISongAlbum {
     id: number;
     title: string;
     cover: string;
@@ -49,7 +49,7 @@ interface ISong {
     explicit_lyrics: boolean;
     type: string;
     duration: number;
-    album: IAlbum;
+    album: ISongAlbum;
 }
 
 interface IArtistTopSongsResponse {
@@ -57,7 +57,7 @@ interface IArtistTopSongsResponse {
     total: number;
 }
 
-export interface IArtistAlbum extends IAlbum {
+export interface IArtistAlbum extends ISongAlbum {
     genre_id: number;
     fans: number;
     release_date: string;
@@ -71,7 +71,7 @@ interface IArtistAlbumsResponse {
 
 type IChartsArtist  = Omit<IArtist, "nb_fan" | "nb_album">;
 
-interface IChartsAlbum extends IAlbum {
+interface IChartsAlbum extends ISongAlbum {
     artist: IChartsArtist;
 }
 
@@ -112,6 +112,36 @@ interface IChartsResponse {
     
 }
 
+export interface IGenre {
+    id: number;
+    name: string;
+    picture: string;
+    picture_medium: string;
+}
+
+interface IGenresResponse {
+    data: IGenre[];
+    total: number;
+}
+
+interface IAlbumResponse {
+    id: number;
+    title: string;
+    cover_medium: string;
+    genres: {
+        data: Omit<IGenre, 'picture_medium'>[];
+    };
+    nb_tracks: number;
+    label: string;
+    fans: number;
+    duration: number;
+    release_date: string;
+    available: boolean;
+    artist: IChartsArtist;
+    tracks: {
+        data: ISong[];
+    };
+}
 
 
 export const deezerApi = createApi({
@@ -138,7 +168,13 @@ export const deezerApi = createApi({
         }),
         getCharts: builder.query<IChartsResponse, void>({
             query: () => 'chart'
-        })
+        }),
+        getGenres: builder.query<IGenresResponse, void>({
+            query: () => 'editorial'
+        }),
+        getAlbumById: builder.query<IAlbumResponse, number | string>({
+            query: (albumId: number | string) => `album/${albumId}`,
+        }),
 
        
     }),
@@ -151,6 +187,8 @@ export const {
     useGetArtistAlbumsQuery,
     useGetArtistTopSongsQuery,
     useGetChartsQuery,
+    useGetGenresQuery,
+    useGetAlbumByIdQuery,
 } = deezerApi;
 
 export default deezerApi;

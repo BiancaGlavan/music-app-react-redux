@@ -42,7 +42,7 @@ const Playlists = ({playlists}: IPropsPlaylists) => {
                         <img src={playlist?.picture_medium} alt="artist picture" />
                     </Box>
                     <Typography className="artist-details" variant="subtitle1">{playlist?.title}</Typography>
-                    <Typography className="artist-details" variant="subtitle2" color="secondary">Created by {playlist?.user.name}</Typography>
+                    <Typography className="artist-details" variant="subtitle2" color="textSecondary">Created by {playlist?.user.name}</Typography>
                 </Grid>)}
             </Grid>
     </StyledPlaylists>
