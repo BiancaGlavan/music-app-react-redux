@@ -1,5 +1,6 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import { IArtistAlbum } from "../../redux/features/apiDeezerSlice";
 
 interface IPropsArtistAlbums {
@@ -40,12 +41,14 @@ const ArtistAlbums = ({albums}: IPropsArtistAlbums) => {
     <StyledArtistAlbums>
         <Typography className="title" variant="h5">Albums</Typography>
         <Grid container spacing={10} >
-                {albums.map((album) => <Grid item className="artist-container" key={album?.id}  xs={12} sm={6}  md={4} lg={3}>
-                    <Box className="artist-picture">
+                {albums.map((album) => <Grid item  key={album?.id}  xs={12} sm={6}  md={4} lg={3}>
+                   <Link className="artist-container" to={`/album/${album.id}`}>
+                   <Box className="artist-picture">
                         <img src={album?.cover_medium} alt="artist picture" />
                     </Box>
                     <Typography className="artist-details" variant="subtitle1">{album?.title}</Typography>
                     <Typography className="artist-details" variant="subtitle2" color="textSecondary">Released on {album?.release_date}</Typography>
+                   </Link>
                 </Grid>)}
             </Grid>
     </StyledArtistAlbums>

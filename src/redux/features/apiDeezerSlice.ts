@@ -50,6 +50,10 @@ interface ISong {
     type: string;
     duration: number;
     album: ISongAlbum;
+    artist: {
+        id: number;
+        name: string;
+    };
 }
 
 interface IArtistTopSongsResponse {
@@ -143,6 +147,27 @@ interface IAlbumResponse {
     };
 }
 
+interface IPlaylistResponse {
+    id: number;
+    title: string;
+    description: string;
+    public: boolean;
+    duration: number;
+    nb_tracks: number;
+    fans: number;
+    picture: string;
+    picture_medium: string;
+    creation_date: string;
+    creator: {
+        id: number;
+        name: string;
+    };
+    tracks: {
+        data: ISong[];
+    };
+    
+}
+
 
 export const deezerApi = createApi({
     reducerPath: 'api',
@@ -175,6 +200,9 @@ export const deezerApi = createApi({
         getAlbumById: builder.query<IAlbumResponse, number | string>({
             query: (albumId: number | string) => `album/${albumId}`,
         }),
+        getPlaylistById: builder.query<IPlaylistResponse, number | string>({
+            query: (playlistId: number | string) => `playlist/${playlistId}`,
+        }),
 
        
     }),
@@ -189,6 +217,7 @@ export const {
     useGetChartsQuery,
     useGetGenresQuery,
     useGetAlbumByIdQuery,
+    useGetPlaylistByIdQuery,
 } = deezerApi;
 
 export default deezerApi;
