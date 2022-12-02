@@ -20,7 +20,8 @@ const SidebarMenu = () => {
   return (
     <StyledSidebar square className="SidebarMenu">
         <List>
-          <ListItem disablePadding>
+         <Link to={'/'}>
+         <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 <HomeOutlinedIcon/>
@@ -28,6 +29,8 @@ const SidebarMenu = () => {
               <ListItemText primary="Home" />
             </ListItemButton>
           </ListItem>
+         </Link>
+          <Link to={'/explore'}>
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -36,6 +39,7 @@ const SidebarMenu = () => {
               <ListItemText primary="Explore" />
             </ListItemButton>
           </ListItem>
+          </Link>
         </List>
     </StyledSidebar>
   )

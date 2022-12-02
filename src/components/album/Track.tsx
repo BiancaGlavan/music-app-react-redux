@@ -6,6 +6,7 @@ import PauseCircleFilledOutlinedIcon from '@mui/icons-material/PauseCircleFilled
 import classNames from "classnames";
 import { secondsToSongTime } from "../../helpers/timeFormater";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import { Link } from "react-router-dom";
 
 interface IPropsTrack {
     track: ISong;
@@ -76,6 +77,11 @@ const StyledTrack = styled(Paper)`
         margin-right: 20px;
     }
 
+    .artist-name {
+        &:hover {
+            color: ${props => props.theme.palette.text.primary};
+        }
+    }
     
 `;
 
@@ -94,7 +100,9 @@ const Track = ({ track, cover, trackNr, isActive = false, isPlaying = false }: I
             <Typography className="track-nr" variant="subtitle1">{trackNr}</Typography>
             <Box className="track-artist">
                 <Typography variant="subtitle1">{track.title}</Typography>
-                <Typography variant="caption" color="textSecondary">{track.artist.name}</Typography>
+               <Link to={`/artists/${track.artist.id}`}>
+               <Typography className="artist-name" variant="caption" color="textSecondary">{track.artist.name}</Typography>
+               </Link>
             </Box>
             <Box className="more">
                 <IconButton>

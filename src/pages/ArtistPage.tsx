@@ -67,12 +67,11 @@ const ArtistPage = () => {
                 <Tabs
                     value={activeTab}
                     onChange={handleTabChange}
-                    aria-label="wrapped label tabs example"
                 >
                     <Tab
                         value="overview"
                         label="Overview"
-                        wrapped
+                        
                     />
                     <Tab value="albums" label="Albums" />
                     <Tab value="playlists" label="Playlists" />

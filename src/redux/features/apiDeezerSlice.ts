@@ -148,7 +148,7 @@ export interface IAlbumResponse {
     };
 }
 
-interface IPlaylistResponse {
+export interface IPlaylistResponse {
     id: number;
     title: string;
     description: string;
