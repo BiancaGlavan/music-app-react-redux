@@ -8,6 +8,7 @@ import { Box, IconButton, Typography } from "@mui/material";
 import { useRef } from "react";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { Link } from "react-router-dom";
 
 
 interface IPropsContentSlider {
@@ -78,9 +79,11 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
         return artists.map((artist, idx) => <SwiperSlide key={artist.id} className="swiper-slide">
             <Box className="content-slide">
                 <img className="slide-img" src={artist.picture} alt="" />
-                <Typography variant="subtitle2">
+             <Link to={`/artists/${artist.id}`}>
+             <Typography variant="subtitle2">
                     {artist.name}
                 </Typography>
+             </Link>
             </Box>
         </SwiperSlide>);
     }
@@ -89,9 +92,11 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
         return albums.map((album, idx) => <SwiperSlide key={album.id} className="swiper-slide">
             <Box className="content-slide">
                 <img className="slide-img" src={album.cover} alt="" />
+                <Link to={`/album/${album.id}`}>
                 <Typography variant="subtitle2">
                     {album.title}
                 </Typography>
+                </Link>
                 <Typography variant="caption">
                     {album.artist.name}
                 </Typography>
@@ -103,9 +108,11 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
         return playlists.map((playlist, idx) => <SwiperSlide key={playlist.id} className="swiper-slide">
             <Box className="content-slide">
                 <img className="slide-img" src={playlist.picture} alt="" />
+                <Link to={`/playlist/${playlist.id}`}>
                 <Typography variant="subtitle2">
                     {playlist.title}
                 </Typography>
+                </Link>
                 <Typography variant="caption">
                     Created by: {playlist.user.name}
                 </Typography>

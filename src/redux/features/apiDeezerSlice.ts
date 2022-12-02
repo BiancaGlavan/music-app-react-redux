@@ -169,6 +169,10 @@ export interface IPlaylistResponse {
     
 }
 
+interface IGenreArtistsResponse {
+    data: IChartsArtist[];
+}
+
 
 export const deezerApi = createApi({
     reducerPath: 'api',
@@ -204,7 +208,9 @@ export const deezerApi = createApi({
         getPlaylistById: builder.query<IPlaylistResponse, number | string>({
             query: (playlistId: number | string) => `playlist/${playlistId}`,
         }),
-
+        getArtistsByGenre: builder.query<IGenreArtistsResponse, number | string>({
+            query: (genreId: number | string) => `genre/${genreId}/artists`
+        }),
        
     }),
 });
@@ -219,6 +225,7 @@ export const {
     useGetGenresQuery,
     useGetAlbumByIdQuery,
     useGetPlaylistByIdQuery,
+    useGetArtistsByGenreQuery,
 } = deezerApi;
 
 export default deezerApi;

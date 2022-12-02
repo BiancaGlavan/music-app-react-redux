@@ -28,14 +28,14 @@ const StyledSimilarArtist = styled('div')`
       
     }
 
-     .artist-picture {
+    .artist-picture {
        
         img {
             width: 100%;
             border-radius: 50%;
             object-fit: cover;
         }
-        
+    }
    
 `;
 
