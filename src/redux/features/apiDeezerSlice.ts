@@ -73,20 +73,20 @@ interface IArtistAlbumsResponse {
     total: number;
 }
 
-type IChartsArtist  = Omit<IArtist, "nb_fan" | "nb_album">;
+export type IChartsArtist  = Omit<IArtist, "nb_fan" | "nb_album">;
 
-interface IChartsAlbum extends ISongAlbum {
+export interface IChartsAlbum extends ISongAlbum {
     artist: IChartsArtist;
 }
 
-interface IChartsPlaylist extends IPlaylist {
+export interface IChartsPlaylist extends IPlaylist {
     public: boolean;
     nb_tracks: number;
     creation_date: string;
     type: string;
 }
 
-interface IChartsTrack {
+export interface IChartsTrack {
     id: number;
     title: string;
     duration: number;
