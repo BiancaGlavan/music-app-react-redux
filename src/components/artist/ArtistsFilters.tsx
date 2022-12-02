@@ -17,7 +17,7 @@ const StyledArtistsFilters = styled('div')`
         margin: 10px;
 
         &.active {
-            background: red;
+            background: ${props => props.theme.palette.primary.main};
         }
     }
 `;

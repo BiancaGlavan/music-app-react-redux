@@ -8,12 +8,16 @@ interface IPropsArtistsList {
     artists: IChartsArtist[];
 }
 
-const StyledArtistsList = styled('div')``;
+const StyledArtistsList = styled('div')`
+    .title {
+        margin: 20px 0;
+    }
+`;
 
 const ArtistsList = ({artists}: IPropsArtistsList) => {
   return (
     <StyledArtistsList>
-        <Typography variant="h6">Explore Artists by Genre</Typography>
+        <Typography className="title" variant="h6">Explore Artists by Genre</Typography>
         <Grid container spacing={10}>
             {artists.map((artist, idx) => <Grid item key={artist.id} xs={6} sm={4} md={4} lg={3}>
                 <Link to={`/artists/${artist.id}`}>
