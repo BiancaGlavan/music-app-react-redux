@@ -14,6 +14,7 @@ interface IPropsTrack {
     trackNr: number;
     isActive?: boolean;
     isPlaying?: boolean;
+    onAddTrack?: () => void;
 }
 
 const StyledTrack = styled(Paper)`
@@ -85,12 +86,12 @@ const StyledTrack = styled(Paper)`
     
 `;
 
-const Track = ({ track, cover, trackNr, isActive = false, isPlaying = false }: IPropsTrack) => {
+const Track = ({ track, cover, trackNr, isActive = false, isPlaying = false, onAddTrack = () => {} }: IPropsTrack) => {
     return (
         <StyledTrack className="Track" elevation={isActive ? 5 : 1}>
             <Box className="cover">
-                <img src={cover} alt="track-cover" />
-                <Box className={classNames("play-pause", { active: isActive, playing: isPlaying })}>
+                <img src={track.album.cover || cover} alt="track-cover" />
+                <Box onClick={onAddTrack} className={classNames("play-pause", { active: isActive, playing: isPlaying })}>
                     {isPlaying ? <PauseCircleFilledOutlinedIcon className="icon pause" /> : <PlayCircleFilledOutlinedIcon className="icon play" />}
                     {/* {isActive && isPlaying ? <PauseCircleFilledOutlinedIcon className="icon pause" /> : <PlayCircleFilledOutlinedIcon className="icon play" />} */}
                 </Box>
