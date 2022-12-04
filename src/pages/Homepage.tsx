@@ -12,6 +12,7 @@ const Homepage = () => {
   console.log('charts: ', charts);
   return (
     <StyledHomepage className="Homepage">
+      {isLoading && 'Is Loading...'}
       {!isLoading && charts && <ContentSlider type="album" albums={charts.albums.data}/>}
       {!isLoading && charts && <ContentSlider type="playlist" playlists={charts.playlists.data}/>}
       {!isLoading && charts && <ContentSlider type="track" tracks={charts.tracks.data}/>}

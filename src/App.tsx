@@ -17,6 +17,7 @@ const StyledApp = styled('div')`
   .page-content {
     flex-grow: 1;
     padding-top: 60px;
+    padding-bottom: 150px;
   }
 `;
 

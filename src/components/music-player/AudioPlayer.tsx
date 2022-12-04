@@ -63,7 +63,7 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
 
 
     return (
-        <StyledAudioPlayer className="AudioPlayer">
+        <StyledAudioPlayer className="AudioPlayer" variant="outlined">
             <Box className="artist-info">
                 <img src={playerState.activeSong?.album.cover_small} alt="" />
                 <Box className="artist-name-and-song">
@@ -85,7 +85,7 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
                         <SkipPreviousOutlinedIcon />
                     </IconButton>
                     <IconButton>
-                        <PlayCircleFilledOutlinedIcon />
+                        <PlayCircleFilledOutlinedIcon fontSize="large"/>
                     </IconButton>
                     <IconButton>
                         <SkipNextOutlinedIcon />

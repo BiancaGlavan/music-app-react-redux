@@ -177,7 +177,7 @@ interface IGenreArtistsResponse {
 export const deezerApi = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://cors-anywhere-iw1d.onrender.com/https://api.deezer.com/',
+        baseUrl: 'https://rich-veil-clam.cyclic.app/https://api.deezer.com/',
     }),
     endpoints: (builder) => ({
 

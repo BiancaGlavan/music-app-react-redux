@@ -16,6 +16,7 @@ const AlbumPage = () => {
 
   return (
     <StyledAlbumPage>
+        {isLoading && 'Is Loading...'}
         {!isLoading && album && <AlbumHeader album={album}/>}
         {!isLoading && album && <TrackList cover={album.cover_small} tracks={album.tracks.data}/>}
     </StyledAlbumPage>

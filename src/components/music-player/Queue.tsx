@@ -1,6 +1,7 @@
 import { Box, Button, Drawer } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
+import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 
 const StyledQueue = styled(Box)`
 
@@ -26,7 +27,7 @@ const Queue = () => {
 
 
     <StyledQueue>
-      <Button variant="contained" onClick={handleDrawerToggle}>
+      <Button variant="outlined" onClick={handleDrawerToggle} startIcon={<QueueMusicIcon />}>
         Queue
       </Button>
       <Drawer
