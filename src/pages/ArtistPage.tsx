@@ -6,11 +6,12 @@ import { useParams } from "react-router-dom";
 import ArtistAlbums from "../components/artist/ArtistAlbums";
 import Playlists from "../components/artist/Playlists";
 import SimilarArtists from "../components/artist/SimilarArtists";
+import NavigateBack from "../components/NavigateBack";
 import { useGetArtistAlbumsQuery, useGetArtistByIdQuery, useGetArtistPlaylistsQuery, useGetRelatedArtistsQuery } from "../redux/features/apiDeezerSlice";
 
 
 const StyledArtistPage = styled(Container)`
-   margin-top: 100px;
+   
 
     .artist {
         display: flex;
@@ -52,7 +53,7 @@ const ArtistPage = () => {
       };
     return (
         <StyledArtistPage>
-
+            <NavigateBack />
             {artist && <Box className="artist">
                 <Box className="artist-img">
                     <img src={artist.picture_big} alt="artist-picture" />

@@ -2,11 +2,12 @@ import { Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useParams } from "react-router-dom";
 import TrackList from "../components/album/TrackList";
+import NavigateBack from "../components/NavigateBack";
 import PlaylistHeader from "../components/playlist/PlaylistHeader";
 import { useGetPlaylistByIdQuery } from "../redux/features/apiDeezerSlice";
 
 const StyledPlaylistPage = styled(Container)`
-  margin-top: 30px;
+  
 `;
 
 const PlaylistPage = () => {
@@ -15,6 +16,7 @@ const PlaylistPage = () => {
 
   return (
     <StyledPlaylistPage>
+          <NavigateBack />
          {!isLoading && playlist && <PlaylistHeader playlist={playlist}/>}
          {!isLoading && playlist && <TrackList cover={playlist.picture} tracks={playlist.tracks.data}/>}
     </StyledPlaylistPage>
