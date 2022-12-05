@@ -4,21 +4,29 @@ import { useParams } from "react-router-dom";
 import AlbumHeader from "../components/album/AlbumHeader";
 import { useGetAlbumByIdQuery } from "../redux/features/apiDeezerSlice";
 import TrackList from "../components/album/TrackList";
+import NavigateBack from "../components/NavigateBack";
+import AlbumPageLoader from "../components/loaders/pageLoaders/AlbumPageLoader";
+import { useEffect } from "react";
 
 
 const StyledAlbumPage = styled(Container)`
-    padding-top: 30px;
+
 `;
 
 const AlbumPage = () => {
-    const {id} = useParams();
-    const {data: album, isLoading} = useGetAlbumByIdQuery(id || '');
+  const { id } = useParams();
+  const { data: album, isLoading } = useGetAlbumByIdQuery(id || '');
+
+  useEffect(() => {
+    window.scrollTo({top: 0, left: 0});
+  }, [id]);
 
   return (
     <StyledAlbumPage>
-        {isLoading && 'Is Loading...'}
-        {!isLoading && album && <AlbumHeader album={album}/>}
-        {!isLoading && album && <TrackList cover={album.cover_small} tracks={album.tracks.data}/>}
+      <NavigateBack />
+      {isLoading && <AlbumPageLoader />}
+      {!isLoading && album && <AlbumHeader album={album} />}
+      {!isLoading && album && <TrackList cover={album.cover_small} tracks={album.tracks.data} />}
     </StyledAlbumPage>
   )
 }

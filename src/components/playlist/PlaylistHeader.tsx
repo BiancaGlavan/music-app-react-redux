@@ -22,8 +22,9 @@ const StyledPlaylistHeader = styled('div')`
 
     .artist {
         display: flex;
+        flex-direction: column;
         margin-top: 20px;
-        align-items: center;
+        align-items: flex-start;
     }
 
     .playlist-details {

@@ -10,6 +10,7 @@ import darkTheme from './theme/dark';
 import AlbumPage from './pages/AlbumPage';
 import PlaylistPage from './pages/PlaylistPage';
 import MusicPlayer from './components/music-player/MusicPlayer';
+import LoadersPage from './pages/LoadersPage';
 
 const StyledApp = styled('div')`
   display: flex;
@@ -38,6 +39,7 @@ function App() {
             <Route path='/explore' element={<ExplorePage />} />
             <Route path='/album/:id' element={<AlbumPage />} />
             <Route path='/playlist/:id' element={<PlaylistPage />} />
+            <Route path='/loaders' element={<LoadersPage />} />
           </Routes>
         </div>
         <MusicPlayer />
