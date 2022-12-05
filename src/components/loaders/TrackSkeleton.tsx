@@ -2,12 +2,12 @@ import { Box, Paper, Skeleton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 
-interface IPropsTrackLoader {
+interface IPropsTrackSkeleton {
     artistWidth?: number;
     trackWidth?: number;
 }
 
-const StyledTrackLoader = styled(Paper)`
+const StyledTrackSkeleton = styled(Paper)`
     display: flex;
     margin-bottom: 10px;
     align-items: center;
@@ -35,9 +35,9 @@ const StyledTrackLoader = styled(Paper)`
     }
 `;
 
-const TrackLoader = ({ artistWidth = 70, trackWidth = 100 }: IPropsTrackLoader) => {
+const TrackSkeleton = ({ artistWidth = 70, trackWidth = 100 }: IPropsTrackSkeleton) => {
     return (
-        <StyledTrackLoader elevation={1}>
+        <StyledTrackSkeleton elevation={1}>
             <Skeleton className="cover" variant="rectangular" width={50} height={50} />
             <Skeleton className="track-nr" variant="text" width={20} height={40} />
             <Box className="track-artist">
@@ -49,8 +49,8 @@ const TrackLoader = ({ artistWidth = 70, trackWidth = 100 }: IPropsTrackLoader) 
                 <Skeleton variant="text" width={40}  />
 
             </Box>
-        </StyledTrackLoader>
+        </StyledTrackSkeleton>
     )
 }
 
-export default TrackLoader;
+export default TrackSkeleton;

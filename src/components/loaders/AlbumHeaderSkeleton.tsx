@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 
 
 
-const StyledAlbumHeaderLoader = styled('div')`
+const StyledAlbumHeaderSkeleton = styled('div')`
     display: flex;
 
     .album-img {
@@ -37,9 +37,9 @@ const StyledAlbumHeaderLoader = styled('div')`
 
 `;
 
-const AlbumHeaderLoader = () => {
+const AlbumHeaderSkeleton = () => {
   return (
-    <StyledAlbumHeaderLoader>
+    <StyledAlbumHeaderSkeleton>
         <Box className="album-img">
             <Skeleton variant="rectangular" width={250} height={250} />
         </Box>
@@ -56,8 +56,8 @@ const AlbumHeaderLoader = () => {
                 <Skeleton className="details" variant="rectangular" width={60} height={8}/>
             </Box>
         </Box>
-    </StyledAlbumHeaderLoader>
+    </StyledAlbumHeaderSkeleton>
   )
 }
 
-export default AlbumHeaderLoader;
+export default AlbumHeaderSkeleton;

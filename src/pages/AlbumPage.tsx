@@ -5,7 +5,7 @@ import AlbumHeader from "../components/album/AlbumHeader";
 import { useGetAlbumByIdQuery } from "../redux/features/apiDeezerSlice";
 import TrackList from "../components/album/TrackList";
 import NavigateBack from "../components/NavigateBack";
-import AlbumPageLoader from "../components/loaders/pageLoaders/AlbumPageLoader";
+import AlbumPageLoader from "../components/loaders/AlbumPageLoader";
 import { useEffect } from "react";
 
 

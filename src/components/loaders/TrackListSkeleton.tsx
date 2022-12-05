@@ -1,9 +1,9 @@
 import { Box, Divider, Skeleton } from "@mui/material";
-import TrackLoader from "./TrackLoader";
+import TrackSkeleton from "./TrackSkeleton";
 import {styled} from "@mui/material/styles"
 
 
-const StyledTrackListLoader = styled('div')`
+const StyledTrackListSkeleton = styled('div')`
 .track {
     display: flex;
     justify-content: space-between;
@@ -22,23 +22,23 @@ const StyledTrackListLoader = styled('div')`
   }
 `;
 
-const TrackListLoader = () => {
+const TrackListSkeleton = () => {
   return (
-    <StyledTrackListLoader>
+    <StyledTrackListSkeleton>
         <Box className="track">
             <Skeleton variant="rectangular" width={60} height={20}/>
             <Skeleton className="icon" variant="circular" width={20} height={20}/>
         </Box>
         <Divider className="divider"/>
-        <TrackLoader />
-        <TrackLoader />
-        <TrackLoader />
-        <TrackLoader />
-        <TrackLoader />
-        <TrackLoader />
-        <TrackLoader />
-    </StyledTrackListLoader>
+        <TrackSkeleton />
+        <TrackSkeleton />
+        <TrackSkeleton />
+        <TrackSkeleton />
+        <TrackSkeleton />
+        <TrackSkeleton />
+        <TrackSkeleton />
+    </StyledTrackListSkeleton>
   )
 }
 
-export default TrackListLoader;
+export default TrackListSkeleton;
