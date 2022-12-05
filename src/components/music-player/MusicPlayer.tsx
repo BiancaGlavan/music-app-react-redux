@@ -15,7 +15,7 @@ const MusicPlayer = () => {
 
   return (
     <StyledMusicPlayer className="MusicPlayer">
-        <AudioPlayer playerState={playerState} />
+        {playerState.isActive && <AudioPlayer playerState={playerState} />}
     </StyledMusicPlayer>
   )
 }

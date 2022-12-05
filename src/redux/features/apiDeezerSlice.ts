@@ -40,6 +40,7 @@ interface ISongAlbum {
     cover: string;
     cover_medium: string;
     cover_small: string;
+    cover_big: string;
 }
 
 export interface ISong {

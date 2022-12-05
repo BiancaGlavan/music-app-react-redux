@@ -33,6 +33,7 @@ export const playerSlice = createSlice({
         state.currentIndex = action.payload.activeIndex;
         state.songList = action.payload.songList;
         state.isActive = true;
+        state.isPlaying = true;
     },
     play: (state) => {
         state.isPlaying = true;
@@ -40,12 +41,26 @@ export const playerSlice = createSlice({
     pause: (state) => {
         state.isPlaying = false;
     },
+    onNextSong: (state) => {
+      const newIndex = state.currentIndex < state.songList.length - 2 ? state.currentIndex + 1 : 0;
+      const newActiveSong = state.songList[newIndex];
+      state.currentIndex = newIndex;
+      state.activeSong = newActiveSong;
+      state.isPlaying = true;
+    },
+    onPrevSong: (state) => {
+      const newIndex = state.currentIndex === 0 ? state.songList.length - 1 : state.currentIndex - 1;
+      const newActiveSong = state.songList[newIndex];
+      state.currentIndex = newIndex;
+      state.activeSong = newActiveSong;
+      state.isPlaying = true;
+    },
 
   },
 
 
 });
 
-export const { addSong, play, pause } = playerSlice.actions;
+export const { addSong, play, pause, onNextSong, onPrevSong } = playerSlice.actions;
 
 export default playerSlice.reducer;

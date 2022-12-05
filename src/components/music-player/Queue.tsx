@@ -1,7 +1,9 @@
-import { Box, Button, Drawer } from "@mui/material";
+import { Box, Button, Drawer, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
+import CloseIcon from '@mui/icons-material/Close';
+import QueueContent from "./QueueContent";
 
 const StyledQueue = styled(Box)`
 
@@ -12,6 +14,11 @@ const StyledQueue = styled(Box)`
 
   .MuiDrawer-paper {
     background: red;
+  }
+
+  .close {
+    display: flex;
+    justify-content: flex-end;
   }
 
 `;
@@ -42,11 +49,12 @@ const Queue = () => {
           '& .MuiDrawer-paper': { boxSizing: 'border-box', height: 'calc(100vh - 90px)', marginBottom: '90px' },
         }}
       >
-        Queue Content
-
-        <Button variant="contained" onClick={handleDrawerToggle}>
-        close
-      </Button>
+        <Box sx={{display: 'flex', justifyContent: 'flex-end', padding: '10px'}}>
+          <IconButton onClick={handleDrawerToggle}>
+          <CloseIcon />
+          </IconButton>
+        </Box>
+        <QueueContent />
       </Drawer>
     </StyledQueue>
 
