@@ -6,9 +6,12 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from "react";
 import SidebarMenu from "./SidebarMenu";
+import Search from "./search/Search";
+import classNames from "classnames";
+import Button from "@mui/material/Button";
 
 const StyledNavigation = styled(Paper)`
-    width: 100%;
+    width: calc(100% - 280px);
     position: fixed;
     top: 0;
     padding: 10px;
@@ -16,22 +19,9 @@ const StyledNavigation = styled(Paper)`
     align-items: center;
     z-index: 10;
 
-    .search-field {
-        display: flex;
-        align-items: center;
-        margin-left: 20px;
-    }
-
-    .search-text {
-        input {
-            &::after {
-                border-bottom: none;
-                display: none;
-            }
-        }
-    }
-
-
+   &.isMobile {
+    width: 100%;
+   }
 `;
 
 const Navigation = () => {
@@ -46,16 +36,9 @@ const Navigation = () => {
 
 
     return (
-        <StyledNavigation square className="Navigation">
+        <StyledNavigation square className={classNames('Navigation', {isMobile: isMobile})}>
             {isMobile && <IconButton onClick={handleDrawerToggle}><MenuIcon /></IconButton>}
-            <Box className="search-field">
-
-                <TextField className="search-text" type="search" placeholder="Search" variant="standard" />
-                <IconButton>
-                    <SearchIcon fontSize="medium" />
-                </IconButton>
-            </Box>
-            {/* <Divider /> */}
+            <Search />
             <Drawer
                variant="temporary"
                open={mobileOpen}

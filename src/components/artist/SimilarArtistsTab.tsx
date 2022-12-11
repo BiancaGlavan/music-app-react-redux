@@ -2,6 +2,7 @@ import { Box, Button, IconButton, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { IArtist } from "../../redux/features/apiDeezerSlice";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Link } from "react-router-dom";
 
 interface IPropsSimilarArtistsTab {
     artists: IArtist[];
@@ -40,10 +41,12 @@ const SimilarArtistsTab = ({ artists, onTabChange }: IPropsSimilarArtistsTab) =>
     return (
         <StyledSimilarArtistsTab className="SimilarArtistsTab">
             <Typography className="similar-artists-title" variant="h6">Fans also like</Typography>
-            {artists.map((artist, idx) => <Box className="artist-info">
+            {artists.map((artist, idx) => <Box key={artist.id} className="artist-info">
                 <img className="artist-img" src={artist.picture} alt="" />
                 <Box className="name-and-fans">
+                    <Link to={`/artists/${artist.id}`}>
                     <Typography variant="subtitle2">{artist.name}</Typography>
+                    </Link>
                     <Typography variant="caption" color="textSecondary">{new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
                 </Box>
                 <Box className="icon">

@@ -11,6 +11,7 @@ import AlbumPage from './pages/AlbumPage';
 import PlaylistPage from './pages/PlaylistPage';
 import MusicPlayer from './components/music-player/MusicPlayer';
 import LoadersPage from './pages/LoadersPage';
+import SearchPage from './pages/SearchPage';
 
 const StyledApp = styled('div')`
   display: flex;
@@ -40,6 +41,8 @@ function App() {
             <Route path='/album/:id' element={<AlbumPage />} />
             <Route path='/playlist/:id' element={<PlaylistPage />} />
             <Route path='/loaders' element={<LoadersPage />} />
+            <Route path='/search' element={<SearchPage />} />
+            
           </Routes>
         </div>
         <MusicPlayer />

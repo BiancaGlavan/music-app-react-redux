@@ -31,6 +31,7 @@ const StyledTrack = styled(Paper)`
         height: 50px;
         margin: 5px;
         position: relative;
+        flex-shrink: 0;
 
         img {
             width: 100%;
@@ -70,6 +71,7 @@ const StyledTrack = styled(Paper)`
 
     .track-artist {
         flex-grow: 1;
+        overflow: hidden;
     }
     
     .more {
@@ -100,7 +102,7 @@ const Track = ({ track, cover, trackNr, isActive = false, isPlaying = false, onA
             </Box>
             <Typography className="track-nr" variant="subtitle1">{trackNr}</Typography>
             <Box className="track-artist">
-                <Typography variant="subtitle1">{track.title}</Typography>
+                <Typography noWrap variant="subtitle1">{track.title}</Typography>
                <Link to={`/artists/${track.artist.id}`}>
                <Typography className="artist-name" variant="caption" color="textSecondary">{track.artist.name}</Typography>
                </Link>

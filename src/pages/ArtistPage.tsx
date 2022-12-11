@@ -43,7 +43,7 @@ const StyledArtistPage = styled(Container)`
 const ArtistPage = () => {
 
     const { id } = useParams();
-    const { data: artist, isLoading } = useGetArtistByIdQuery(id || '');
+    const { data: artist, isLoading, isFetching } = useGetArtistByIdQuery(id || '');
     const { data: relatedArtists } = useGetRelatedArtistsQuery(id || '');
     const { data: playlistResponse } = useGetArtistPlaylistsQuery(id || '');
     const { data: albumsResponse } = useGetArtistAlbumsQuery(id || '');
@@ -60,7 +60,7 @@ const ArtistPage = () => {
     return (
         <StyledArtistPage>
             <NavigateBack />
-            {artist && <Box className="artist">
+            {!isFetching && artist && <Box className="artist">
                 <Box className="artist-img">
                     <img src={artist.picture_big} alt="artist-picture" />
                 </Box>
@@ -70,27 +70,30 @@ const ArtistPage = () => {
 
                 </Box>
             </Box>}
-            <Box>
-                <Tabs
-                    value={activeTab}
-                    onChange={handleTabChange}
-                >
-                    <Tab
-                        value="overview"
-                        label="Overview"
+            {isFetching ? <div>is loading...</div> :
+                <>
+                    <Box>
+                        <Tabs
+                            value={activeTab}
+                            onChange={handleTabChange}
+                        >
+                            <Tab
+                                value="overview"
+                                label="Overview"
 
-                    />
-                    <Tab value="albums" label="Albums" />
-                    <Tab value="playlists" label="Playlists" />
-                    <Tab value="related" label="Similar Artists" />
-                </Tabs>
-                <Divider />
-            </Box>
-            {activeTab === 'overview' && <ArtistOverview onTabChange={setActiveTab}/>}
-            {albumsResponse && activeTab === 'albums' && <ArtistAlbums albums={albumsResponse.data} />}
-            {relatedArtists && activeTab === 'related' && <SimilarArtists artists={relatedArtists.data} />}
-            {playlistResponse && activeTab === 'playlists' && <Playlists playlists={playlistResponse.data} />}
-
+                            />
+                            <Tab value="albums" label="Albums" />
+                            <Tab value="playlists" label="Playlists" />
+                            <Tab value="related" label="Similar Artists" />
+                        </Tabs>
+                        <Divider />
+                    </Box>
+                    {activeTab === 'overview' && <ArtistOverview onTabChange={setActiveTab} />}
+                    {albumsResponse && activeTab === 'albums' && <ArtistAlbums albums={albumsResponse.data} />}
+                    {relatedArtists && activeTab === 'related' && <SimilarArtists artists={relatedArtists.data} />}
+                    {playlistResponse && activeTab === 'playlists' && <Playlists playlists={playlistResponse.data} />}
+                </>
+            }
         </StyledArtistPage>
     )
 }

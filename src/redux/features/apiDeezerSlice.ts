@@ -74,7 +74,7 @@ interface IArtistAlbumsResponse {
     total: number;
 }
 
-export type IChartsArtist  = Omit<IArtist, "nb_fan" | "nb_album">;
+export type IChartsArtist = Omit<IArtist, "nb_fan" | "nb_album">;
 
 export interface IChartsAlbum extends ISongAlbum {
     artist: IChartsArtist;
@@ -114,7 +114,7 @@ interface IChartsResponse {
         data: IChartsTrack[];
         total: number;
     }
-    
+
 }
 
 export interface IGenre {
@@ -167,11 +167,16 @@ export interface IPlaylistResponse {
     tracks: {
         data: ISong[];
     };
-    
+
 }
 
 interface IGenreArtistsResponse {
     data: IChartsArtist[];
+}
+
+interface ISearchResponse {
+    data: ISong[];
+    total: number;
 }
 
 
@@ -189,13 +194,13 @@ export const deezerApi = createApi({
             query: (artistId: number | string) => `artist/${artistId}/related`
         }),
         getArtistPlaylists: builder.query<IArtistPlaylistsResponse, number | string>({
-            query: (artistId: number | string) =>`artist/${artistId}/playlists`
+            query: (artistId: number | string) => `artist/${artistId}/playlists`
         }),
         getArtistTopSongs: builder.query<IArtistTopSongsResponse, number | string>({
-            query: (artistId: number | string) =>`artist/${artistId}/top`
+            query: (artistId: number | string) => `artist/${artistId}/top`
         }),
         getArtistAlbums: builder.query<IArtistAlbumsResponse, number | string>({
-            query: (artistId: number | string) =>`artist/${artistId}/albums`
+            query: (artistId: number | string) => `artist/${artistId}/albums`
         }),
         getCharts: builder.query<IChartsResponse, void>({
             query: () => 'chart'
@@ -212,7 +217,10 @@ export const deezerApi = createApi({
         getArtistsByGenre: builder.query<IGenreArtistsResponse, number | string>({
             query: (genreId: number | string) => `genre/${genreId}/artists`
         }),
-       
+        search: builder.query<ISearchResponse, string>({
+            query: (term: string) => `search?q=${term}`
+        }),
+
     }),
 });
 
@@ -227,6 +235,7 @@ export const {
     useGetAlbumByIdQuery,
     useGetPlaylistByIdQuery,
     useGetArtistsByGenreQuery,
+    useSearchQuery,
 } = deezerApi;
 
 export default deezerApi;
