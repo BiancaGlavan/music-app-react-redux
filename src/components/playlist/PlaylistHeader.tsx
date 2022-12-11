@@ -10,9 +10,17 @@ interface IPropsPlaylistHeader {
 
 const StyledPlaylistHeader = styled('div')`
     display: flex;
+    flex-direction: column;
+    align-items: center;
 
-    .playlist-img {
-        margin-right: 30px;
+    ${props => props.theme.breakpoints.up("sm")} {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+
+        .playlist-img {
+            margin-right: 30px;
+        }
     }
 
     .playlist-info {
@@ -54,7 +62,7 @@ const PlaylistHeader = ({ playlist }: IPropsPlaylistHeader) => {
                     <Typography className="details" color="textSecondary" variant="caption">{playlist.nb_tracks} tracks</Typography>
                     <Typography className="details" color="textSecondary" variant="caption">{secondsToAlbumTime(playlist.duration)}</Typography>
                     <Typography className="details" color="textSecondary" variant="caption">{playlist.creation_date}</Typography>
-                    <Typography className="details" color="textSecondary" variant="caption">{new Intl.NumberFormat().format(playlist.fans)} fans</Typography>
+                    <Typography className="details" color="textSecondary" variant="caption">{new Intl.NumberFormat().format(playlist.fans)} listeners</Typography>
                 </Box>
             </Box>
         </StyledPlaylistHeader>

@@ -1,7 +1,10 @@
 import { Box, Divider, Skeleton } from "@mui/material";
 import TrackSkeleton from "./TrackSkeleton";
-import {styled} from "@mui/material/styles"
+import { styled } from "@mui/material/styles"
 
+interface IPropsTrackListSkeleton {
+  hideHeader?: boolean;
+}
 
 const StyledTrackListSkeleton = styled('div')`
 .track {
@@ -22,21 +25,23 @@ const StyledTrackListSkeleton = styled('div')`
   }
 `;
 
-const TrackListSkeleton = () => {
+const TrackListSkeleton = ({ hideHeader = false }: IPropsTrackListSkeleton) => {
   return (
     <StyledTrackListSkeleton>
+      {!hideHeader && <>
         <Box className="track">
-            <Skeleton variant="rectangular" width={60} height={20}/>
-            <Skeleton className="icon" variant="circular" width={20} height={20}/>
+          <Skeleton variant="rectangular" width={60} height={20} />
+          <Skeleton className="icon" variant="circular" width={20} height={20} />
         </Box>
-        <Divider className="divider"/>
-        <TrackSkeleton />
-        <TrackSkeleton />
-        <TrackSkeleton />
-        <TrackSkeleton />
-        <TrackSkeleton />
-        <TrackSkeleton />
-        <TrackSkeleton />
+        <Divider className="divider" />
+      </>}
+      <TrackSkeleton />
+      <TrackSkeleton />
+      <TrackSkeleton />
+      <TrackSkeleton />
+      <TrackSkeleton />
+      <TrackSkeleton />
+      <TrackSkeleton />
     </StyledTrackListSkeleton>
   )
 }

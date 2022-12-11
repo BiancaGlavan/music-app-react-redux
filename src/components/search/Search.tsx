@@ -7,6 +7,7 @@ import { useSearchQuery } from "../../redux/features/apiDeezerSlice";
 import TrackList from "../album/TrackList";
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import TrackListSkeleton from "../loaders/TrackListSkeleton";
 
 
 const StyledDrawerContent = styled('div')`
@@ -110,8 +111,9 @@ const Search = () => {
                             <SearchIcon />
                         </IconButton>
                     </Container>
-
-
+                    {isFetching && <Paper className="search-results">
+                        <TrackListSkeleton hideHeader />
+                    </Paper>}
                     {!isFetching && searchResult && <Paper variant="outlined" className="search-results">
                         <TrackList hideHeader={true} cover="" tracks={searchResult.data} /></Paper>}
 

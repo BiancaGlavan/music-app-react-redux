@@ -10,14 +10,28 @@ interface IPropsAlbumHeader {
 
 const StyledAlbumHeader = styled('div')`
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 
-    .album-img {
-        margin-right: 30px;
-    }
+        ${props => props.theme.breakpoints.up("sm")} {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+
+            .album-img {
+                margin-right: 30px;
+            }
+        }
 
     .album-info {
         display: flex;
         flex-direction: column;
+        align-items: center;
+
+        ${props => props.theme.breakpoints.up("sm")} {
+            align-items: flex-start;
+        }
     }
 
     .artist {
@@ -63,7 +77,7 @@ const AlbumHeader = ({ album }: IPropsAlbumHeader) => {
                     <Typography className="details" color="textSecondary" variant="caption">{album.nb_tracks} tracks</Typography>
                     <Typography className="details" color="textSecondary" variant="caption">{secondsToAlbumTime(album.duration)}</Typography>
                     <Typography className="details" color="textSecondary" variant="caption">{album.release_date}</Typography>
-                    <Typography className="details" color="textSecondary" variant="caption">{new Intl.NumberFormat().format(album.fans)} fans</Typography>
+                    <Typography className="details" color="textSecondary" variant="caption">{new Intl.NumberFormat().format(album.fans)} listeners</Typography>
                 </Box>
             </Box>
         </StyledAlbumHeader>
