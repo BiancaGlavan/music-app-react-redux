@@ -1,8 +1,9 @@
 import { styled } from "@mui/material/styles";
 import { Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
+import classNames from "classnames";
 
 const StyledSidebar = styled(Paper)`
     height: 100vh;
@@ -14,24 +15,33 @@ const StyledSidebar = styled(Paper)`
     flex-shrink: 0;
     position: sticky;
     top: 0;
+
+    .list-item {
+      &.active {
+        color: ${props => props.theme.palette.primary.main};
+      }
+    }
 `;
 
 const SidebarMenu = () => {
+  const location = useLocation();
+  console.log(location.pathname);
+
   return (
     <StyledSidebar square className="SidebarMenu">
-        <List>
-         <Link to={'/'}>
-         <ListItem disablePadding>
+      <List>
+        <Link to={'/'}>
+          <ListItem disablePadding className={classNames('list-item', {active: location.pathname === '/'})}>
             <ListItemButton>
               <ListItemIcon>
-                <HomeOutlinedIcon/>
+                <HomeOutlinedIcon />
               </ListItemIcon>
               <ListItemText primary="Home" />
             </ListItemButton>
           </ListItem>
-         </Link>
-          <Link to={'/explore'}>
-          <ListItem disablePadding>
+        </Link>
+        <Link to={'/explore'}>
+          <ListItem disablePadding className={classNames('list-item', {active: location.pathname === '/explore'})}>
             <ListItemButton>
               <ListItemIcon>
                 <LibraryMusicOutlinedIcon />
@@ -39,8 +49,8 @@ const SidebarMenu = () => {
               <ListItemText primary="Explore" />
             </ListItemButton>
           </ListItem>
-          </Link>
-        </List>
+        </Link>
+      </List>
     </StyledSidebar>
   )
 }

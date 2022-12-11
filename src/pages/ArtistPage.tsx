@@ -55,7 +55,7 @@ const ArtistPage = () => {
 
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0 });
-    }, [id]);
+    }, [id, activeTab]);
 
     return (
         <StyledArtistPage>
@@ -86,7 +86,7 @@ const ArtistPage = () => {
                 </Tabs>
                 <Divider />
             </Box>
-            {activeTab === 'overview' && <ArtistOverview />}
+            {activeTab === 'overview' && <ArtistOverview onTabChange={setActiveTab}/>}
             {albumsResponse && activeTab === 'albums' && <ArtistAlbums albums={albumsResponse.data} />}
             {relatedArtists && activeTab === 'related' && <SimilarArtists artists={relatedArtists.data} />}
             {playlistResponse && activeTab === 'playlists' && <Playlists playlists={playlistResponse.data} />}
