@@ -1,9 +1,10 @@
 import { Box, Container, Divider, Tab, Tabs, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ArtistAlbums from "../components/artist/ArtistAlbums";
+import ArtistOverview from "../components/artist/ArtistOverview";
 import Playlists from "../components/artist/Playlists";
 import SimilarArtists from "../components/artist/SimilarArtists";
 import NavigateBack from "../components/NavigateBack";
@@ -50,7 +51,12 @@ const ArtistPage = () => {
 
     const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
         setActiveTab(newValue);
-      };
+    };
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0 });
+    }, [id]);
+
     return (
         <StyledArtistPage>
             <NavigateBack />
@@ -72,7 +78,7 @@ const ArtistPage = () => {
                     <Tab
                         value="overview"
                         label="Overview"
-                        
+
                     />
                     <Tab value="albums" label="Albums" />
                     <Tab value="playlists" label="Playlists" />
@@ -80,11 +86,11 @@ const ArtistPage = () => {
                 </Tabs>
                 <Divider />
             </Box>
-            {activeTab === 'overview' && <div>Overview Tab</div>}
+            {activeTab === 'overview' && <ArtistOverview />}
             {albumsResponse && activeTab === 'albums' && <ArtistAlbums albums={albumsResponse.data} />}
             {relatedArtists && activeTab === 'related' && <SimilarArtists artists={relatedArtists.data} />}
             {playlistResponse && activeTab === 'playlists' && <Playlists playlists={playlistResponse.data} />}
-            
+
         </StyledArtistPage>
     )
 }

@@ -53,6 +53,7 @@ const StyledAudioPlayer = styled(Paper)`
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+        margin-right: 100px;
 
         .buttons {
             display: flex;
@@ -61,18 +62,17 @@ const StyledAudioPlayer = styled(Paper)`
         }
     }
 
-    .volume {
-        margin-left: 20px;
-        margin-right: 20px;
-    }
+ 
 
     .volume-btn {
         position: relative;
+        margin-left: 10px;
+        margin-right: 10px;
 
         .volume-slider {
             position: absolute;
-            top: -50px;
-            left: -70px;
+            top: -52px;
+            left: -60px;
             width: 150px;
             padding: 10px 10px;
             display: none;
@@ -243,7 +243,7 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
             </Box>
             <Box className="volume" sx={{ width: 100 }}>
                 <IconButton className="volume-btn">
-                    <Paper  elevation={3} className="volume-slider">
+                    <Paper elevation={3} className="volume-slider">
                         <Slider className="" step={0.1} min={0} max={1}
                             value={volume}
                             onChange={(e, val) => setVolume(val as number)} />
@@ -251,9 +251,7 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
                     {volume === 0 && <VolumeOffIcon />}
                     {volume > 0 && volume < 0.5 && <VolumeDownIcon />}
                     {volume >= 0.5 && <VolumeUpIcon />}
-
                 </IconButton>
-
             </Box>
             <Queue />
 
