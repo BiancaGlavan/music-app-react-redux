@@ -58,7 +58,7 @@ const StyledAlbumHeader = styled('div')`
 
 const AlbumHeader = ({ album }: IPropsAlbumHeader) => {
     return (
-        <StyledAlbumHeader>
+        <StyledAlbumHeader className="AlbumHeader">
             <Box className="album-img">
                 <img src={album.cover_medium} alt="" />
             </Box>

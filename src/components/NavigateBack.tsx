@@ -11,7 +11,7 @@ export const NavigateBack = () => {
     const navigate = useNavigate();
 
   return (
-    <StyledNavigateBack>
+    <StyledNavigateBack className="NavigateBack">
         <Button onClick={() => navigate(-1)} startIcon={<KeyboardBackspaceIcon />}>
             Back
         </Button>

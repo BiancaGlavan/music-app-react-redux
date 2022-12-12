@@ -47,6 +47,7 @@ const StyledTrack = styled(Paper)`
             border-radius: 20px;
             display: none;
             cursor: pointer;
+            padding: 0;
             
 
             .icon {
@@ -93,10 +94,10 @@ const Track = ({ track, cover, trackNr, isActive = false, isPlaying = false, onA
         <StyledTrack className="Track" elevation={isActive ? 5 : 1}>
             <Box className="cover">
                 <img src={track.album.cover || cover} alt="track-cover" />
-                <Box onClick={onAddTrack} className={classNames("play-pause", { active: isActive, playing: isPlaying })}>
+                <IconButton onClick={onAddTrack} className={classNames("play-pause", { active: isActive, playing: isPlaying })}>
                     {isPlaying ? <PauseCircleFilledOutlinedIcon className="icon pause" /> : <PlayCircleFilledOutlinedIcon className="icon play" />}
                     {/* {isActive && isPlaying ? <PauseCircleFilledOutlinedIcon className="icon pause" /> : <PlayCircleFilledOutlinedIcon className="icon play" />} */}
-                </Box>
+                </IconButton>
 
 
             </Box>
@@ -104,7 +105,7 @@ const Track = ({ track, cover, trackNr, isActive = false, isPlaying = false, onA
             <Box className="track-artist">
                 <Typography noWrap variant="subtitle1">{track.title}</Typography>
                <Link to={`/artists/${track.artist.id}`}>
-               <Typography className="artist-name" variant="caption" color="textSecondary">{track.artist.name}</Typography>
+               <Typography noWrap className="artist-name" variant="caption" color="textSecondary">{track.artist.name}</Typography>
                </Link>
             </Box>
             <Box className="more">

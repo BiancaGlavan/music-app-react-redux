@@ -71,7 +71,7 @@ const StyledAudioPlayer = styled(Paper)`
 
         .volume-slider {
             position: absolute;
-            top: -52px;
+            top: -50px;
             left: -60px;
             width: 150px;
             padding: 10px 10px;
@@ -203,7 +203,6 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
         onScrub(newValue as number);
     };
 
-
     return (
         <StyledAudioPlayer className="AudioPlayer" variant="outlined">
             <Box className="artist-info">
@@ -226,12 +225,12 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
                     <IconButton onClick={toPrevTrack}>
                         <SkipPreviousOutlinedIcon />
                     </IconButton>
-                    <IconButton>
-                        {playerState.isPlaying ?
-                            <PauseCircleFilledOutlinedIcon fontSize="large" onClick={handlePause} /> :
-                            <PlayCircleFilledOutlinedIcon fontSize="large" onClick={handlePlay} />}
 
-                    </IconButton>
+                    {playerState.isPlaying ?
+                        <IconButton onClick={handlePause}><PauseCircleFilledOutlinedIcon fontSize="large" /></IconButton> :
+                        <IconButton onClick={handlePlay}><PlayCircleFilledOutlinedIcon fontSize="large" /></IconButton>
+                    }
+
                     <IconButton onClick={toNextTrack}>
                         <SkipNextOutlinedIcon />
                     </IconButton>

@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Container, Divider, Typography } from "@mui/material";
 import { ISong } from "../../redux/features/apiDeezerSlice";
 import Track from "./Track";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -15,6 +15,10 @@ interface IPropsTrackList {
 }
 
 const StyledTrackList = styled('div')`
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 
   .track {
     display: flex;
