@@ -17,6 +17,7 @@ const StyledPlaylists = styled('div')`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 30px;
   }
 
   .artist-details {
@@ -48,15 +49,15 @@ const StyledPlaylists = styled('div')`
 const Playlists = ({ playlists }: IPropsPlaylists) => {
   return (
     <StyledPlaylists className="Playlists">
-      <Typography className="title" variant="h5">Playlists</Typography>
-      <Grid container spacing={10} >
+      <Typography className="title" variant="h6">Playlists</Typography>
+      <Grid container spacing={2} >
         {playlists.map((playlist) => <Grid item key={playlist?.id} xs={6} sm={6} md={4} lg={3}>
           <Link className="artist-container" to={`/playlist/${playlist.id}`}>
             <Box className="artist-picture">
               <img src={playlist?.picture_medium} alt="artist picture" />
             </Box>
-            <Typography className="artist-details" variant="body1">{playlist?.title}</Typography>
-            <Typography className="artist-details" variant="body2" color="textSecondary">Created by {playlist?.user.name}</Typography>
+            <Typography className="artist-details" variant="body2">{playlist?.title}</Typography>
+            <Typography className="artist-details" variant="caption" color="textSecondary">Created by {playlist?.user.name}</Typography>
           </Link>
         </Grid>)}
       </Grid>

@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 
 const StyledAlbumPage = styled(Container)`
-  max-width: calc(100vw - 20px);
+  // max-width: calc(100vw - 20px);
 `;
 
 const AlbumPage = () => {

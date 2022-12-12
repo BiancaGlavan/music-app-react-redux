@@ -115,7 +115,7 @@ const Track = ({ track, cover, trackNr, isActive = false, isPlaying = false, onA
             </Box>
             <Typography className="track-nr" variant="subtitle1">{trackNr}</Typography>
             <Box className="track-artist">
-                <Typography noWrap variant="subtitle1">{track.title}</Typography>
+                <Typography noWrap variant="body2">{track.title}</Typography>
                <Link to={`/artists/${track.artist.id}`}>
                <Typography noWrap className="artist-name" variant="caption" color="textSecondary">{track.artist.name}</Typography>
                </Link>

@@ -22,7 +22,7 @@ const ArtistsListSkeleton = () => {
   return (
     <StyledArtistsListSkeleton>
         <Skeleton variant="rectangular" className="title" width={200} height={30}/>
-        <Grid container spacing={10}>
+        <Grid container spacing={2}>
             <Grid item className="artist-card" xs={6} sm={4} md={4} lg={3}>
                 <Skeleton className="img" variant="circular" width={120} height={120}/>
                 <Skeleton variant="rectangular" width={80} height={20}/>

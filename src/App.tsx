@@ -20,6 +20,7 @@ const StyledApp = styled('div')`
     flex-grow: 1;
     padding-top: 60px;
     padding-bottom: 150px;
+    max-width: 100vw;
   }
 `;
 
@@ -32,7 +33,7 @@ function App() {
       <CssBaseline />
       <StyledApp className='App'>
         {!isMobile && <div className='left-sidebar'><SidebarMenu /></div>}
-        <div className='page-content'>
+        <div className='page-content' style={{maxWidth: !isMobile ? 'calc(100vw - 298px)' : 'calc(100vw - 18px)'}}>
           <Navigation />
           <Routes>
             <Route path='/' element={<Homepage />} />

@@ -18,6 +18,7 @@ const StyledArtistAlbums = styled('div')`
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 30px;
     }
 
     .artist-details {
@@ -53,15 +54,15 @@ const StyledArtistAlbums = styled('div')`
 const ArtistAlbums = ({albums}: IPropsArtistAlbums) => {
   return (
     <StyledArtistAlbums className="ArtistAlbums">
-        <Typography className="title" variant="h5">Albums</Typography>
-        <Grid container spacing={10} >
+        <Typography className="title" variant="h6">Albums</Typography>
+        <Grid container spacing={2} >
                 {albums.map((album) => <Grid item  key={album?.id}  xs={6} sm={6}  md={4} lg={3}>
                    <Link className="artist-container" to={`/album/${album.id}`}>
                    <Box className="artist-picture">
                         <img src={album?.cover_medium} alt="artist picture" />
                     </Box>
-                    <Typography className="artist-details" variant="body1">{album?.title}</Typography>
-                    <Typography className="artist-details" variant="body2" color="textSecondary">Released on {album?.release_date}</Typography>
+                    <Typography className="artist-details" variant="body2">{album?.title}</Typography>
+                    <Typography className="artist-details" variant="caption" color="textSecondary">Released on {album?.release_date}</Typography>
                    </Link>
                 </Grid>)}
             </Grid>

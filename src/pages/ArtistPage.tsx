@@ -12,7 +12,6 @@ import { useGetArtistAlbumsQuery, useGetArtistByIdQuery, useGetArtistPlaylistsQu
 
 
 const StyledArtistPage = styled(Container)`
-   
 
     .artist {
         display: flex;

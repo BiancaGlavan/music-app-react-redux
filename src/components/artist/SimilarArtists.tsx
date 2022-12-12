@@ -19,6 +19,7 @@ const StyledSimilarArtist = styled('div')`
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 30px;
 
         .artist-details {
             text-align: center;
@@ -43,15 +44,15 @@ const SimilarArtists = ({ artists }: IPropsSimilarArtists) => {
 
     return (
         <StyledSimilarArtist className="SimilarArtists">
-            <Typography className="title" variant="h5">Similar Artists</Typography>
-            <Grid container spacing={10} >
+            <Typography className="title" variant="h6">Similar Artists</Typography>
+            <Grid container spacing={2} >
                 {artists.map((artist) => <Grid item key={artist.id} xs={6} sm={6} md={4} lg={3}>
                     <Link className="artist-container" to={`/artists/${artist.id}`}>
                         <Box className="artist-picture">
                             <img src={artist.picture} alt="artist picture" />
                         </Box>
-                        <Typography className="artist-details name" variant="subtitle1">{artist.name}</Typography>
-                        <Typography className="artist-details" variant="subtitle2" color="textSecondary">{new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
+                        <Typography className="artist-details name" variant="body2">{artist.name}</Typography>
+                        <Typography className="artist-details" variant="caption" color="textSecondary">{new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
                     </Link>
                 </Grid>)}
             </Grid>
