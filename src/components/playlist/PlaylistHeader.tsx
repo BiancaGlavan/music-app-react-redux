@@ -26,13 +26,25 @@ const StyledPlaylistHeader = styled('div')`
     .playlist-info {
         display: flex;
         flex-direction: column;
+        
+        .playlist-name {
+            text-align: center;
+
+            ${props => props.theme.breakpoints.up("sm")} {
+                text-align: justify;
+            }
+        }
     }
 
     .artist {
         display: flex;
         flex-direction: column;
         margin-top: 20px;
-        align-items: flex-start;
+        align-items: center;
+
+        ${props => props.theme.breakpoints.up("sm")} {
+            align-items: flex-start;
+        }
     }
 
     .playlist-details {
@@ -51,12 +63,12 @@ const PlaylistHeader = ({ playlist }: IPropsPlaylistHeader) => {
                 <img src={playlist.picture_medium} alt="" />
             </Box>
             <Box className="playlist-info">
-                <Typography variant="h5" className="playlist-name">
+                <Typography variant="h6" className="playlist-name">
                     {playlist.title}
                 </Typography>
                 <Box className="artist">
-                    <Typography variant="subtitle1">Created by: {playlist.creator.name}</Typography>
-                    <Typography variant="subtitle1">{playlist.description}</Typography>
+                    <Typography className="text" variant="body1">Created by: {playlist.creator.name}</Typography>
+                    <Typography className="text" variant="body2">{playlist.description}</Typography>
                 </Box>
                 <Box className="playlist-details">
                     <Typography className="details" color="textSecondary" variant="caption">{playlist.nb_tracks} tracks</Typography>

@@ -75,14 +75,17 @@ const QueueContent = (props: IPropsQueueContent) => {
         <StyledQueueContent>
             <Box className="song-preview">
                 <Box className="artist">
-                    <img className="image" src={playerState.activeSong?.album.cover_big || ''} alt="" />
+                    {playerState && <> <img className="image" src={playerState.activeSong?.album.cover_big || ''} alt="" />
                     <Typography className="title" variant="subtitle1">{playerState.activeSong?.title || ''}</Typography>
                     <Typography variant="caption">{playerState.activeSong?.artist.name}</Typography>
+                    </>
+                    }
                 </Box>
+
             </Box>
 
             <Box className="track-list">
-                <TrackList tracks={playerState.songList} cover={playerState.activeSong?.album.cover_medium || ''} />
+                {playerState && <TrackList tracks={playerState.songList} cover={playerState.activeSong?.album.cover_medium || ''} />}
             </Box>
         </StyledQueueContent>
     )
