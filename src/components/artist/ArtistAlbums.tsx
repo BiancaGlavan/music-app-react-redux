@@ -8,6 +8,7 @@ interface IPropsArtistAlbums {
 }
 
 const StyledArtistAlbums = styled('div')`
+
     .title {
         margin-bottom: 30px;
         margin-top: 30px;
@@ -21,16 +22,29 @@ const StyledArtistAlbums = styled('div')`
 
     .artist-details {
         text-align: center;
+      
     }
 
 
     .artist-picture {
-       max-width: 170px;
+       max-width: 100px;
         img {
             width: 100%;
             border-radius: 7px;
             object-fit: cover;
         }
+
+        ${props => props.theme.breakpoints.up("sm")} {
+            max-width: 170px;
+          }
+      
+          ${props => props.theme.breakpoints.up("md")} {
+            max-width: 100px;
+          }
+      
+          ${props => props.theme.breakpoints.up("lg")} {
+            max-width: 170px;
+          }
     }
 
   
@@ -38,7 +52,7 @@ const StyledArtistAlbums = styled('div')`
 
 const ArtistAlbums = ({albums}: IPropsArtistAlbums) => {
   return (
-    <StyledArtistAlbums>
+    <StyledArtistAlbums className="ArtistAlbums">
         <Typography className="title" variant="h5">Albums</Typography>
         <Grid container spacing={10} >
                 {albums.map((album) => <Grid item  key={album?.id}  xs={12} sm={6}  md={4} lg={3}>
@@ -46,8 +60,8 @@ const ArtistAlbums = ({albums}: IPropsArtistAlbums) => {
                    <Box className="artist-picture">
                         <img src={album?.cover_medium} alt="artist picture" />
                     </Box>
-                    <Typography className="artist-details" variant="subtitle1">{album?.title}</Typography>
-                    <Typography className="artist-details" variant="subtitle2" color="textSecondary">Released on {album?.release_date}</Typography>
+                    <Typography className="artist-details" variant="body1">{album?.title}</Typography>
+                    <Typography className="artist-details" variant="body2" color="textSecondary">Released on {album?.release_date}</Typography>
                    </Link>
                 </Grid>)}
             </Grid>

@@ -10,9 +10,25 @@ interface IPropsSimilarArtistsTab {
 }
 
 const StyledSimilarArtistsTab = styled(Box)`
-    margin-top: 30px;
-    margin-left: 30px;
-    width: 35%;
+    flex-shrink: 0;
+    flex-grow: 1;
+
+    ${props => props.theme.breakpoints.up("sm")} {
+        margin-top: 30px;
+        margin-left: 30px;
+    }
+
+    ${props => props.theme.breakpoints.up("md")} {
+    margin-left: 0;
+    }
+
+    ${props => props.theme.breakpoints.up("lg")} {
+        margin-top: 30px;
+        margin-left: 30px;
+        width: 280px;
+    }
+    
+  
 
     .similar-artists-title {
         margin-bottom: 20px;

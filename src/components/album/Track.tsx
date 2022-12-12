@@ -27,11 +27,18 @@ const StyledTrack = styled(Paper)`
     }
 
     .cover {
-        width: 50px;
-        height: 50px;
+        width: 30px;
+        height: 30px;
         margin: 5px;
         position: relative;
         flex-shrink: 0;
+
+        ${props => props.theme.breakpoints.up("md")} {
+            width: 50px;
+            height: 50px;
+        }
+      
+          
 
         img {
             width: 100%;
@@ -42,12 +49,17 @@ const StyledTrack = styled(Paper)`
             background: ${props => props.theme.palette.background.default};
             top: 5px;
             left: 5px;
-            width: 40px;
-            height: 40px;
+            width: 20px;
+            height: 20px;
             border-radius: 20px;
             display: none;
             cursor: pointer;
             padding: 0;
+
+            ${props => props.theme.breakpoints.up("md")} {
+                width: 40px;
+                height: 40px;
+            }
             
 
             .icon {

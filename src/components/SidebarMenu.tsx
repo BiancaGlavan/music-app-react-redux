@@ -25,7 +25,6 @@ const StyledSidebar = styled(Paper)`
 
 const SidebarMenu = () => {
   const location = useLocation();
-  console.log(location.pathname);
 
   return (
     <StyledSidebar square className="SidebarMenu">

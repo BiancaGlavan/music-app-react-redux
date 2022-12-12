@@ -19,8 +19,13 @@ const StyledArtistPage = styled(Container)`
         margin-bottom: 30px;
 
         .artist-img {
-            max-width: 200px;
-            max-height: 200px;
+            max-width: 100px;
+            max-height: 100px;
+
+            ${props => props.theme.breakpoints.up("sm")} {
+                max-width: 200px;
+                max-height: 200px;
+            }
            
 
             img {
@@ -38,15 +43,19 @@ const StyledArtistPage = styled(Container)`
             margin-left: 40px;
         }
     }
+
+    .artist-tabs {
+        max-width: calc(100vw - 50px);
+    }
 `;
 
 const ArtistPage = () => {
 
     const { id } = useParams();
     const { data: artist, isLoading, isFetching } = useGetArtistByIdQuery(id || '');
-    const { data: relatedArtists } = useGetRelatedArtistsQuery(id || '');
-    const { data: playlistResponse } = useGetArtistPlaylistsQuery(id || '');
-    const { data: albumsResponse } = useGetArtistAlbumsQuery(id || '');
+    const { data: relatedArtists, isFetching: isRelatedFetching } = useGetRelatedArtistsQuery(id || '');
+    const { data: playlistResponse, isFetching: isPlaylistFetching } = useGetArtistPlaylistsQuery(id || '');
+    const { data: albumsResponse, isFetching: isAlbumsFetching } = useGetArtistAlbumsQuery(id || '');
     const [activeTab, setActiveTab] = useState('overview');
 
     const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -72,10 +81,12 @@ const ArtistPage = () => {
             </Box>}
             {isFetching ? <div>is loading...</div> :
                 <>
-                    <Box>
+                    <Box className="artist-tabs">
                         <Tabs
                             value={activeTab}
                             onChange={handleTabChange}
+                            variant="scrollable"
+                            scrollButtons
                         >
                             <Tab
                                 value="overview"
@@ -89,9 +100,9 @@ const ArtistPage = () => {
                         <Divider />
                     </Box>
                     {activeTab === 'overview' && <ArtistOverview onTabChange={setActiveTab} />}
-                    {albumsResponse && activeTab === 'albums' && <ArtistAlbums albums={albumsResponse.data} />}
-                    {relatedArtists && activeTab === 'related' && <SimilarArtists artists={relatedArtists.data} />}
-                    {playlistResponse && activeTab === 'playlists' && <Playlists playlists={playlistResponse.data} />}
+                    {!isAlbumsFetching && albumsResponse && activeTab === 'albums' && <ArtistAlbums albums={albumsResponse.data} />}
+                    {!isRelatedFetching && relatedArtists && activeTab === 'related' && <SimilarArtists artists={relatedArtists.data} />}
+                    {!isPlaylistFetching && playlistResponse?.data && activeTab === 'playlists' && <Playlists playlists={playlistResponse.data} />}
                 </>
             }
         </StyledArtistPage>

@@ -8,6 +8,7 @@ export interface PlayerState {
     isPlaying: boolean;
     songList: ISong[];
     activeSong: ISong | null;
+    volume: number;
 }
 
 const initialState: PlayerState = {
@@ -16,6 +17,7 @@ const initialState: PlayerState = {
     isPlaying: false,
     songList: [],
     activeSong: null,
+    volume: 0.3,
 };
 
 
@@ -55,12 +57,15 @@ export const playerSlice = createSlice({
       state.activeSong = newActiveSong;
       state.isPlaying = true;
     },
+    onVolumeChange: (state, action: PayloadAction<number>) => {
+      state.volume = action.payload;
+    }
 
   },
 
 
 });
 
-export const { addSong, play, pause, onNextSong, onPrevSong } = playerSlice.actions;
+export const { addSong, play, pause, onNextSong, onPrevSong, onVolumeChange } = playerSlice.actions;
 
 export default playerSlice.reducer;

@@ -8,7 +8,7 @@ import PlayCircleFilledOutlinedIcon from '@mui/icons-material/PlayCircleFilledOu
 import SkipNextOutlinedIcon from '@mui/icons-material/SkipNextOutlined';
 import RepeatOutlinedIcon from '@mui/icons-material/RepeatOutlined';
 import { ISong } from "../../redux/features/apiDeezerSlice";
-import { onNextSong, onPrevSong, pause, play, PlayerState } from "../../redux/features/playerSlice";
+import { onNextSong, onPrevSong, onVolumeChange, pause, play, PlayerState } from "../../redux/features/playerSlice";
 import Queue from "./Queue";
 import PauseCircleFilledOutlinedIcon from '@mui/icons-material/PauseCircleFilledOutlined';
 import { useAppDispatch } from "../../redux/hooks";
@@ -88,11 +88,7 @@ const StyledAudioPlayer = styled(Paper)`
 
 const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
     const [trackProgress, setTrackProgress] = useState(0);
-
     const [volume, setVolume] = useState(0.3);
-
-
-
 
     // Refs
     const audioRef = useRef(new Audio(playerState.activeSong?.preview));
@@ -101,7 +97,7 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
     const isReady = useRef(false);
 
 
-    const { duration } = audioRef.current;
+    const duration = audioRef.current?.duration || 0;
     const dispatch = useAppDispatch();
 
 
@@ -128,51 +124,40 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
         }, 300);
     };
 
-    const onScrub = (value: number) => {
+    const onTimeChange = (value: number) => {
         // Clear any timers already running
         clearInterval(intervalRef.current);
         audioRef.current.currentTime = value;
         setTrackProgress(audioRef.current.currentTime);
 
-        onScrubEnd();
-    };
-
-    const onScrubEnd = () => {
         // If not already playing, start
         if (!playerState.isPlaying) {
-
-
             dispatch(play());
         }
         startTimer();
     };
-
-    useEffect(() => {
-        if (playerState.isPlaying) {
-            audioRef.current.play();
-            startTimer();
-        } else {
-            audioRef.current.pause();
-        }
-    }, [playerState.isPlaying]);
-
 
     // Handles cleanup and setup when changing tracks
     useEffect(() => {
         audioRef.current.pause();
 
         audioRef.current = new Audio(playerState.activeSong?.preview);
+        audioRef.current.volume = playerState.volume;
         setTrackProgress(audioRef.current.currentTime);
 
         if (isReady.current) {
-            audioRef.current.play();
-            //   setIsPlaying(true);
-            startTimer();
+            if (playerState.isPlaying) {
+                audioRef.current.play();
+                startTimer();
+            } else {
+                audioRef.current.pause();
+            }
+
         } else {
             // Set the isReady ref as true for the next pass
             isReady.current = true;
         }
-    }, [playerState.currentIndex]);
+    }, [playerState.currentIndex, playerState.isPlaying]);
 
 
     useEffect(() => {
@@ -194,13 +179,13 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
 
     // handle volume change
     useEffect(() => {
-        audioRef.current.volume = volume;
-    }, [volume]);
+        audioRef.current.volume = playerState.volume;
+    }, [playerState.volume]);
 
 
 
     const handleChange = (event: Event, newValue: number | number[]) => {
-        onScrub(newValue as number);
+        onTimeChange(newValue as number);
     };
 
     return (
@@ -238,18 +223,18 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
                         <RepeatOutlinedIcon />
                     </IconButton>
                 </Box>
-                <Slider className="slider" step={0.1} min={0} max={duration} value={trackProgress} onChange={handleChange} />
+                <Slider className="slider" step={0.1} min={0} max={duration} value={trackProgress || 0} onChange={handleChange} />
             </Box>
             <Box className="volume" sx={{ width: 100 }}>
                 <IconButton className="volume-btn">
                     <Paper elevation={3} className="volume-slider">
                         <Slider className="" step={0.1} min={0} max={1}
-                            value={volume}
-                            onChange={(e, val) => setVolume(val as number)} />
+                            value={playerState.volume}
+                            onChange={(e, val) => dispatch(onVolumeChange(val as number))} />
                     </Paper>
-                    {volume === 0 && <VolumeOffIcon />}
-                    {volume > 0 && volume < 0.5 && <VolumeDownIcon />}
-                    {volume >= 0.5 && <VolumeUpIcon />}
+                    {playerState.volume === 0 && <VolumeOffIcon />}
+                    {playerState.volume > 0 && playerState.volume < 0.5 && <VolumeDownIcon />}
+                    {playerState.volume >= 0.5 && <VolumeUpIcon />}
                 </IconButton>
             </Box>
             <Queue />

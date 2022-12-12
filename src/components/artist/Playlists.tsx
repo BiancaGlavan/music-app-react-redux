@@ -21,21 +21,33 @@ const StyledPlaylists = styled('div')`
 
   .artist-details {
     text-align: center;
+   
   }
 
   .artist-picture {
-    max-width: 170px;
+    max-width: 100px;
      img {
          width: 100%;
          border-radius: 7px;
          object-fit: cover;
      }
+    ${props => props.theme.breakpoints.up("sm")} {
+      max-width: 170px;
+    }
+
+    ${props => props.theme.breakpoints.up("md")} {
+      max-width: 100px;
+    }
+
+    ${props => props.theme.breakpoints.up("lg")} {
+      max-width: 170px;
+    }
  }
 `;
 
 const Playlists = ({ playlists }: IPropsPlaylists) => {
   return (
-    <StyledPlaylists>
+    <StyledPlaylists className="Playlists">
       <Typography className="title" variant="h5">Playlists</Typography>
       <Grid container spacing={10} >
         {playlists.map((playlist) => <Grid item key={playlist?.id} xs={12} sm={6} md={4} lg={3}>
@@ -43,8 +55,8 @@ const Playlists = ({ playlists }: IPropsPlaylists) => {
             <Box className="artist-picture">
               <img src={playlist?.picture_medium} alt="artist picture" />
             </Box>
-            <Typography className="artist-details" variant="subtitle1">{playlist?.title}</Typography>
-            <Typography className="artist-details" variant="subtitle2" color="textSecondary">Created by {playlist?.user.name}</Typography>
+            <Typography className="artist-details" variant="body1">{playlist?.title}</Typography>
+            <Typography className="artist-details" variant="body2" color="textSecondary">Created by {playlist?.user.name}</Typography>
           </Link>
         </Grid>)}
       </Grid>
