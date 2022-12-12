@@ -10,6 +10,7 @@ interface IPropsSimilarArtistsTab {
 }
 
 const StyledSimilarArtistsTab = styled(Box)`
+    margin-top: 30px;
     flex-shrink: 0;
     flex-grow: 1;
 
@@ -20,6 +21,7 @@ const StyledSimilarArtistsTab = styled(Box)`
 
     ${props => props.theme.breakpoints.up("md")} {
     margin-left: 0;
+    margin-top: 30px;
     }
 
     ${props => props.theme.breakpoints.up("lg")} {
