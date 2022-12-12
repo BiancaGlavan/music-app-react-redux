@@ -32,6 +32,10 @@ const StyledAlbumHeader = styled('div')`
         ${props => props.theme.breakpoints.up("sm")} {
             align-items: flex-start;
         }
+
+        .album-name {
+            text-align: center;
+        }
     }
 
     .artist {

@@ -9,26 +9,56 @@ interface IPropsQueueContent {
 
 const StyledQueueContent = styled('div')`
     display: flex;
-    padding: 10px 40px;
+    flex-direction: column;
+    padding: 10px;
+
+    ${props => props.theme.breakpoints.up("sm")} {
+        flex-direction: row;
+        padding: 10px 20px;
+    }
+    
 
    
     .artist {
        display: flex;
        flex-direction: column;
-       margin-right: 30px;
-       position: sticky;
-       top: 70px;
        align-items: center;
+        
+       ${props => props.theme.breakpoints.up("sm")} {
+            margin-right: 30px;
+            position: sticky;
+            top: 70px;
+       }
 
        .image {
-        max-width: 400px;
-        max-height: 450px;
+        max-width: 300px;
+        max-height: 300px;
+        margin-bottom: 20px;
+
+        ${props => props.theme.breakpoints.up("sm")} {
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+        ${props => props.theme.breakpoints.up("md")} {
+            max-width: 400px;
+            max-height: 450px;
+        }
+       }
+
+       .title {
+        text-align: center;
         margin-bottom: 20px;
        }
     }
 
     .track-list {
         flex-grow: 1;
+        margin-top: 20px;
+        
+        ${props => props.theme.breakpoints.up("sm")}{
+            max-width: calc(100vw - 250px - 50px);
+        }
 
         .track {
             margin-top: 0;
@@ -46,7 +76,7 @@ const QueueContent = (props: IPropsQueueContent) => {
             <Box className="song-preview">
                 <Box className="artist">
                     <img className="image" src={playerState.activeSong?.album.cover_big || ''} alt="" />
-                    <Typography variant="subtitle1">{playerState.activeSong?.title || ''}</Typography>
+                    <Typography className="title" variant="subtitle1">{playerState.activeSong?.title || ''}</Typography>
                     <Typography variant="caption">{playerState.activeSong?.artist.name}</Typography>
                 </Box>
             </Box>
