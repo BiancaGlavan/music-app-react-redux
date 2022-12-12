@@ -137,32 +137,43 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
         startTimer();
     };
 
+    useEffect(() => {
+        if (playerState.isPlaying) {
+            audioRef.current.play();
+            startTimer();
+        } else {
+            if (isReady.current) {
+                audioRef.current.pause();
+            }
+        }
+
+    }, [playerState.isPlaying]);
+
     // Handles cleanup and setup when changing tracks
     useEffect(() => {
         audioRef.current.pause();
+        console.log('pause from use effect 2. pause().  index changed');
 
         audioRef.current = new Audio(playerState.activeSong?.preview);
         audioRef.current.volume = playerState.volume;
         setTrackProgress(audioRef.current.currentTime);
 
         if (isReady.current) {
-            if (playerState.isPlaying) {
-                audioRef.current.play();
-                startTimer();
-            } else {
-                audioRef.current.pause();
-            }
+            console.log('play from use effect 2. play()');
+            audioRef.current.play();
+            startTimer();
 
         } else {
             // Set the isReady ref as true for the next pass
             isReady.current = true;
         }
-    }, [playerState.currentIndex, playerState.isPlaying]);
+    }, [playerState.currentIndex]);
 
 
     useEffect(() => {
         // Pause and clean up on unmount
         return () => {
+            console.log('pause from use effect 3. unmount here');
             audioRef.current.pause();
             clearInterval(intervalRef.current);
         };

@@ -55,7 +55,7 @@ const ArtistAlbums = ({albums}: IPropsArtistAlbums) => {
     <StyledArtistAlbums className="ArtistAlbums">
         <Typography className="title" variant="h5">Albums</Typography>
         <Grid container spacing={10} >
-                {albums.map((album) => <Grid item  key={album?.id}  xs={12} sm={6}  md={4} lg={3}>
+                {albums.map((album) => <Grid item  key={album?.id}  xs={6} sm={6}  md={4} lg={3}>
                    <Link className="artist-container" to={`/album/${album.id}`}>
                    <Box className="artist-picture">
                         <img src={album?.cover_medium} alt="artist picture" />

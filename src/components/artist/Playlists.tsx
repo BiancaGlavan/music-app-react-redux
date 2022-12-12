@@ -50,7 +50,7 @@ const Playlists = ({ playlists }: IPropsPlaylists) => {
     <StyledPlaylists className="Playlists">
       <Typography className="title" variant="h5">Playlists</Typography>
       <Grid container spacing={10} >
-        {playlists.map((playlist) => <Grid item key={playlist?.id} xs={12} sm={6} md={4} lg={3}>
+        {playlists.map((playlist) => <Grid item key={playlist?.id} xs={6} sm={6} md={4} lg={3}>
           <Link className="artist-container" to={`/playlist/${playlist.id}`}>
             <Box className="artist-picture">
               <img src={playlist?.picture_medium} alt="artist picture" />

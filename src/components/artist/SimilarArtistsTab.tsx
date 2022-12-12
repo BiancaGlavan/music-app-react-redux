@@ -16,7 +16,7 @@ const StyledSimilarArtistsTab = styled(Box)`
 
     ${props => props.theme.breakpoints.up("sm")} {
         margin-top: 30px;
-        margin-left: 30px;
+        
     }
 
     ${props => props.theme.breakpoints.up("md")} {
