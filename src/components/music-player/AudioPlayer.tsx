@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Paper, Slider, SpeedDial, Typography } from "@mui/material";
+import { Box, Button, IconButton, Paper, Slider, SpeedDial, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useEffect, useRef, useState } from "react";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -27,25 +27,50 @@ interface IPropsAudioPlayer {
 
 const StyledAudioPlayer = styled(Paper)`
     display: flex;
-    align-items: center;
-    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 5px;
+
+    .player {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+    }
 
     .artist-info {
         display: flex;
-        margin-right: 20px;
+        margin-right: 10px;
         align-items: center;
         flex-shrink: 0;
-        min-width: 350px;
+        flex-grow: 1;
+        
+
+        .fav {
+            display: none;
+
+            ${props => props.theme.breakpoints.up("sm")} {
+                display: flex;
+            }
+        }
        
         img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
+            display: none;
+            
+
+            ${props => props.theme.breakpoints.up("sm")} {
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+              }
         }
 
        .artist-name-and-song {
-        margin-left: 20px;
-        margin-right: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
+            overflow: hidden;
+            flex-grow: 1;
+            max-width: 170px;
        }
     }
 
@@ -53,7 +78,7 @@ const StyledAudioPlayer = styled(Paper)`
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        margin-right: 100px;
+        
 
         .buttons {
             display: flex;
@@ -89,6 +114,9 @@ const StyledAudioPlayer = styled(Paper)`
 const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
     const [trackProgress, setTrackProgress] = useState(0);
     const [volume, setVolume] = useState(0.3);
+
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     // Refs
     const audioRef = useRef(new Audio(playerState.activeSong?.preview));
@@ -201,54 +229,63 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
 
     return (
         <StyledAudioPlayer className="AudioPlayer" variant="outlined">
-            <Box className="artist-info">
-                <img src={playerState.activeSong?.album.cover_small} alt="" />
-                <Box className="artist-name-and-song">
-                    <Typography variant="body2">{playerState.activeSong?.title}</Typography>
-                    <Typography variant="caption">{playerState.activeSong?.artist.name}</Typography>
+            <Box className="player">
+                <Box className="artist-info">
+                    <img src={playerState.activeSong?.album.cover_small} alt="" />
+                    <Box className="artist-name-and-song">
+                        <Typography noWrap variant="body2">{playerState.activeSong?.title}</Typography>
+                        <Typography noWrap variant="caption">{playerState.activeSong?.artist.name}</Typography>
+                    </Box>
+                    <Box>
+                        <IconButton className="fav">
+                            <FavoriteBorderOutlinedIcon />
+                        </IconButton>
+                    </Box>
                 </Box>
-                <Box>
-                    <IconButton>
-                        <FavoriteBorderOutlinedIcon />
-                    </IconButton>
-                </Box>
-            </Box>
-            <Box className="slider-and-buttons">
-                <Box className="buttons">
-                    <IconButton>
-                        <ShuffleOutlinedIcon />
-                    </IconButton>
-                    <IconButton onClick={toPrevTrack}>
-                        <SkipPreviousOutlinedIcon />
-                    </IconButton>
+                {!isMobile && <Box className="slider-and-buttons">
+                    <Box className="buttons">
+                        {!isMobile && <><IconButton>
+                            <ShuffleOutlinedIcon />
+                        </IconButton>
+                            <IconButton onClick={toPrevTrack}>
+                                <SkipPreviousOutlinedIcon />
+                            </IconButton></>
+                        }
 
-                    {playerState.isPlaying ?
-                        <IconButton onClick={handlePause}><PauseCircleFilledOutlinedIcon fontSize="large" /></IconButton> :
-                        <IconButton onClick={handlePlay}><PlayCircleFilledOutlinedIcon fontSize="large" /></IconButton>
-                    }
+                        {playerState.isPlaying ?
+                            <IconButton onClick={handlePause}><PauseCircleFilledOutlinedIcon fontSize="large" /></IconButton> :
+                            <IconButton onClick={handlePlay}><PlayCircleFilledOutlinedIcon fontSize="large" /></IconButton>
+                        }
 
-                    <IconButton onClick={toNextTrack}>
-                        <SkipNextOutlinedIcon />
+
+                        {!isMobile && <><IconButton onClick={toNextTrack}>
+                            <SkipNextOutlinedIcon />
+                        </IconButton><IconButton>
+                                <RepeatOutlinedIcon />
+                            </IconButton></>}
+                    </Box>
+                    {!isMobile && <Slider className="slider" step={0.1} min={0} max={duration} value={trackProgress || 0} onChange={handleChange} />}
+                </Box>}
+                {!isMobile && <Box className="volume" sx={{ width: 100 }}>
+                    <IconButton className="volume-btn">
+                        <Paper elevation={3} className="volume-slider">
+                            <Slider className="" step={0.1} min={0} max={1}
+                                value={playerState.volume}
+                                onChange={(e, val) => dispatch(onVolumeChange(val as number))} />
+                        </Paper>
+                        {playerState.volume === 0 && <VolumeOffIcon />}
+                        {playerState.volume > 0 && playerState.volume < 0.5 && <VolumeDownIcon />}
+                        {playerState.volume >= 0.5 && <VolumeUpIcon />}
                     </IconButton>
-                    <IconButton>
-                        <RepeatOutlinedIcon />
-                    </IconButton>
-                </Box>
-                <Slider className="slider" step={0.1} min={0} max={duration} value={trackProgress || 0} onChange={handleChange} />
+                </Box>}
+
+                {isMobile && (playerState.isPlaying ?
+                    <IconButton onClick={handlePause}><PauseCircleFilledOutlinedIcon fontSize="large" /></IconButton> :
+                    <IconButton onClick={handlePlay}><PlayCircleFilledOutlinedIcon fontSize="large" /></IconButton>
+                )}
+                <Queue />
             </Box>
-            <Box className="volume" sx={{ width: 100 }}>
-                <IconButton className="volume-btn">
-                    <Paper elevation={3} className="volume-slider">
-                        <Slider className="" step={0.1} min={0} max={1}
-                            value={playerState.volume}
-                            onChange={(e, val) => dispatch(onVolumeChange(val as number))} />
-                    </Paper>
-                    {playerState.volume === 0 && <VolumeOffIcon />}
-                    {playerState.volume > 0 && playerState.volume < 0.5 && <VolumeDownIcon />}
-                    {playerState.volume >= 0.5 && <VolumeUpIcon />}
-                </IconButton>
-            </Box>
-            <Queue />
+            {isMobile && <Slider className="slider" step={0.1} min={0} max={duration} value={trackProgress || 0} onChange={handleChange} />}
 
         </StyledAudioPlayer>
     )

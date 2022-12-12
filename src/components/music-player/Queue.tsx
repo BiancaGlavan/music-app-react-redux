@@ -1,4 +1,4 @@
-import { Box, Button, Drawer, IconButton } from "@mui/material";
+import { Box, Button, Drawer, IconButton, useMediaQuery, useTheme } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
@@ -9,8 +9,11 @@ const StyledQueue = styled(Box)`
 
   display: flex;
   align-items: center;
-  margin-left: 20px;
-  
+  margin-left: 10px;
+
+  ${props => props.theme.breakpoints.up("sm")} {
+    margin-left: 20px;
+  }
 
   .MuiDrawer-paper {
     background: red;
@@ -26,17 +29,25 @@ const StyledQueue = styled(Box)`
 const Queue = () => {
   const [open, setOpen] = useState(false);
 
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const handleDrawerToggle = () => {
-      setOpen(!open);
+    setOpen(!open);
   };
 
   return (
 
 
     <StyledQueue>
-      <Button variant="outlined" onClick={handleDrawerToggle} startIcon={<QueueMusicIcon />}>
-        Queue
-      </Button>
+      {isMobile ? <IconButton onClick={handleDrawerToggle}>
+        <QueueMusicIcon />
+        </IconButton> : <Button variant="outlined" onClick={handleDrawerToggle} startIcon={<QueueMusicIcon />}>
+       Queue
+      </Button>}
+      {/* <Button variant="outlined" onClick={handleDrawerToggle} startIcon={<QueueMusicIcon />}>
+        {!isMobile && 'Queue'}
+      </Button> */}
       <Drawer
         variant="temporary"
         anchor="bottom"
@@ -49,9 +60,9 @@ const Queue = () => {
           '& .MuiDrawer-paper': { boxSizing: 'border-box', height: 'calc(100vh - 90px)', marginBottom: '90px' },
         }}
       >
-        <Box sx={{display: 'flex', justifyContent: 'flex-end', padding: '10px'}}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
           <IconButton onClick={handleDrawerToggle}>
-          <CloseIcon />
+            <CloseIcon />
           </IconButton>
         </Box>
         <QueueContent />

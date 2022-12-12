@@ -45,7 +45,7 @@ const SimilarArtists = ({ artists }: IPropsSimilarArtists) => {
         <StyledSimilarArtist className="SimilarArtists">
             <Typography className="title" variant="h5">Similar Artists</Typography>
             <Grid container spacing={10} >
-                {artists.map((artist) => <Grid item key={artist.id} xs={12} sm={6} md={4} lg={3}>
+                {artists.map((artist) => <Grid item key={artist.id} xs={6} sm={6} md={4} lg={3}>
                     <Link className="artist-container" to={`/artists/${artist.id}`}>
                         <Box className="artist-picture">
                             <img src={artist.picture} alt="artist picture" />
