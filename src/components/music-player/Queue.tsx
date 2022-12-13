@@ -1,4 +1,4 @@
-import { Box, Button, Drawer, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Button, Drawer, IconButton, SwipeableDrawer, useMediaQuery, useTheme } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
@@ -42,13 +42,15 @@ const Queue = () => {
     <StyledQueue>
       {isMobile ? <IconButton onClick={handleDrawerToggle}>
         <QueueMusicIcon />
-        </IconButton> : <Button variant="outlined" onClick={handleDrawerToggle} startIcon={<QueueMusicIcon />}>
-       Queue
+      </IconButton> : <Button variant="outlined" onClick={handleDrawerToggle} startIcon={<QueueMusicIcon />}>
+        Queue
       </Button>}
       {/* <Button variant="outlined" onClick={handleDrawerToggle} startIcon={<QueueMusicIcon />}>
         {!isMobile && 'Queue'}
       </Button> */}
-      <Drawer
+
+
+      {/* <Drawer
         variant="temporary"
         anchor="bottom"
         open={open}
@@ -57,7 +59,7 @@ const Queue = () => {
           keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', height: 'calc(100vh - 90px)', marginBottom: '105px' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', height: 'calc(100vh - 90px)', marginBottom: {xs: '93px', sm: '90px'} },
         }}
       >
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
@@ -66,7 +68,29 @@ const Queue = () => {
           </IconButton>
         </Box>
         <QueueContent />
-      </Drawer>
+      </Drawer> */}
+
+      <SwipeableDrawer
+        anchor="bottom"
+        open={open}
+        onClose={handleDrawerToggle}
+        onOpen={handleDrawerToggle}
+        swipeAreaWidth={5}
+        disableSwipeToOpen={false}
+        ModalProps={{
+          keepMounted: true,
+        }}
+      >
+        <Box sx={{maxHeight: 'calc(100vh - 80px)', overflow: 'auto'}}>
+        <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
+          <IconButton onClick={handleDrawerToggle}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+        <QueueContent />
+        </Box>
+       
+      </SwipeableDrawer>
     </StyledQueue>
 
 
