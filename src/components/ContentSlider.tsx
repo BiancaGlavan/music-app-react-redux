@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { styled } from "@mui/material/styles";
 import { IChartsAlbum, IChartsArtist, IChartsPlaylist, IChartsTrack } from "../redux/features/apiDeezerSlice";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { useRef } from "react";
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -68,22 +68,25 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);
 
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
     const getTitle = () => {
-        if(type === 'artist') return 'Top Artists';
-        if(type === 'album') return 'Top Albums';
-        if(type === 'playlist') return 'Top Playlists';
-        if(type === 'track') return 'Top Songs';
+        if (type === 'artist') return 'Top Artists';
+        if (type === 'album') return 'Top Albums';
+        if (type === 'playlist') return 'Top Playlists';
+        if (type === 'track') return 'Top Songs';
     }
 
     const getArtists = () => {
         return artists.map((artist, idx) => <SwiperSlide key={artist.id} className="swiper-slide">
             <Box className="content-slide">
                 <img className="slide-img" src={artist.picture} alt="" />
-             <Link to={`/artists/${artist.id}`}>
-             <Typography variant="subtitle2">
-                    {artist.name}
-                </Typography>
-             </Link>
+                <Link to={`/artists/${artist.id}`}>
+                    <Typography variant="subtitle2">
+                        {artist.name}
+                    </Typography>
+                </Link>
             </Box>
         </SwiperSlide>);
     }
@@ -93,9 +96,9 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
             <Box className="content-slide">
                 <img className="slide-img" src={album.cover} alt="" />
                 <Link to={`/album/${album.id}`}>
-                <Typography variant="subtitle2">
-                    {album.title}
-                </Typography>
+                    <Typography variant="subtitle2">
+                        {album.title}
+                    </Typography>
                 </Link>
                 <Typography variant="caption">
                     {album.artist.name}
@@ -109,9 +112,9 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
             <Box className="content-slide">
                 <img className="slide-img" src={playlist.picture} alt="" />
                 <Link to={`/playlist/${playlist.id}`}>
-                <Typography variant="subtitle2">
-                    {playlist.title}
-                </Typography>
+                    <Typography variant="subtitle2">
+                        {playlist.title}
+                    </Typography>
                 </Link>
                 <Typography variant="caption">
                     Created by: {playlist.user.name}
@@ -142,12 +145,14 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
                 <Typography variant="subtitle1" className="slider-title">
                     {getTitle()}
                 </Typography>
-                <IconButton ref={navigationPrevRef}>
-                    <KeyboardArrowLeftIcon />
-                </IconButton>
-                <IconButton ref={navigationNextRef}>
-                    <KeyboardArrowRightIcon />
-                </IconButton>
+                {!isMobile && <>
+                    <IconButton ref={navigationPrevRef}>
+                        <KeyboardArrowLeftIcon />
+                    </IconButton>
+                    <IconButton ref={navigationNextRef}>
+                        <KeyboardArrowRightIcon />
+                    </IconButton>
+                </>}
             </div>
             <Swiper className="my-swiper swiper-container" navigation={{
                 prevEl: navigationPrevRef.current,
@@ -163,32 +168,32 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
                 }}
                 modules={[Navigation]}
 
-                spaceBetween={5}
-                slidesPerView={1}
+                spaceBetween={1}
+                slidesPerView={2.2}
                 breakpoints={{
                     400: {
-                      slidesPerView: 2,
-                    
+                        slidesPerView: 3.2,
+
                     },
                     600: {
-                      slidesPerView: 3,
-                      
+                        slidesPerView: 4.2,
+
                     },
                     800: {
-                        slidesPerView: 4,
+                        slidesPerView: 4.2,
                     },
                     900: {
-                        slidesPerView: 3,
+                        slidesPerView: 3.2,
 
                     },
                     1024: {
-                      slidesPerView: 4,
-                   
+                        slidesPerView: 4.2,
+
                     },
                     1200: {
-                        slidesPerView: 5,
+                        slidesPerView: 5.2,
                     },
-                  }}
+                }}
             >
                 {type === 'artist' && getArtists()}
                 {type === 'album' && getAlbums()}

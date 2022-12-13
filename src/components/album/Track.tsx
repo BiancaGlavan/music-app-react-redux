@@ -99,7 +99,11 @@ const StyledTrack = styled(Paper)`
     .more {
         display: flex;
         align-items: center;
-        margin-right: 20px;
+        margin-right: 10px;
+
+        .duration {
+            min-width: 33px;
+        }
     }
 
     .artist-name {
@@ -133,7 +137,7 @@ const Track = ({ track, cover, trackNr, isActive = false, isPlaying = false, onA
                 <IconButton>
                     <FavoriteBorderOutlinedIcon />
                 </IconButton>
-                <Typography variant="subtitle1">
+                <Typography variant="subtitle1" className="duration">
                     {secondsToSongTime(track.duration)}
                 </Typography>
             </Box>
