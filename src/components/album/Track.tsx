@@ -27,8 +27,8 @@ const StyledTrack = styled(Paper)`
     }
 
     .cover {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
         margin: 5px;
         position: relative;
         flex-shrink: 0;
@@ -49,9 +49,9 @@ const StyledTrack = styled(Paper)`
             background: ${props => props.theme.palette.background.default};
             top: 5px;
             left: 5px;
-            width: 20px;
-            height: 20px;
-            border-radius: 20px;
+            width: 30px;
+            height: 30px;
+            border-radius: 30px;
             display: none;
             cursor: pointer;
             padding: 0;
@@ -85,6 +85,15 @@ const StyledTrack = styled(Paper)`
     .track-artist {
         flex-grow: 1;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .artist-link {
+            padding: 0;
+            margin: 0;
+            line-height: 18px;
+        }
     }
     
     .more {
@@ -116,7 +125,7 @@ const Track = ({ track, cover, trackNr, isActive = false, isPlaying = false, onA
             <Typography className="track-nr" variant="subtitle1">{trackNr}</Typography>
             <Box className="track-artist">
                 <Typography noWrap variant="body2">{track.title}</Typography>
-               <Link to={`/artists/${track.artist.id}`}>
+               <Link className="artist-link" to={`/artists/${track.artist.id}`}>
                <Typography noWrap className="artist-name" variant="caption" color="textSecondary">{track.artist.name}</Typography>
                </Link>
             </Box>

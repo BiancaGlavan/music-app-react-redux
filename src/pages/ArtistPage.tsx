@@ -14,10 +14,6 @@ import { useGetArtistAlbumsQuery, useGetArtistByIdQuery, useGetArtistPlaylistsQu
 
 const StyledArtistPage = styled(Container)`
 
-   
-    .artist-tabs {
-        max-width: calc(100vw - 50px);
-    }
 `;
 
 const ArtistPage = () => {
@@ -48,7 +44,6 @@ const ArtistPage = () => {
                             value={activeTab}
                             onChange={handleTabChange}
                             variant="scrollable"
-                            scrollButtons
                         >
                             <Tab
                                 value="overview"

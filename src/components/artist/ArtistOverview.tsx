@@ -19,14 +19,6 @@ flex-grow: 1;
         display: flex;
         flex-direction: column;
 
-        ${props => props.theme.breakpoints.up("sm")} {
-            flex-direction: column;
-        }
-
-        ${props => props.theme.breakpoints.up("md")} {
-            flex-direction: column;
-        }
-
         ${props => props.theme.breakpoints.up("lg")} {
             flex-direction: row;
         }
@@ -34,11 +26,6 @@ flex-grow: 1;
 
     .tracks {
        flex-grow: 1;
-       max-width: calc(100vw - 55px );
-
-       ${props => props.theme.breakpoints.up("lg")} {
-            max-width: calc(100vw - 48px - 50px - 280px);
-        }
     }
 
   

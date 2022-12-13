@@ -15,6 +15,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import VolumeDownIcon from '@mui/icons-material/VolumeDown';
+import classNames from "classnames";
 
 
 interface IPropsAudioPlayer {
@@ -30,6 +31,12 @@ const StyledAudioPlayer = styled(Paper)`
     flex-direction: column;
     align-items: flex-start;
     padding: 5px;
+
+    display: none;
+
+    &.active {
+        display: flex;
+    }
 
     .player {
         display: flex;
@@ -186,7 +193,7 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
         audioRef.current.volume = playerState.volume;
         setTrackProgress(audioRef.current.currentTime);
 
-        if (isReady.current) {
+        if (isReady.current && playerState.isActive) {
             console.log('play from use effect 2. play()');
             audioRef.current.play();
             startTimer();
@@ -195,7 +202,7 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
             // Set the isReady ref as true for the next pass
             isReady.current = true;
         }
-    }, [playerState.currentIndex]);
+    }, [playerState.currentIndex, playerState.isActive]);
 
 
     useEffect(() => {
@@ -228,7 +235,7 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
     };
 
     return (
-        <StyledAudioPlayer className="AudioPlayer" variant="outlined">
+        <StyledAudioPlayer className={classNames("AudioPlayer", {active: playerState.isActive})} variant="outlined">
             <Box className="player">
                 <Box className="artist-info">
                     <img src={playerState.activeSong?.album.cover_small} alt="" />

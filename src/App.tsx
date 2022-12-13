@@ -14,14 +14,26 @@ import LoadersPage from './pages/LoadersPage';
 import SearchPage from './pages/SearchPage';
 
 const StyledApp = styled('div')`
-  display: flex;
+
   min-height: 100vh;
+  display: block;
+
   .page-content {
-    flex-grow: 1;
+    display: block;
+    max-width: 100%;
     padding-top: 60px;
     padding-bottom: 150px;
-    max-width: 100vw;
   }
+
+  ${props => props.theme.breakpoints.up('md')} {
+    display: flex;
+   
+    .page-content {
+      flex-grow: 1;
+      max-width: calc(100vw - 300px);
+    }
+  }
+
 `;
 
 function App() {
@@ -33,7 +45,7 @@ function App() {
       <CssBaseline />
       <StyledApp className='App'>
         {!isMobile && <div className='left-sidebar'><SidebarMenu /></div>}
-        <div className='page-content' style={{maxWidth: !isMobile ? 'calc(100vw - 298px)' : 'calc(100vw - 18px)'}}>
+        <div className='page-content'>
           <Navigation />
           <Routes>
             <Route path='/' element={<Homepage />} />

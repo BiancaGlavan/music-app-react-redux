@@ -10,7 +10,7 @@ import ContentHeader from "../components/ContentHeader";
 
 
 const StyledAlbumPage = styled(Container)`
-  // max-width: calc(100vw - 20px);
+
 `;
 
 const AlbumPage = () => {
