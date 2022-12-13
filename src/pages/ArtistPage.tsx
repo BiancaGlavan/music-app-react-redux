@@ -7,42 +7,14 @@ import ArtistAlbums from "../components/artist/ArtistAlbums";
 import ArtistOverview from "../components/artist/ArtistOverview";
 import Playlists from "../components/artist/Playlists";
 import SimilarArtists from "../components/artist/SimilarArtists";
+import ContentHeader from "../components/ContentHeader";
 import NavigateBack from "../components/NavigateBack";
 import { useGetArtistAlbumsQuery, useGetArtistByIdQuery, useGetArtistPlaylistsQuery, useGetRelatedArtistsQuery } from "../redux/features/apiDeezerSlice";
 
 
 const StyledArtistPage = styled(Container)`
 
-    .artist {
-        display: flex;
-        margin-bottom: 30px;
-
-        .artist-img {
-            max-width: 100px;
-            max-height: 100px;
-
-            ${props => props.theme.breakpoints.up("sm")} {
-                max-width: 200px;
-                max-height: 200px;
-            }
-           
-
-            img {
-                width: 100%;
-                height: 100%;
-                border-radius: 100%;
-            }
-        }
-
-        .artist-details {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-left: 40px;
-        }
-    }
-
+   
     .artist-tabs {
         max-width: calc(100vw - 50px);
     }
@@ -68,16 +40,7 @@ const ArtistPage = () => {
     return (
         <StyledArtistPage>
             <NavigateBack />
-            {!isFetching && artist && <Box className="artist">
-                <Box className="artist-img">
-                    <img src={artist.picture_big} alt="artist-picture" />
-                </Box>
-                <Box className="artist-details">
-                    <Typography variant="h5">{artist?.name}</Typography>
-                    <Typography variant="subtitle2" color="textSecondary"> {new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
-
-                </Box>
-            </Box>}
+            {!isFetching && artist && <ContentHeader type="artist" artist={artist}/>}
             {isFetching ? <div>is loading...</div> :
                 <>
                     <Box className="artist-tabs">
