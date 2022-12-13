@@ -57,7 +57,7 @@ const Queue = () => {
           keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', height: 'calc(100vh - 90px)', marginBottom: '90px' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', height: 'calc(100vh - 90px)', marginBottom: '105px' },
         }}
       >
         <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
