@@ -20,7 +20,7 @@ interface IPropsContentSlider {
 }
 
 const StyledContentSlider = styled('div')`
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 
     .content-slide {
         display: flex;
