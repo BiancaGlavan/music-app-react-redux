@@ -24,25 +24,25 @@ const StyledRegister = styled('div')`
 const Register = ({onTabChange}: IPropsRegister) => {
   return (
     <StyledRegister>
-        <TextField className="input first" label="Username" variant="standard" type="text" fullWidth inputProps={{
+        <TextField className="input first" label="Username" variant="outlined" type="text" fullWidth inputProps={{
                         autocomplete: 'new-password',
                         form: {
                           autocomplete: 'off',
                         },
                       }}/>
-        <TextField className="input" label="Email" variant="standard" type="email" fullWidth inputProps={{
+        <TextField className="input" label="Email" variant="outlined" type="email" fullWidth inputProps={{
                         autocomplete: 'new-password',
                         form: {
                           autocomplete: 'off',
                         },
                       }}/>
-        <TextField className="input" label="Password" variant="standard" type="password" fullWidth inputProps={{
+        <TextField className="input" label="Password" variant="outlined" type="password" fullWidth inputProps={{
                         autocomplete: 'new-password',
                         form: {
                           autocomplete: 'off',
                         },
                       }}/>
-        <TextField className="input" label="Confirm password" variant="standard" type="password" fullWidth inputProps={{
+        <TextField className="input" label="Confirm password" variant="outlined" type="password" fullWidth inputProps={{
                         autocomplete: 'new-password',
                         form: {
                           autocomplete: 'off',

@@ -32,6 +32,7 @@ const StyledAudioPlayer = styled(Paper)`
     align-items: flex-start;
     padding: 5px;
 
+
     display: none;
 
     &.active {

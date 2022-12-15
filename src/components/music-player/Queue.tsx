@@ -1,4 +1,4 @@
-import { Box, Button, Drawer, IconButton, SwipeableDrawer, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Button, Drawer, IconButton, Paper, SwipeableDrawer, useMediaQuery, useTheme } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import QueueMusicIcon from '@mui/icons-material/QueueMusic';
@@ -82,15 +82,15 @@ const Queue = () => {
           keepMounted: true,
         }}
       >
-        <Box sx={{maxHeight: 'calc(100vh - 80px)', overflow: 'auto'}}>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
-          <IconButton onClick={handleDrawerToggle}>
-            <CloseIcon />
-          </IconButton>
+        <Box sx={{ maxHeight: 'calc(100vh - 80px)', overflow: 'auto' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
+            <IconButton onClick={handleDrawerToggle}>
+              <CloseIcon />
+            </IconButton>
+          </Box>
+          <QueueContent />
         </Box>
-        <QueueContent />
-        </Box>
-       
+
       </SwipeableDrawer>
     </StyledQueue>
 

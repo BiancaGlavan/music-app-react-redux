@@ -1,10 +1,10 @@
-import { Box, Button, Dialog, DialogContent, Tab, Tabs } from "@mui/material";
+import { Box, Button, Dialog, DialogContent, Paper, Tab, Tabs } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 
-const StyledLoginRegister = styled(Box)`
+const StyledLoginRegister = styled(Paper)`
 
 `;
 

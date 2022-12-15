@@ -1,3 +1,4 @@
+import { Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useAppSelector } from "../../redux/hooks";
 import AudioPlayer from "./AudioPlayer";
@@ -8,6 +9,7 @@ const StyledMusicPlayer = styled('div')`
     bottom: 0;
     left: 0;
     z-index: 20;
+   
 `;
 
 const MusicPlayer = () => {
