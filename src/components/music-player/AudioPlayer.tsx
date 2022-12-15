@@ -49,8 +49,16 @@ const StyledAudioPlayer = styled(Paper)`
         display: flex;
         margin-right: 10px;
         align-items: center;
-        flex-shrink: 0;
         flex-grow: 1;
+        flex-shrink: 0;
+
+        ${props => props.theme.breakpoints.up("sm")} {
+            flex-grow: 0;
+        }
+
+        @media screen and (min-width: 1050px) {
+            margin-right: 30px;
+        }
         
 
         .fav {
@@ -62,14 +70,15 @@ const StyledAudioPlayer = styled(Paper)`
         }
        
         img {
-            display: none;
+            max-width: 30px;
+            max-height: 30px;
+            object-fit: cover;
             
-
-            ${props => props.theme.breakpoints.up("sm")} {
-                width: 50px;
-                height: 50px;
+            @media screen and (min-width: 380px) {
+                max-width: 50px;
+                max-height: 50px;
                 object-fit: cover;
-              }
+            }
         }
 
        .artist-name-and-song {
@@ -77,7 +86,28 @@ const StyledAudioPlayer = styled(Paper)`
             margin-right: 10px;
             overflow: hidden;
             flex-grow: 1;
-            max-width: 170px;
+            max-width: 130px;
+
+            @media screen and (min-width: 450px) {
+                max-width: 250px;
+            }
+
+            @media screen and (min-width: 600px) {
+                max-width: 130px;
+            }
+
+            @media screen and (min-width: 750px) {
+                max-width: 200px;
+            }
+
+            @media screen and (min-width: 900px) {
+                max-width: 250px;
+            }
+
+            @media screen and (min-width: 1050px) {
+                max-width: 300px;
+            }
+          
        }
     }
 
@@ -100,6 +130,10 @@ const StyledAudioPlayer = styled(Paper)`
         position: relative;
         margin-left: 10px;
         margin-right: 10px;
+
+        @media screen and (min-width: 1050px) {
+            margin-left: 30px;
+        }
 
         .volume-slider {
             position: absolute;
@@ -273,7 +307,7 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
                     </Box>
                     {!isMobile && <Slider className="slider" step={0.1} min={0} max={duration} value={trackProgress || 0} onChange={handleChange} />}
                 </Box>}
-                {!isMobile && <Box className="volume" sx={{ width: 100 }}>
+                {!isMobile && <Box className="volume">
                     <IconButton className="volume-btn">
                         <Paper elevation={3} className="volume-slider">
                             <Slider className="" step={0.1} min={0} max={1}

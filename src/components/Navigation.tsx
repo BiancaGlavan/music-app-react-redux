@@ -9,6 +9,7 @@ import SidebarMenu from "./SidebarMenu";
 import Search from "./search/Search";
 import classNames from "classnames";
 import Button from "@mui/material/Button";
+import LoginRegister from "./login-register/LoginRegister";
 
 const StyledNavigation = styled(Paper)`
     width: calc(100% - 280px);
@@ -39,6 +40,7 @@ const Navigation = () => {
         <StyledNavigation square className={classNames('Navigation', {isMobile: isMobile})}>
             {isMobile && <IconButton onClick={handleDrawerToggle}><MenuIcon /></IconButton>}
             <Search />
+            <LoginRegister />
             <Drawer
                variant="temporary"
                open={mobileOpen}
