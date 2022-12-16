@@ -5,6 +5,9 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';
 import classNames from "classnames";
 
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+
+
 const StyledSidebar = styled(Paper)`
     height: 100vh;
     overflow: auto;
@@ -46,6 +49,17 @@ const SidebarMenu = () => {
                 <LibraryMusicOutlinedIcon />
               </ListItemIcon>
               <ListItemText primary="Explore" />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+
+        <Link to={'/favorites'}>
+          <ListItem disablePadding className={classNames('list-item', {active: location.pathname === '/favorites'})}>
+            <ListItemButton>
+              <ListItemIcon>
+                <FavoriteBorderOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Favorite" />
             </ListItemButton>
           </ListItem>
         </Link>

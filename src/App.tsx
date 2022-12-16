@@ -12,6 +12,7 @@ import PlaylistPage from './pages/PlaylistPage';
 import MusicPlayer from './components/music-player/MusicPlayer';
 import LoadersPage from './pages/LoadersPage';
 import SearchPage from './pages/SearchPage';
+import FavoritesPage from './pages/FavoritesPage';
 
 const StyledApp = styled('div')`
 
@@ -55,6 +56,7 @@ function App() {
             <Route path='/playlist/:id' element={<PlaylistPage />} />
             <Route path='/loaders' element={<LoadersPage />} />
             <Route path='/search' element={<SearchPage />} />
+            <Route path='/favorites' element={<FavoritesPage />} />
             
           </Routes>
         </div>
