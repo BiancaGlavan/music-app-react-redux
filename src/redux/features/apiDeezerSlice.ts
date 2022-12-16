@@ -181,7 +181,7 @@ interface ISearchResponse {
 
 
 export const deezerApi = createApi({
-    reducerPath: 'api',
+    reducerPath: 'deezerapi',
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://rich-veil-clam.cyclic.app/https://api.deezer.com/',
     }),
