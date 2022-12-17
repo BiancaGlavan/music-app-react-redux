@@ -59,7 +59,7 @@ const SidebarMenu = () => {
               <ListItemIcon>
                 <FavoriteBorderOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary="Favorite" />
+              <ListItemText primary="Favorites" />
             </ListItemButton>
           </ListItem>
         </Link>

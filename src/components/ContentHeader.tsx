@@ -3,10 +3,11 @@ import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import secondsToAlbumTime from "../helpers/timeFormater";
 import { IAlbumResponse, IArtist, IPlaylistResponse } from "../redux/features/apiDeezerSlice";
-import { useAddArtistToFavMutation } from "../redux/features/apiSlice";
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useAddAlbumToFavMutation, useAddArtistToFavMutation } from "../redux/features/apiSlice";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useAppSelector } from "../redux/hooks";
+import ShareIcon from "@mui/icons-material/Share";
 
 interface IPropsContentHeader {
   artist?: IArtist;
@@ -16,6 +17,16 @@ interface IPropsContentHeader {
 }
 
 const StyledContentHeader = styled("div")`
+  .buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+
+    .fav-btn {
+      color: ${(props) => props.theme.palette.primary.main};
+    }
+  }
+
   .ArtistPage {
     display: flex;
     margin-bottom: 30px;
@@ -144,9 +155,10 @@ const StyledContentHeader = styled("div")`
 `;
 
 const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) => {
-  const [addToFav, addToFavResponse] = useAddArtistToFavMutation();
+  const [addArtistToFav, addArtistToFavResponse] = useAddArtistToFavMutation();
+  const [addAlbumToFav, addAlbumToFavResponse] = useAddAlbumToFavMutation();
 
-  const authState = useAppSelector(state => state.auth);
+  const authState = useAppSelector((state) => state.auth);
 
   const handleAddArtistToFav = () => {
     if (artist) {
@@ -158,13 +170,35 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
         picture: artist.picture,
       };
 
-      addToFav({artist: artistToSave});
+      addArtistToFav({ artist: artistToSave });
+    }
+  };
 
+  const handleAddAlbumToFav = () => {
+    if (album) {
+      const albumToSave = {
+        deezer_id: album.id,
+        title: album.title,
+        artist: album.artist.name,
+        cover_medium: album.cover_medium,
+      };
+
+      addAlbumToFav({ album: albumToSave});
+    }
+  };
+
+  const handleAddPlaylistToFav = () => {
+    if(playlist){
+      const playlistToSave = {
+        deezer_id: playlist.id,
+        title: playlist.title,
+        picture_medium: playlist.picture_medium,
+        creator: playlist.creator.name
+      }
     }
   };
 
   const artistHeader = () => {
-
     const isFavorite = artist ? authState.favorites.artists.includes(artist.id) : false;
     return (
       <Box className="ArtistPage">
@@ -179,15 +213,22 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
               {new Intl.NumberFormat().format(artist.nb_fan)} listeners
             </Typography>
           )}
-          <IconButton onClick={handleAddArtistToFav}>
-            {!isFavorite ? <FavoriteBorderOutlinedIcon /> : <FavoriteIcon />}
-          </IconButton>
+          <Box className="buttons">
+            <IconButton className="fav-btn" onClick={handleAddArtistToFav}>
+              {!isFavorite ? <FavoriteBorderOutlinedIcon /> : <FavoriteIcon />}
+            </IconButton>
+            <IconButton className="share-btn">
+              <ShareIcon />
+            </IconButton>
+          </Box>
         </Box>
       </Box>
     );
   };
 
   const playlistHeader = () => {
+    const isFavorite = playlist ? authState.favorites.playlists.includes(playlist.id) : false;
+
     return (
       <Box className="PlaylistAndAlbumHeader">
         <Box className="playlist-img">
@@ -223,12 +264,21 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
               </Typography>
             )}
           </Box>
+          <Box className="buttons">
+            <IconButton className="fav-btn" onClick={handleAddPlaylistToFav}>
+              {!isFavorite ? <FavoriteBorderOutlinedIcon /> : <FavoriteIcon />}
+            </IconButton>
+            <IconButton className="share-btn">
+              <ShareIcon />
+            </IconButton>
+          </Box>
         </Box>
       </Box>
     );
   };
 
   const albumHeader = () => {
+    const isFavorite = album ? authState.favorites.albums.includes(album.id) : false;
     return (
       <Box className="PlaylistAndAlbumHeader">
         <Box className="playlist-img">
@@ -263,6 +313,14 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
                 {new Intl.NumberFormat().format(album.fans)} listeners
               </Typography>
             )}
+          </Box>
+          <Box className="buttons">
+            <IconButton className="fav-btn" onClick={handleAddAlbumToFav}>
+              {!isFavorite ? <FavoriteBorderOutlinedIcon /> : <FavoriteIcon />}
+            </IconButton>
+            <IconButton className="share-btn">
+              <ShareIcon />
+            </IconButton>
           </Box>
         </Box>
       </Box>

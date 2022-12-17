@@ -2,13 +2,21 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
 import { IArtist } from "./apiDeezerSlice";
 
-interface IAddArtistToFavResponse {}
+interface IAddToFavResponse {
+  message: string;
+}
 interface IArtistPayload {
   deezer_id: number;
   name: string;
   picture_big: string;
   nb_fan: number;
   picture: string;
+}
+interface IAlbumPayload {
+  deezer_id: number;
+  title: string;
+  artist: string;
+  cover_medium: string;
 }
 
 interface IFavoriteObject {
@@ -48,10 +56,10 @@ export const backendApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Profile"],
+  tagTypes: ["Profile", "Artists", "Albums"],
 
   endpoints: (builder) => ({
-    addArtistToFav: builder.mutation<IAddArtistToFavResponse, { artist: IArtistPayload }>({
+    addArtistToFav: builder.mutation<IAddToFavResponse, { artist: IArtistPayload }>({
       query({ artist }) {
         return {
           url: `favourites/add/artist`,
@@ -59,11 +67,25 @@ export const backendApi = createApi({
           body: artist,
         };
       },
-      invalidatesTags: ["Profile"],
+      invalidatesTags: ["Profile", "Artists"],
     }),
-
+    addAlbumToFav: builder.mutation<IAddToFavResponse, { album: IAlbumPayload }>({
+      query({ album }) {
+        return {
+          url: `favourites/add/album`,
+          method: "POST",
+          body: album,
+        };
+      },
+      invalidatesTags: ["Profile", "Albums"],
+    }),
     getFavoriteArtists: builder.query<IArtist[], any>({
       query: () => "favourites/artists",
+      providesTags: ["Artists"],
+    }),
+    getFavoriteAlbums: builder.query<IAlbumPayload[], any>({
+      query: () => "favourites/albums",
+      providesTags: ["Albums"],
     }),
     getMyProfile: builder.query<IUser, any>({
       query: () => "auth/profile",
@@ -91,6 +113,8 @@ export const {
   useGetMyProfileQuery,
   useAddArtistToFavMutation,
   useGetFavoriteArtistsQuery,
+  useAddAlbumToFavMutation,
+  useGetFavoriteAlbumsQuery,
 } = backendApi;
 
 export default backendApi;
