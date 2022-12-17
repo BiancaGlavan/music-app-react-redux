@@ -12,7 +12,9 @@ import Button from "@mui/material/Button";
 import LoginRegister from "./login-register/LoginRegister";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useGetMyProfileQuery } from "../redux/features/apiSlice";
-import { setUser } from "../redux/features/authSlice";
+import { logout, setUser } from "../redux/features/authSlice";
+import { useNavigate } from "react-router-dom";
+import UserDropdown from "./UserDropdown";
 
 const StyledNavigation = styled(Paper)`
   width: calc(100% - 280px);
@@ -41,6 +43,13 @@ const Navigation = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  }
+
   useEffect(() => {
     if (userProfile) {
       dispatch(setUser(userProfile));
@@ -57,7 +66,8 @@ const Navigation = () => {
         </IconButton>
       )}
       <Search />
-      {!authState.isAuth ? <LoginRegister /> : <div>{authState.user?.name}</div>}
+      {!authState.isAuth && <LoginRegister />}
+      {authState.isAuth && authState.user && <UserDropdown user={authState.user} handleLogout={handleLogout} />}
       <Drawer
         variant="temporary"
         open={mobileOpen}
