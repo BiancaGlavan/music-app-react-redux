@@ -5,6 +5,8 @@ import secondsToAlbumTime from "../helpers/timeFormater";
 import { IAlbumResponse, IArtist, IPlaylistResponse } from "../redux/features/apiDeezerSlice";
 import { useAddArtistToFavMutation } from "../redux/features/apiSlice";
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useAppSelector } from "../redux/hooks";
 
 interface IPropsContentHeader {
   artist?: IArtist;
@@ -144,6 +146,8 @@ const StyledContentHeader = styled("div")`
 const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) => {
   const [addToFav, addToFavResponse] = useAddArtistToFavMutation();
 
+  const authState = useAppSelector(state => state.auth);
+
   const handleAddArtistToFav = () => {
     if (artist) {
       const artistToSave = {
@@ -160,6 +164,8 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
   };
 
   const artistHeader = () => {
+
+    const isFavorite = artist ? authState.favorites.artists.includes(artist.id) : false;
     return (
       <Box className="ArtistPage">
         <Box className="artist-page-img">
@@ -174,7 +180,7 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
             </Typography>
           )}
           <IconButton onClick={handleAddArtistToFav}>
-            <FavoriteBorderOutlinedIcon />
+            {!isFavorite ? <FavoriteBorderOutlinedIcon /> : <FavoriteIcon />}
           </IconButton>
         </Box>
       </Box>

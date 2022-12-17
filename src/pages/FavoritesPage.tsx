@@ -1,3 +1,4 @@
+import SimilarArtists from "../components/artist/SimilarArtists";
 import { useGetFavoriteArtistsQuery } from "../redux/features/apiSlice";
 import { useAppSelector } from "../redux/hooks";
 
@@ -10,7 +11,7 @@ const FavoritesPage = () => {
   return (
     <div>Favorites
 
-        {!isLoading && data && data.map((artist, idx) => <h2 key={idx}>{artist.name}</h2>)}
+        {!isLoading && data && <SimilarArtists artists={data} />}
     </div>
   )
 }

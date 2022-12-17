@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
+import { IArtist } from "./apiDeezerSlice";
 
 interface IAddArtistToFavResponse {}
 interface IArtistPayload {
@@ -10,6 +11,10 @@ interface IArtistPayload {
   picture: string;
 }
 
+interface IFavoriteObject {
+  _id: string;
+  deezer_id: number;
+}
 export interface IUser {
   _id?: string;
   id?: string;
@@ -19,18 +24,15 @@ export interface IUser {
   image?: string;
   imageThumb?: string;
   role: string;
-  albums: string[];
-  artists: string[];
-  songs: string[];
-  playlists: string[];
+
+  albums: IFavoriteObject[];
+  artists: IFavoriteObject[];
+  songs: IFavoriteObject[];
+  playlists: IFavoriteObject[];
 }
 
 interface ILoginResponse {
   access_token: string;
-}
-
-interface ICustomArtist {
-  name: string;
 }
 
 export const backendApi = createApi({
@@ -46,6 +48,8 @@ export const backendApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["Profile"],
+
   endpoints: (builder) => ({
     addArtistToFav: builder.mutation<IAddArtistToFavResponse, { artist: IArtistPayload }>({
       query({ artist }) {
@@ -55,13 +59,15 @@ export const backendApi = createApi({
           body: artist,
         };
       },
+      invalidatesTags: ["Profile"],
     }),
 
-    getFavoriteArtists: builder.query<ICustomArtist[], any>({
+    getFavoriteArtists: builder.query<IArtist[], any>({
       query: () => "favourites/artists",
     }),
     getMyProfile: builder.query<IUser, any>({
       query: () => "auth/profile",
+      providesTags: ["Profile"],
     }),
     loginUser: builder.mutation<ILoginResponse, { data: Partial<IUser> }>({
       query: ({ data }) => ({

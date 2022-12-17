@@ -5,6 +5,8 @@ import { IArtist } from "../../redux/features/apiDeezerSlice";
 
 interface IPropsSimilarArtists {
     artists: IArtist[];
+    title?: string;
+
 }
 
 const StyledSimilarArtist = styled('div')`
@@ -40,14 +42,14 @@ const StyledSimilarArtist = styled('div')`
    
 `;
 
-const SimilarArtists = ({ artists }: IPropsSimilarArtists) => {
+const SimilarArtists = ({ artists, title = 'Similar Artists' }: IPropsSimilarArtists) => {
 
     return (
         <StyledSimilarArtist className="SimilarArtists">
-            <Typography className="title" variant="h6">Similar Artists</Typography>
+            <Typography className="title" variant="h6">{title}</Typography>
             <Grid container spacing={2} >
-                {artists.map((artist) => <Grid item key={artist.id} xs={6} sm={6} md={4} lg={3}>
-                    <Link className="artist-container" to={`/artists/${artist.id}`}>
+                {artists.map((artist) => <Grid item key={artist.deezer_id || artist.id} xs={6} sm={6} md={4} lg={3}>
+                    <Link className="artist-container" to={`/artists/${artist.deezer_id || artist.id}`}>
                         <Box className="artist-picture">
                             <img src={artist.picture} alt="artist picture" />
                         </Box>

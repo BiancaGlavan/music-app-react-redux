@@ -10,6 +10,8 @@ export interface IArtist {
     picture: string;
     type: string;
 
+    // custom attribute
+    deezer_id?: number;
 }
 
 interface IRelatedArtistsResponse {
