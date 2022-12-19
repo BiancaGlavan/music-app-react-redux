@@ -12,7 +12,7 @@ interface IArtistPayload {
   nb_fan: number;
   picture: string;
 }
-interface IAlbumPayload {
+export interface IAlbumCustom {
   deezer_id: number;
   title: string;
   artist: string;
@@ -43,6 +43,23 @@ interface ILoginResponse {
   access_token: string;
 }
 
+export interface IPlaylistCustom {
+  deezer_id: number;
+  title: string;
+  picture_medium: string;
+  creator: string;
+}
+
+export interface ISongCustom {
+  deezer_id: number;
+  title: string;
+  preview: string;
+  duration: number;
+  album_cover: string;
+  artist_id: number;
+  artist_name: string;
+}
+
 export const backendApi = createApi({
   reducerPath: "backendapi",
   baseQuery: fetchBaseQuery({
@@ -56,7 +73,7 @@ export const backendApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Profile", "Artists", "Albums"],
+  tagTypes: ["Profile", "Artists", "Albums", "Playlists", "Songs"],
 
   endpoints: (builder) => ({
     addArtistToFav: builder.mutation<IAddToFavResponse, { artist: IArtistPayload }>({
@@ -69,7 +86,7 @@ export const backendApi = createApi({
       },
       invalidatesTags: ["Profile", "Artists"],
     }),
-    addAlbumToFav: builder.mutation<IAddToFavResponse, { album: IAlbumPayload }>({
+    addAlbumToFav: builder.mutation<IAddToFavResponse, { album: IAlbumCustom }>({
       query({ album }) {
         return {
           url: `favourites/add/album`,
@@ -79,13 +96,41 @@ export const backendApi = createApi({
       },
       invalidatesTags: ["Profile", "Albums"],
     }),
+    addPlaylistToFav: builder.mutation<IAddToFavResponse, { playlist: IPlaylistCustom }>({
+      query({ playlist }) {
+        return {
+          url: `favourites/add/playlist`,
+          method: "POST",
+          body: playlist,
+        };
+      },
+      invalidatesTags: ["Profile", "Playlists"],
+    }),
+    addSongToFav: builder.mutation<IAddToFavResponse, { song: ISongCustom }>({
+      query({ song }) {
+        return {
+          url: `favourites/add/song`,
+          method: "POST",
+          body: song,
+        };
+      },
+      invalidatesTags: ["Profile", "Songs"],
+    }),
     getFavoriteArtists: builder.query<IArtist[], any>({
       query: () => "favourites/artists",
       providesTags: ["Artists"],
     }),
-    getFavoriteAlbums: builder.query<IAlbumPayload[], any>({
+    getFavoriteAlbums: builder.query<IAlbumCustom[], any>({
       query: () => "favourites/albums",
       providesTags: ["Albums"],
+    }),
+    getFavoritePlaylists: builder.query<IPlaylistCustom[], any>({
+      query: () => "favourites/playlists",
+      providesTags: ["Playlists"],
+    }),
+    getFavoriteSongs: builder.query<ISongCustom[], any>({
+      query: () => "favourites/songs",
+      providesTags: ["Songs"],
     }),
     getMyProfile: builder.query<IUser, any>({
       query: () => "auth/profile",
@@ -115,6 +160,10 @@ export const {
   useGetFavoriteArtistsQuery,
   useAddAlbumToFavMutation,
   useGetFavoriteAlbumsQuery,
+  useAddPlaylistToFavMutation,
+  useGetFavoritePlaylistsQuery,
+  useAddSongToFavMutation,
+  useGetFavoriteSongsQuery,
 } = backendApi;
 
 export default backendApi;

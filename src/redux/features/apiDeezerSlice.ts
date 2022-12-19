@@ -49,7 +49,6 @@ export interface ISong {
     id: number;
     title: string;
     preview: string;
-    explicit_lyrics: boolean;
     type: string;
     duration: number;
     album: ISongAlbum;
