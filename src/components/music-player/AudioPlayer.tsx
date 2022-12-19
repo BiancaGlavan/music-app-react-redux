@@ -11,12 +11,14 @@ import { ISong } from "../../redux/features/apiDeezerSlice";
 import { onNextSong, onPrevSong, onVolumeChange, pause, play, PlayerState } from "../../redux/features/playerSlice";
 import Queue from "./Queue";
 import PauseCircleFilledOutlinedIcon from '@mui/icons-material/PauseCircleFilledOutlined';
-import { useAppDispatch } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 import VolumeDownIcon from '@mui/icons-material/VolumeDown';
 import classNames from "classnames";
-
+import { ISongCustom, useAddSongToFavMutation } from "../../redux/features/apiSlice";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { AuthState } from "../../redux/features/authSlice";
 
 interface IPropsAudioPlayer {
     playerState: PlayerState;
@@ -24,6 +26,7 @@ interface IPropsAudioPlayer {
     onNext?: () => void;
     onPlay?: () => void;
     onPause?: () => void;
+    authState: AuthState;
 }
 
 const StyledAudioPlayer = styled(Paper)`
@@ -64,6 +67,7 @@ const StyledAudioPlayer = styled(Paper)`
 
         .fav {
             display: none;
+            color: ${(props) => props.theme.palette.primary.main};
 
             ${props => props.theme.breakpoints.up("sm")} {
                 display: flex;
@@ -153,7 +157,7 @@ const StyledAudioPlayer = styled(Paper)`
     }
 `;
 
-const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
+const AudioPlayer = ({ playerState, authState }: IPropsAudioPlayer) => {
     const [trackProgress, setTrackProgress] = useState(0);
     const [volume, setVolume] = useState(0.3);
 
@@ -269,6 +273,26 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
         onTimeChange(newValue as number);
     };
 
+   
+    const isFavorite = authState.favorites.songs.includes(playerState.activeSong?.id || 0);
+    const [addSongToFav, addSongToFavResponse] = useAddSongToFavMutation();
+
+    const handleAddSongToFav = () => {
+        if (playerState.activeSong) {
+            const songToSave = {
+                deezer_id: playerState.activeSong.id,
+                title: playerState.activeSong.title,
+                preview: playerState.activeSong.preview,
+                duration: playerState.activeSong.duration,
+                album_cover: playerState.activeSong.album.cover,
+                artist_id: playerState.activeSong.artist.id,
+                artist_name: playerState.activeSong.artist.name,
+            };
+      
+            addSongToFav({ song: songToSave });
+          }
+    }
+
     return (
         <StyledAudioPlayer className={classNames("AudioPlayer", {active: playerState.isActive})} variant="outlined">
             <Box className="player">
@@ -279,8 +303,8 @@ const AudioPlayer = ({ playerState }: IPropsAudioPlayer) => {
                         <Typography noWrap variant="caption">{playerState.activeSong?.artist.name}</Typography>
                     </Box>
                     <Box>
-                        <IconButton className="fav">
-                            <FavoriteBorderOutlinedIcon />
+                        <IconButton className="fav" onClick={handleAddSongToFav}>
+                        {!isFavorite ? <FavoriteBorderOutlinedIcon /> : <FavoriteIcon />}
                         </IconButton>
                     </Box>
                 </Box>

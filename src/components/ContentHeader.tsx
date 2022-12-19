@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import secondsToAlbumTime from "../helpers/timeFormater";
 import { IAlbumResponse, IArtist, IPlaylistResponse } from "../redux/features/apiDeezerSlice";
-import { useAddAlbumToFavMutation, useAddArtistToFavMutation } from "../redux/features/apiSlice";
+import { useAddAlbumToFavMutation, useAddArtistToFavMutation, useAddPlaylistToFavMutation } from "../redux/features/apiSlice";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useAppSelector } from "../redux/hooks";
@@ -157,6 +157,7 @@ const StyledContentHeader = styled("div")`
 const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) => {
   const [addArtistToFav, addArtistToFavResponse] = useAddArtistToFavMutation();
   const [addAlbumToFav, addAlbumToFavResponse] = useAddAlbumToFavMutation();
+  const [addPlaylistToFav, addPlaylistToFavResponse] = useAddPlaylistToFavMutation();
 
   const authState = useAppSelector((state) => state.auth);
 
@@ -194,7 +195,9 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
         title: playlist.title,
         picture_medium: playlist.picture_medium,
         creator: playlist.creator.name
-      }
+      };
+
+      addPlaylistToFav({ playlist: playlistToSave});
     }
   };
 

@@ -5,6 +5,7 @@ import { IPlaylist } from "../../redux/features/apiDeezerSlice";
 
 interface IPropsPlaylists {
   playlists: IPlaylist[];
+  title?: string;
 }
 
 const StyledPlaylists = styled('div')`
@@ -46,10 +47,10 @@ const StyledPlaylists = styled('div')`
  }
 `;
 
-const Playlists = ({ playlists }: IPropsPlaylists) => {
+const Playlists = ({ playlists, title = 'Playlists' }: IPropsPlaylists) => {
   return (
     <StyledPlaylists className="Playlists">
-      <Typography className="title" variant="h6">Playlists</Typography>
+      <Typography className="title" variant="h6">{title}</Typography>
       <Grid container spacing={2} >
         {playlists.map((playlist) => <Grid item key={playlist?.id} xs={6} sm={6} md={4} lg={3}>
           <Link className="artist-container" to={`/playlist/${playlist.id}`}>

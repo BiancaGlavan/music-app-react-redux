@@ -14,11 +14,12 @@ const StyledMusicPlayer = styled('div')`
 
 const MusicPlayer = () => {
     const playerState = useAppSelector(state => state.player);
+    const authState = useAppSelector(state => state.auth);
 
   return (
     <StyledMusicPlayer className="MusicPlayer">
         {/* {playerState.isActive && <AudioPlayer playerState={playerState} />} */}
-        <AudioPlayer playerState={playerState} />
+        <AudioPlayer authState={authState} playerState={playerState} />
     </StyledMusicPlayer>
   )
 }
