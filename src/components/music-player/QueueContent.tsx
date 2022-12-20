@@ -1,5 +1,6 @@
 import { Box, Grid, Paper, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
 import TrackList from "../album/TrackList";
 
@@ -14,6 +15,7 @@ const StyledQueueContent = styled('div')`
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin-bottom: 20px;
        
         ${props => props.theme.breakpoints.up("sm")} {
             position: sticky;
@@ -28,6 +30,8 @@ const StyledQueueContent = styled('div')`
 
         .title {
             text-align: center;
+            margin-top: 20px;
+            margin-bottom: 10px;
         }
     }
 `;
@@ -42,8 +46,10 @@ const QueueContent = (props: IPropsQueueContent) => {
                 <Grid item xs={12} sm={4}>
                     <Box className="artist">         
                     {playerState && <> <img className="image" src={playerState.activeSong?.album.cover_big || ''} alt="" />
-                    <Typography className="title" variant="subtitle1">{playerState.activeSong?.title || ''}</Typography>
-                    <Typography variant="caption">{playerState.activeSong?.artist.name}</Typography>
+                    <Typography className="title" variant="h3">{playerState.activeSong?.title || ''}</Typography>
+                    <Link to={`/artists/${playerState.activeSong?.artist.id}`}>
+                    <Typography variant="h4">{playerState.activeSong?.artist.name}</Typography>
+                    </Link>
                     </>
                     }
                     </Box>                

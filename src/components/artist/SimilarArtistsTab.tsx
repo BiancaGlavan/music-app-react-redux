@@ -26,7 +26,6 @@ const StyledSimilarArtistsTab = styled(Box)`
 
     ${props => props.theme.breakpoints.up("lg")} {
         margin-top: 30px;
-        margin-left: 30px;
         width: 280px;
     }
     
@@ -63,9 +62,9 @@ const SimilarArtistsTab = ({ artists, onTabChange }: IPropsSimilarArtistsTab) =>
                 <img className="artist-img" src={artist.picture} alt="" />
                 <Box className="name-and-fans">
                     <Link to={`/artists/${artist.id}`}>
-                    <Typography variant="subtitle2">{artist.name}</Typography>
+                    <Typography variant="body1">{artist.name}</Typography>
                     </Link>
-                    <Typography variant="caption" color="textSecondary">{new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
+                    <Typography variant="h6" color="textSecondary">{new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
                 </Box>
                 <Box className="icon">
                     <IconButton>

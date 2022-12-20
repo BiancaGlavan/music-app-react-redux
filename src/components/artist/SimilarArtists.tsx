@@ -53,8 +53,8 @@ const SimilarArtists = ({ artists, title = 'Similar Artists' }: IPropsSimilarArt
                         <Box className="artist-picture">
                             <img src={artist.picture} alt="artist picture" />
                         </Box>
-                        <Typography className="artist-details name" variant="body2">{artist.name}</Typography>
-                        <Typography className="artist-details" variant="caption" color="textSecondary">{new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
+                        <Typography className="artist-details name" variant="body1">{artist.name}</Typography>
+                        <Typography className="artist-details" variant="h6" color="textSecondary">{new Intl.NumberFormat().format(artist.nb_fan)} listeners</Typography>
                     </Link>
                 </Grid>)}
             </Grid>

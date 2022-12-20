@@ -149,15 +149,15 @@ const Track = ({ track, cover, trackNr, isActive = false, isPlaying = false, onA
           )}
         </IconButton>
       </Box>
-      <Typography className="track-nr" variant="subtitle1">
+      <Typography className="track-nr" variant="h6">
         {trackNr}
       </Typography>
       <Box className="track-artist">
-        <Typography noWrap variant="body2">
+        <Typography noWrap variant="h4">
           {track.title}
         </Typography>
         <Link className="artist-link" to={`/artists/${track.artist.id}`}>
-          <Typography noWrap className="artist-name" variant="caption" color="textSecondary">
+          <Typography noWrap className="artist-name" variant="h6" color="textSecondary">
             {track.artist.name}
           </Typography>
         </Link>
@@ -166,7 +166,7 @@ const Track = ({ track, cover, trackNr, isActive = false, isPlaying = false, onA
         <IconButton className="fav-btn" onClick={handleAddSongToFav}>
           {!isFavorite ? <FavoriteBorderOutlinedIcon /> : <FavoriteIcon />}
         </IconButton>
-        <Typography variant="subtitle1" className="duration">
+        <Typography variant="h6" className="duration">
           {secondsToSongTime(track.duration)}
         </Typography>
       </Box>

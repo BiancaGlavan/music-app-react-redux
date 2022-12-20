@@ -214,7 +214,7 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
           <img src={artist?.picture_big} alt="artist-picture" />
         </Box>
         <Box className="artist-page-details">
-          <Typography variant="h1">{artist?.name}</Typography>
+          <Typography variant="h2">{artist?.name}</Typography>
           {artist && (
             <Typography variant="h5" color="textSecondary">
               {" "}
@@ -247,27 +247,27 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
             {playlist?.title}
           </Typography>
           <Box className="playlist-artist">
-            <Typography className="text" variant="body1">
+            <Typography className="text" variant="h4">
               Created by: {playlist?.creator.name}
             </Typography>
-            <Typography className="text" variant="body2">
+            <Typography className="text" variant="h4">
               {playlist?.description}
             </Typography>
           </Box>
           <Box className="artist-details">
-            <Typography className="details" color="textSecondary" variant="caption">
+            <Typography className="details" color="textSecondary" variant="h5">
               {playlist?.nb_tracks} tracks
             </Typography>
             {playlist && (
-              <Typography className="details" color="textSecondary" variant="caption">
+              <Typography className="details" color="textSecondary" variant="h5">
                 {secondsToAlbumTime(playlist?.duration)}
               </Typography>
             )}
-            <Typography className="details" color="textSecondary" variant="caption">
+            <Typography className="details" color="textSecondary" variant="h5">
               {playlist?.creation_date}
             </Typography>
             {playlist && (
-              <Typography className="details" color="textSecondary" variant="caption">
+              <Typography className="details" color="textSecondary" variant="h5">
                 {new Intl.NumberFormat().format(playlist.fans)} listeners
               </Typography>
             )}
@@ -293,7 +293,7 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
           <img src={album?.cover_medium} alt="" />
         </Box>
         <Box className="album-info">
-          <Typography variant="h1" className="playlist-name">
+          <Typography variant="h2" className="playlist-name">
             {album?.title}
           </Typography>
           <Box className="album-artist">
@@ -301,7 +301,7 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
               <img className="artist-img" src={album?.artist.picture} alt="" />
             </Link>
             <Link to={`/artists/${album?.artist.id}`}>
-              <Typography variant="h3">{album?.artist.name}</Typography>
+              <Typography variant="h4">{album?.artist.name}</Typography>
             </Link>
           </Box>
           <Box className="artist-details">

@@ -62,7 +62,7 @@ const ArtistAlbums = ({albums}: IPropsArtistAlbums) => {
                         <img src={album?.cover_medium} alt="artist picture" />
                     </Box>
                     <Typography className="artist-details" variant="body2">{album?.title}</Typography>
-                    <Typography className="artist-details" variant="caption" color="textSecondary">Released on {album?.release_date}</Typography>
+                    <Typography className="artist-details" variant="h6" color="textSecondary">Released on {album?.release_date}</Typography>
                    </Link>
                 </Grid>)}
             </Grid>

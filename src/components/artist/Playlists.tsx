@@ -71,10 +71,10 @@ const Playlists = ({
               <Box className="artist-picture">
                 <img src={playlist?.picture_medium} alt="artist picture" />
               </Box>
-              <Typography className="artist-details" variant="body2">
+              <Typography className="artist-details" variant="body1">
                 {playlist?.title}
               </Typography>
-              <Typography className="artist-details" variant="caption" color="textSecondary">
+              <Typography className="artist-details" variant="h6" color="textSecondary">
                 Created by {playlist?.user.name}
               </Typography>
             </Link>

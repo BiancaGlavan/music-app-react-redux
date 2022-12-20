@@ -42,7 +42,7 @@ const theme = createTheme({
       fontSize: "12px",
     },
     h6: {
-      fontSize: "10px",
+      fontSize: "12px",
     },
   },
   shape: {
