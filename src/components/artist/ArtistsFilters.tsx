@@ -11,13 +11,38 @@ interface IPropsArtistsFilters {
 
 const StyledArtistsFilters = styled('div')`
     display: flex;
-    flex-wrap: wrap;
+    overflow: auto;
+    padding-bottom: 10px;
+
+
+        ::-webkit-scrollbar {
+        height: 4px;
+      }
+      
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: none;
+      }
+       
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: ${props => props.theme.palette.grey[800]}; 
+     
+
+       
+      }
+      
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: ${props => props.theme.palette.grey[700]}; 
+      }
+    
 
     .genre {
         margin: 10px;
 
         &.active {
-            background: ${props => props.theme.palette.primary.main};
+            background: ${props => props.theme.palette.primary.dark};
         }
     }
 `;

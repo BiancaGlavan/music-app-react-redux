@@ -31,7 +31,7 @@ const ArtistCard = ({artist}: IPropsArtistCard) => {
         <Box className="artist-img">
             <img src={artist.picture} alt="" />
         </Box>
-        <Typography className="artist-name" variant="subtitle1">{artist.name}</Typography>
+        <Typography className="artist-name" variant="body1">{artist.name}</Typography>
     </StyledArtistCard>
   )
 }
