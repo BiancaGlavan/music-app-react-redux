@@ -33,6 +33,13 @@ const StyledContentSlider = styled("div")`
     align-items: center;
     text-align: center;
 
+    .truncate {
+      max-width: calc(100% - 20px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .slide-img {
       width: calc(100% - 20px);
       margin: 10px;
@@ -52,12 +59,8 @@ const StyledContentSlider = styled("div")`
           display: flex;
         }
       }
-
     }
-
   }
-
-
 
   .play-pause {
     position: absolute;
@@ -137,7 +140,9 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
         <Link to={`/artists/${artist.id}`}>
           <Box className="content-slide">
             <img className="slide-img" src={artist.picture} alt="" />
-            <Typography variant="subtitle2">{artist.name}</Typography>
+            <Typography className="truncate" variant="body1">
+              {artist.name}
+            </Typography>
           </Box>
         </Link>
       </SwiperSlide>
@@ -150,8 +155,12 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
         <Link to={`/album/${album.id}`}>
           <Box className="content-slide">
             <img className="slide-img" src={album.cover} alt="" />
-            <Typography variant="subtitle2">{album.title}</Typography>
-            <Typography variant="caption">{album.artist.name}</Typography>
+            <Typography className="truncate" variant="body1">
+              {album.title}
+            </Typography>
+            <Typography className="truncate" variant="h6">
+              {album.artist.name}
+            </Typography>
           </Box>
         </Link>
       </SwiperSlide>
@@ -164,8 +173,12 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
         <Link to={`/playlist/${playlist.id}`}>
           <Box className="content-slide">
             <img className="slide-img" src={playlist.picture} alt="" />
-            <Typography variant="subtitle2">{playlist.title}</Typography>
-            <Typography variant="caption">Created by: {playlist.user.name}</Typography>
+            <Typography className="truncate" variant="body1">
+              {playlist.title}
+            </Typography>
+            <Typography className="truncate" variant="h6">
+              Created by: {playlist.user.name}
+            </Typography>
           </Box>
         </Link>
       </SwiperSlide>
@@ -177,12 +190,12 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
     const isPlaying = false;
 
     const isSongActive = (song: IChartsTrack) => {
-      return  playerState.activeSong?.id === song.id;
-    }
+      return playerState.activeSong?.id === song.id;
+    };
 
     const isSongPlaying = (song: IChartsTrack) => {
       return playerState.activeSong?.id === song.id && playerState.isPlaying;
-    }
+    };
 
     return tracks.map((track, idx) => (
       <SwiperSlide key={track.id} className="swiper-slide">
@@ -190,7 +203,7 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
           <Box className="cover">
             <img className="track-img" src={track.album.cover_medium} alt="" />
             <IconButton
-            size="large"
+              size="large"
               onClick={() => handleAddTrack(track, idx)}
               className={classNames("play-pause", { active: isSongActive(track), playing: isSongPlaying(track) })}
             >
@@ -201,8 +214,12 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
               )}
             </IconButton>
           </Box>
-          <Typography variant="subtitle2">{track.title}</Typography>
-          <Typography variant="caption">{track.artist.name}</Typography>
+          <Typography className="truncate" variant="body1">
+            {track.title}
+          </Typography>
+          <Link to={`/artists/${track.artist.id}`}>
+            <Typography variant="h6">{track.artist.name}</Typography>
+          </Link>
         </Box>
       </SwiperSlide>
     ));
@@ -211,7 +228,7 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
   return (
     <StyledContentSlider className="ContentSlider">
       <div className="buttons">
-        <Typography variant="subtitle1" className="slider-title">
+        <Typography variant="h3" className="slider-title">
           {getTitle()}
         </Typography>
         {!isMobile && (
