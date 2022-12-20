@@ -52,7 +52,7 @@ const StyledFavoriteAlbums = styled('div')`
 const FavoriteAlbums = ({albums}: IPropsFavAlbums) => {
   return (
     <StyledFavoriteAlbums className="ArtistAlbums">
-        <Typography className="title" variant="h6">Favorite Albums</Typography>
+        <Typography className="title" variant="h2">Favorite Albums</Typography>
         <Grid container spacing={2} >
                 {albums.map((album) => <Grid item  key={album?.deezer_id}  xs={6} sm={6}  md={4} lg={3}>
                    <Link className="artist-container" to={`/album/${album.deezer_id}`}>

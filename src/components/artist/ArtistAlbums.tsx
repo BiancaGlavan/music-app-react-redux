@@ -54,7 +54,7 @@ const StyledArtistAlbums = styled('div')`
 const ArtistAlbums = ({albums}: IPropsArtistAlbums) => {
   return (
     <StyledArtistAlbums className="ArtistAlbums">
-        <Typography className="title" variant="h6">Albums</Typography>
+        <Typography className="title" variant="h2">Albums</Typography>
         <Grid container spacing={2} >
                 {albums.map((album) => <Grid item  key={album?.id}  xs={6} sm={6}  md={4} lg={3}>
                    <Link className="artist-container" to={`/album/${album.id}`}>

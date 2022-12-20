@@ -54,11 +54,11 @@ const ProfilePage = () => {
             alt=""
           />
         </Box>
-        <Typography variant="h6">{authState.user?.name}</Typography>
+        <Typography variant="h2">{authState.user?.name}</Typography>
       </Box>
       <Box className="user-edit">
         <Box className="title">
-        <Typography variant="h6">Edit your profile</Typography>
+        <Typography variant="h2">Edit your profile</Typography>
         <EditIcon />
         </Box>
         <TextField id="outlined-basic" label="Username" type="text" variant="outlined" autoComplete="off" />

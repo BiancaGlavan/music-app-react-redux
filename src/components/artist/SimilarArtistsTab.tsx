@@ -58,7 +58,7 @@ const StyledSimilarArtistsTab = styled(Box)`
 const SimilarArtistsTab = ({ artists, onTabChange }: IPropsSimilarArtistsTab) => {
     return (
         <StyledSimilarArtistsTab className="SimilarArtistsTab">
-            <Typography className="similar-artists-title" variant="h6">Fans also like</Typography>
+            <Typography className="similar-artists-title" variant="h2">Fans also like</Typography>
             {artists.map((artist, idx) => <Box key={artist.id} className="artist-info">
                 <img className="artist-img" src={artist.picture} alt="" />
                 <Box className="name-and-fans">

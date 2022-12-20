@@ -38,7 +38,7 @@ const FavoritesPage = () => {
 
   const { data: artists, isLoading: isLoadingArtists } = useGetFavoriteArtistsQuery({}, { skip: !authState.isAuth });
   const { data: albums, isLoading: isLoadingAlbums } = useGetFavoriteAlbumsQuery({});
-  const { data: playlists, isLoading: isLoadingPlaylists } = useGetFavoritePlaylistsQuery({});
+  const { data: playlists, isLoading: isLoadingPlaylists, isFetching: isFetchingPlaylists } = useGetFavoritePlaylistsQuery({});
   const { data: songs, isLoading: isLoadingSongs } = useGetFavoriteSongsQuery({});
 
   const convertCustomSongs = (customSongs: ISongCustom[]): ISong[] => {
@@ -110,7 +110,7 @@ const FavoritesPage = () => {
       )}
       {activeTab === "albums" && !isLoadingAlbums && albums && <FavoriteAlbums albums={albums} />}
       {activeTab === "playlists" && !isLoadingPlaylists && playlists && (
-        <Playlists playlists={convertCustomPlaylists(playlists)} title={'Favorite Playlists'} />
+        <Playlists  playlists={convertCustomPlaylists(playlists)} title={'Favorite Playlists'} />
       )}
       {activeTab === "songs" && !isLoadingSongs && songs && <TrackList cover="" tracks={convertCustomSongs(songs)} />}
     </StyledFavoritesPage>

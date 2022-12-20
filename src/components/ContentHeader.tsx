@@ -80,14 +80,19 @@ const StyledContentHeader = styled("div")`
 
     .artist-details {
       margin-top: 10px;
-      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      
 
       ${(props) => props.theme.breakpoints.up("sm")} {
-        text-align: justify;
+        justify-content: flex-start;
       }
 
       .details {
-        margin-right: 15px;
+        margin: 10px;
+        flex-shrink: 0;
+        
       }
     }
   }
@@ -209,9 +214,9 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
           <img src={artist?.picture_big} alt="artist-picture" />
         </Box>
         <Box className="artist-page-details">
-          <Typography variant="h6">{artist?.name}</Typography>
+          <Typography variant="h1">{artist?.name}</Typography>
           {artist && (
-            <Typography variant="subtitle2" color="textSecondary">
+            <Typography variant="h5" color="textSecondary">
               {" "}
               {new Intl.NumberFormat().format(artist.nb_fan)} listeners
             </Typography>
@@ -238,7 +243,7 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
           <img src={playlist?.picture_medium} alt="" />
         </Box>
         <Box className="playlist-info">
-          <Typography variant="h6" className="playlist-name">
+          <Typography variant="h2" className="playlist-name">
             {playlist?.title}
           </Typography>
           <Box className="playlist-artist">
@@ -288,7 +293,7 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
           <img src={album?.cover_medium} alt="" />
         </Box>
         <Box className="album-info">
-          <Typography variant="h6" className="playlist-name">
+          <Typography variant="h1" className="playlist-name">
             {album?.title}
           </Typography>
           <Box className="album-artist">
@@ -296,23 +301,23 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
               <img className="artist-img" src={album?.artist.picture} alt="" />
             </Link>
             <Link to={`/artists/${album?.artist.id}`}>
-              <Typography variant="subtitle1">{album?.artist.name}</Typography>
+              <Typography variant="h3">{album?.artist.name}</Typography>
             </Link>
           </Box>
           <Box className="artist-details">
-            <Typography className="details" color="textSecondary" variant="caption">
+            <Typography className="details" color="textSecondary" variant="h5">
               {album?.nb_tracks} tracks
             </Typography>
             {album && (
-              <Typography className="details" color="textSecondary" variant="caption">
+              <Typography className="details" color="textSecondary" variant="h5">
                 {secondsToAlbumTime(album?.duration)}
               </Typography>
             )}
-            <Typography className="details" color="textSecondary" variant="caption">
+            <Typography className="details" color="textSecondary" variant="h5">
               {album?.release_date}
             </Typography>
             {album && (
-              <Typography className="details" color="textSecondary" variant="caption">
+              <Typography className="details" color="textSecondary" variant="h5">
                 {new Intl.NumberFormat().format(album.fans)} listeners
               </Typography>
             )}

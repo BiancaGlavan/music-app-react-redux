@@ -67,7 +67,7 @@ const AlbumHeader = ({ album }: IPropsAlbumHeader) => {
                 <img src={album.cover_medium} alt="" />
             </Box>
             <Box className="album-info">
-                <Typography variant="h6" className="album-name">
+                <Typography variant="h2" className="album-name">
                     {album.title}
                 </Typography>
                 <Box className="artist">

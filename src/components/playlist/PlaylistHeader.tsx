@@ -63,7 +63,7 @@ const PlaylistHeader = ({ playlist }: IPropsPlaylistHeader) => {
                 <img src={playlist.picture_medium} alt="" />
             </Box>
             <Box className="playlist-info">
-                <Typography variant="h6" className="playlist-name">
+                <Typography variant="h2" className="playlist-name">
                     {playlist.title}
                 </Typography>
                 <Box className="artist">

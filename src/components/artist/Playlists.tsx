@@ -6,10 +6,11 @@ import { IPlaylist } from "../../redux/features/apiDeezerSlice";
 interface IPropsPlaylists {
   playlists: IPlaylist[];
   title?: string;
-  totalItems: number;
-  currentOffset: number;
-  onNextPage: () => void;
-  isFetching: boolean;
+
+  totalItems?: number;
+  currentOffset?: number;
+  onNextPage?: () => void;
+  isFetching?: boolean;
 }
 
 const StyledPlaylists = styled("div")`
@@ -53,14 +54,14 @@ const StyledPlaylists = styled("div")`
 const Playlists = ({
   playlists,
   title = "Playlists",
-  totalItems,
-  currentOffset,
-  onNextPage,
-  isFetching,
+  totalItems = 0,
+  currentOffset = 0,
+  onNextPage = () => {},
+  isFetching = false,
 }: IPropsPlaylists) => {
   return (
     <StyledPlaylists className="Playlists">
-      <Typography className="title" variant="h6">
+      <Typography className="title" variant="h2">
         {title}
       </Typography>
       <Grid container spacing={2}>

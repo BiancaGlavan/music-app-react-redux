@@ -20,8 +20,19 @@ const StyledSidebar = styled(Paper)`
     top: 0;
 
     .list-item {
-      &.active {
-        color: ${props => props.theme.palette.primary.main};
+
+      .MuiButtonBase-root  {
+        border-left: 5px solid transparent;
+      }
+
+      &.active {   
+        .MuiButtonBase-root  {
+          border-left: 5px solid ${props => props.theme.palette.primary.main};
+        }
+
+        .MuiListItemIcon-root {
+          color: ${props => props.theme.palette.primary.main};
+        }
       }
     }
 `;
