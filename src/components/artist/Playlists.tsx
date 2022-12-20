@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { IPlaylist } from "../../redux/features/apiDeezerSlice";
@@ -6,9 +6,13 @@ import { IPlaylist } from "../../redux/features/apiDeezerSlice";
 interface IPropsPlaylists {
   playlists: IPlaylist[];
   title?: string;
+  totalItems: number;
+  currentOffset: number;
+  onNextPage: () => void;
+  isFetching: boolean;
 }
 
-const StyledPlaylists = styled('div')`
+const StyledPlaylists = styled("div")`
   .title {
     margin-bottom: 30px;
     margin-top: 30px;
@@ -23,47 +27,64 @@ const StyledPlaylists = styled('div')`
 
   .artist-details {
     text-align: center;
-   
   }
 
   .artist-picture {
     max-width: 100px;
-     img {
-         width: 100%;
-         border-radius: 7px;
-         object-fit: cover;
-     }
-    ${props => props.theme.breakpoints.up("sm")} {
+    img {
+      width: 100%;
+      border-radius: 7px;
+      object-fit: cover;
+    }
+    ${(props) => props.theme.breakpoints.up("sm")} {
       max-width: 170px;
     }
 
-    ${props => props.theme.breakpoints.up("md")} {
+    ${(props) => props.theme.breakpoints.up("md")} {
       max-width: 100px;
     }
 
-    ${props => props.theme.breakpoints.up("lg")} {
+    ${(props) => props.theme.breakpoints.up("lg")} {
       max-width: 170px;
     }
- }
+  }
 `;
 
-const Playlists = ({ playlists, title = 'Playlists' }: IPropsPlaylists) => {
+const Playlists = ({
+  playlists,
+  title = "Playlists",
+  totalItems,
+  currentOffset,
+  onNextPage,
+  isFetching,
+}: IPropsPlaylists) => {
   return (
     <StyledPlaylists className="Playlists">
-      <Typography className="title" variant="h6">{title}</Typography>
-      <Grid container spacing={2} >
-        {playlists.map((playlist) => <Grid item key={playlist?.id} xs={6} sm={6} md={4} lg={3}>
-          <Link className="artist-container" to={`/playlist/${playlist.id}`}>
-            <Box className="artist-picture">
-              <img src={playlist?.picture_medium} alt="artist picture" />
-            </Box>
-            <Typography className="artist-details" variant="body2">{playlist?.title}</Typography>
-            <Typography className="artist-details" variant="caption" color="textSecondary">Created by {playlist?.user.name}</Typography>
-          </Link>
-        </Grid>)}
+      <Typography className="title" variant="h6">
+        {title}
+      </Typography>
+      <Grid container spacing={2}>
+        {playlists.map((playlist) => (
+          <Grid item key={playlist?.id} xs={6} sm={6} md={4} lg={3}>
+            <Link className="artist-container" to={`/playlist/${playlist.id}`}>
+              <Box className="artist-picture">
+                <img src={playlist?.picture_medium} alt="artist picture" />
+              </Box>
+              <Typography className="artist-details" variant="body2">
+                {playlist?.title}
+              </Typography>
+              <Typography className="artist-details" variant="caption" color="textSecondary">
+                Created by {playlist?.user.name}
+              </Typography>
+            </Link>
+          </Grid>
+        ))}
       </Grid>
+
+      {isFetching && <div>is loading...</div>}
+      {currentOffset < totalItems && totalItems > 10 ? <Button onClick={() => onNextPage()}>Show more</Button> : null}
     </StyledPlaylists>
-  )
-}
+  );
+};
 
 export default Playlists;

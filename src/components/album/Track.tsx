@@ -147,7 +147,6 @@ const Track = ({ track, cover, trackNr, isActive = false, isPlaying = false, onA
           ) : (
             <PlayCircleFilledOutlinedIcon className="icon play" />
           )}
-          {/* {isActive && isPlaying ? <PauseCircleFilledOutlinedIcon className="icon pause" /> : <PlayCircleFilledOutlinedIcon className="icon play" />} */}
         </IconButton>
       </Box>
       <Typography className="track-nr" variant="subtitle1">

@@ -11,6 +11,9 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addSong, pause, play } from "../redux/features/playerSlice";
+import classNames from "classnames";
+import PlayCircleFilledOutlinedIcon from "@mui/icons-material/PlayCircleFilledOutlined";
+import PauseCircleFilledOutlinedIcon from "@mui/icons-material/PauseCircleFilledOutlined";
 
 interface IPropsContentSlider {
   artists?: IChartsArtist[];
@@ -33,6 +36,42 @@ const StyledContentSlider = styled("div")`
     .slide-img {
       width: calc(100% - 20px);
       margin: 10px;
+    }
+  }
+
+  .cover {
+    position: relative;
+
+   .slide-img {
+      width: 100%;
+      margin: 10px;
+   }
+
+    .icon {
+      width: 100%;
+      height: 100%;
+    }
+
+    &:hover {
+      .play-pause {
+        display: flex;
+      }
+    }
+  }
+
+  .play-pause {
+    position: absolute;
+    background: ${(props) => props.theme.palette.background.default};
+    top: 0px;
+    left: 0px;
+    width: 50px;
+    height: 50px;
+    display: none;
+    cursor: pointer;
+    padding: 0;
+
+    &.active {
+      display: flex;
     }
   }
 
@@ -63,7 +102,7 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
   const navigationNextRef = useRef(null);
 
   const dispatch = useAppDispatch();
-  const playerState = useAppSelector(state => state.player);
+  const playerState = useAppSelector((state) => state.player);
 
   const handleAddTrack = (track: ISong, trackIndex: number) => {
     if (playerState.activeSong?.id === track.id) {
@@ -72,12 +111,10 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
       } else {
         dispatch(play());
       }
-
     } else {
       dispatch(addSong({ song: track, songList: tracks as ISong[], activeIndex: trackIndex }));
     }
-
-  }
+  };
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -131,10 +168,26 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
   };
 
   const getTracks = () => {
+    const isActive = false;
+    const isPlaying = false;
+
     return tracks.map((track, idx) => (
       <SwiperSlide key={track.id} className="swiper-slide">
-        <Box className="content-slide" onClick={() => handleAddTrack(track, idx)}>
-          <img className="slide-img" src={track.album.cover} alt="" />
+        <Box className="content-slide">
+          <Box className="cover">
+            <img className="slide-img" src={track.album.cover} alt="" />
+            <IconButton
+            size="large"
+              onClick={() => handleAddTrack(track, idx)}
+              className={classNames("play-pause", { active: isActive, playing: isPlaying })}
+            >
+              {isPlaying ? (
+                <PauseCircleFilledOutlinedIcon className="icon pause" />
+              ) : (
+                <PlayCircleFilledOutlinedIcon className="icon play" />
+              )}
+            </IconButton>
+          </Box>
           <Typography variant="subtitle2">{track.title}</Typography>
           <Typography variant="caption">{track.artist.name}</Typography>
         </Box>
