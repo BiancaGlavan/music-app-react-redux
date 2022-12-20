@@ -37,38 +37,43 @@ const StyledContentSlider = styled("div")`
       width: calc(100% - 20px);
       margin: 10px;
     }
-  }
 
-  .cover {
-    position: relative;
-
-   .slide-img {
-      width: 100%;
+    .cover {
+      width: calc(100% - 20px);
       margin: 10px;
-   }
+      position: relative;
 
-    .icon {
-      width: 100%;
-      height: 100%;
-    }
-
-    &:hover {
-      .play-pause {
-        display: flex;
+      .track-img {
+        width: 100%;
       }
+
+      &:hover {
+        .play-pause {
+          display: flex;
+        }
+      }
+
     }
+
   }
+
+
 
   .play-pause {
     position: absolute;
     background: ${(props) => props.theme.palette.background.default};
-    top: 0px;
-    left: 0px;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
     width: 50px;
     height: 50px;
     display: none;
     cursor: pointer;
     padding: 0;
+
+    .icon {
+      width: 100%;
+      height: 100%;
+    }
 
     &.active {
       display: flex;
@@ -171,17 +176,25 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
     const isActive = false;
     const isPlaying = false;
 
+    const isSongActive = (song: IChartsTrack) => {
+      return  playerState.activeSong?.id === song.id;
+    }
+
+    const isSongPlaying = (song: IChartsTrack) => {
+      return playerState.activeSong?.id === song.id && playerState.isPlaying;
+    }
+
     return tracks.map((track, idx) => (
       <SwiperSlide key={track.id} className="swiper-slide">
         <Box className="content-slide">
           <Box className="cover">
-            <img className="slide-img" src={track.album.cover} alt="" />
+            <img className="track-img" src={track.album.cover_medium} alt="" />
             <IconButton
             size="large"
               onClick={() => handleAddTrack(track, idx)}
-              className={classNames("play-pause", { active: isActive, playing: isPlaying })}
+              className={classNames("play-pause", { active: isSongActive(track), playing: isSongPlaying(track) })}
             >
-              {isPlaying ? (
+              {isSongPlaying(track) ? (
                 <PauseCircleFilledOutlinedIcon className="icon pause" />
               ) : (
                 <PlayCircleFilledOutlinedIcon className="icon play" />

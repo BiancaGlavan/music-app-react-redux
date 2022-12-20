@@ -82,7 +82,7 @@ const Playlists = ({
       </Grid>
 
       {isFetching && <div>is loading...</div>}
-      {currentOffset < totalItems && totalItems > 10 ? <Button onClick={() => onNextPage()}>Show more</Button> : null}
+      {!isFetching && currentOffset < totalItems && totalItems > 10 ? <Button onClick={() => onNextPage()}>Show more</Button> : null}
     </StyledPlaylists>
   );
 };
