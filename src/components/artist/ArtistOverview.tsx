@@ -21,17 +21,23 @@ interface IPropsArtistOverview {
 const StyledArtistOverview = styled("div")`
   box-sizing: border-box;
   flex-grow: 1;
+
   .songs-and-artists {
     display: flex;
     flex-direction: column;
 
     ${(props) => props.theme.breakpoints.up("lg")} {
       flex-direction: row;
+      width: 100%;
     }
   }
 
   .tracks {
     flex-grow: 1;
+
+    ${props => props.theme.breakpoints.up("lg")} {
+      margin-right: 30px;
+    }
   }
 `;
 
@@ -39,16 +45,22 @@ const ArtistOverview = ({ onTabChange }: IPropsArtistOverview) => {
   const { id } = useParams();
   const { data: topSongs, isLoading } = useGetArtistTopSongsQuery(id || "");
   const { data: album } = useGetAlbumByIdQuery(id || "");
-  const { data: playlists, isLoading: isLoadingPlaylists } = useGetArtistPlaylistsQuery({artistId: id || "", offset: 0});
+  const { data: playlists, isLoading: isLoadingPlaylists } = useGetArtistPlaylistsQuery({
+    artistId: id || "",
+    offset: 0,
+  });
   const { data: albums, isLoading: isLoadingAlbums } = useGetArtistAlbumsQuery(id || "");
   const { data: relatedArtists, isLoading: isLoadingRelatedArtists } = useGetRelatedArtistsQuery(id || "");
 
   return (
     <StyledArtistOverview className="ArtistOverview">
       <Box className="songs-and-artists">
-        <Box className="tracks">
-          {!isLoading && topSongs && album && <TrackList tracks={topSongs?.data} cover={album.cover_small} />}
-        </Box>
+        {!isLoading && topSongs && topSongs.total > 0 && album && (
+          <Box className="tracks">
+            <TrackList tracks={topSongs?.data} cover={album.cover_small} />
+          </Box>
+        )}
+
         {!isLoadingRelatedArtists && relatedArtists?.total && relatedArtists.total > 0 ? (
           <SimilarArtistsTab artists={relatedArtists.data.slice(0, 3)} onTabChange={onTabChange} />
         ) : null}
