@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useParams } from "react-router-dom";
 import {
@@ -19,26 +19,7 @@ interface IPropsArtistOverview {
 }
 
 const StyledArtistOverview = styled("div")`
-  box-sizing: border-box;
-  flex-grow: 1;
-
-  .songs-and-artists {
-    display: flex;
-    flex-direction: column;
-
-    ${(props) => props.theme.breakpoints.up("lg")} {
-      flex-direction: row;
-      width: 100%;
-    }
-  }
-
-  .tracks {
-    flex-grow: 1;
-
-    ${props => props.theme.breakpoints.up("lg")} {
-      margin-right: 30px;
-    }
-  }
+ 
 `;
 
 const ArtistOverview = ({ onTabChange }: IPropsArtistOverview) => {
@@ -54,17 +35,19 @@ const ArtistOverview = ({ onTabChange }: IPropsArtistOverview) => {
 
   return (
     <StyledArtistOverview className="ArtistOverview">
-      <Box className="songs-and-artists">
+      <Grid container spacing={2}>
         {!isLoading && topSongs && topSongs.total > 0 && album && (
-          <Box className="tracks">
+          <Grid item xs={12} sm={12} lg={8}>
             <TrackList tracks={topSongs?.data} cover={album.cover_small} />
-          </Box>
+          </Grid>
         )}
 
         {!isLoadingRelatedArtists && relatedArtists?.total && relatedArtists.total > 0 ? (
-          <SimilarArtistsTab artists={relatedArtists.data.slice(0, 3)} onTabChange={onTabChange} />
+          <Grid item xs={12} sm={12} lg={4}>
+            <SimilarArtistsTab artists={relatedArtists.data.slice(0, 3)} onTabChange={onTabChange} />
+          </Grid>
         ) : null}
-      </Box>
+      </Grid>
       {/* {!isLoadingPlaylists && playlists?.data && <Playlists playlists={playlists.data} />} */}
       {!isLoadingAlbums && albums && <ArtistAlbums albums={albums.data} />}
     </StyledArtistOverview>
