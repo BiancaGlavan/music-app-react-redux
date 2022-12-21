@@ -4,48 +4,58 @@ import { useState } from "react";
 import Login from "./Login";
 import Register from "./Register";
 
-const StyledLoginRegister = styled(Paper)`
-
+const StyledLoginRegister = styled('div')`
+    .buttons {
+        display: flex;
+        gap: 10px;
+    }
 `;
 
 const LoginRegister = () => {
-    const [open, setOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState('login');
+  const [open, setOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("login");
 
-    const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
-        setActiveTab(newValue);
-    };
+  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
+    setActiveTab(newValue);
+  };
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+  const handleClickOpenRegister = () => {
+    setOpen(true);
+    setActiveTab("register");
+  };
+  const handleClickOpenLogin = () => {
+    setOpen(true);
+    setActiveTab("login");
+  };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    return (
-        <StyledLoginRegister>
-            <Button variant="outlined" size="small" onClick={handleClickOpen}>
-                Login/Register
-            </Button>
-            <Dialog open={open} onClose={handleClose}>
-                <DialogContent>
-                    <Box className="tabs">
-                        <Tabs
-                            value={activeTab}
-                            onChange={handleTabChange}
-                        >
-                            <Tab value="login" label="Login" />
-                            <Tab value="register" label="Register" />
-                        </Tabs>
-                    </Box>
-                    {activeTab === 'login' && <Login onTabChange={setActiveTab} />}
-                    {activeTab === 'register' && <Register onTabChange={setActiveTab} />}
-                </DialogContent>
-            </Dialog>
-        </StyledLoginRegister>
-    )
-}
+  return (
+    <StyledLoginRegister>
+      <Box className="buttons">
+        <Button onClick={handleClickOpenLogin}>
+          Login
+        </Button>
+        <Button variant="outlined" size="small" onClick={handleClickOpenRegister}>
+          Register
+        </Button>
+      </Box>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogContent>
+          <Box className="tabs">
+            <Tabs value={activeTab} onChange={handleTabChange}>
+              <Tab value="login" label="Login" />
+              <Tab value="register" label="Register" />
+            </Tabs>
+          </Box>
+          {activeTab === "login" && <Login onTabChange={setActiveTab} />}
+          {activeTab === "register" && <Register onTabChange={setActiveTab} />}
+        </DialogContent>
+      </Dialog>
+    </StyledLoginRegister>
+  );
+};
 
 export default LoginRegister;
