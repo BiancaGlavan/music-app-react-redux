@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ContentSlider from "../components/ContentSlider";
-import HomePageLoader from "../components/loaders/HomePageLoader";
+import ContentSliderSkeleton from "../components/loaders/ContentSliderSkeleton";
 import { useGetChartsQuery } from "../redux/features/apiDeezerSlice";
 
 const StyledHomepage =styled('div')`
@@ -13,7 +13,12 @@ const Homepage = () => {
   console.log('charts: ', charts);
   return (
     <StyledHomepage className="Homepage">
-      {isLoading && <HomePageLoader />}
+      {isLoading && <>
+      <ContentSliderSkeleton />
+      <ContentSliderSkeleton />
+      <ContentSliderSkeleton />
+      <ContentSliderSkeleton />
+      </>}
       {!isLoading && charts && <ContentSlider type="artist" artists={charts.artists.data}/>}
       {!isLoading && charts && <ContentSlider type="track" tracks={charts.tracks.data}/>}
       {!isLoading && charts && <ContentSlider type="playlist" playlists={charts.playlists.data}/>}

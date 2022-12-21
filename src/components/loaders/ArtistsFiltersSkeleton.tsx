@@ -25,17 +25,7 @@ const ArtistsFiltersSkeleton = () => {
         <Skeleton className="genre" variant="rounded" width={70} height={30}/>
         <Skeleton className="genre" variant="rounded" width={50} height={30}/>
         <Skeleton className="genre" variant="rounded" width={80} height={30}/>
-        <Skeleton className="genre" variant="rounded" width={100} height={30}/>
-        <Skeleton className="genre" variant="rounded" width={70} height={30}/>
-        <Skeleton className="genre" variant="rounded" width={80} height={30}/>
-        <Skeleton className="genre" variant="rounded" width={100} height={30}/>
-        <Skeleton className="genre" variant="rounded" width={100} height={30}/>
-        <Skeleton className="genre" variant="rounded" width={80} height={30}/>
-        <Skeleton className="genre" variant="rounded" width={100} height={30}/>
-        <Skeleton className="genre" variant="rounded" width={100} height={30}/>
         <Skeleton className="genre" variant="rounded" width={50} height={30}/>
-        <Skeleton className="genre" variant="rounded" width={100} height={30}/>
-
     </StyledArtistsFiltersSkeleton>
   )
 }

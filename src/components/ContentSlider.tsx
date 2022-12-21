@@ -190,7 +190,7 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
     const isPlaying = false;
 
     const isSongActive = (song: IChartsTrack) => {
-      return playerState.activeSong?.id === song.id;
+      return playerState?.activeSong?.id === song.id;
     };
 
     const isSongPlaying = (song: IChartsTrack) => {
