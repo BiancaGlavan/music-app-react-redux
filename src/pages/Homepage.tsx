@@ -14,10 +14,13 @@ const Homepage = () => {
   return (
     <StyledHomepage className="Homepage">
       {isLoading && <HomePageLoader />}
-      {!isLoading && charts && <ContentSlider type="album" albums={charts.albums.data}/>}
-      {!isLoading && charts && <ContentSlider type="playlist" playlists={charts.playlists.data}/>}
-      {!isLoading && charts && <ContentSlider type="track" tracks={charts.tracks.data}/>}
       {!isLoading && charts && <ContentSlider type="artist" artists={charts.artists.data}/>}
+      {!isLoading && charts && <ContentSlider type="track" tracks={charts.tracks.data}/>}
+      {!isLoading && charts && <ContentSlider type="playlist" playlists={charts.playlists.data}/>}
+      {!isLoading && charts && <ContentSlider type="album" albums={charts.albums.data}/>}
+     
+     
+      
     </StyledHomepage>
   )
 }
