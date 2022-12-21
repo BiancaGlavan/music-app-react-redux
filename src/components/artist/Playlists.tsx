@@ -66,7 +66,7 @@ const Playlists = ({
       </Typography>
       <Grid container spacing={2}>
         {playlists.map((playlist) => (
-          <Grid item key={playlist?.id} xs={6} sm={6} md={4} lg={3}>
+          <Grid item key={playlist?.id} xs={6} sm={4} md={4} lg={3}>
             <Link className="artist-container" to={`/playlist/${playlist.id}`}>
               <Box className="artist-picture">
                 <img src={playlist?.picture_medium} alt="artist picture" />

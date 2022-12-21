@@ -54,7 +54,7 @@ const FavoriteAlbums = ({albums}: IPropsFavAlbums) => {
     <StyledFavoriteAlbums className="ArtistAlbums">
         <Typography className="title" variant="h2">Favorite Albums</Typography>
         <Grid container spacing={2} >
-                {albums.map((album) => <Grid item  key={album?.deezer_id}  xs={6} sm={6}  md={4} lg={3}>
+                {albums.map((album) => <Grid item  key={album?.deezer_id}  xs={6} sm={4}  md={4} lg={3}>
                    <Link className="artist-container" to={`/album/${album.deezer_id}`}>
                    <Box className="artist-picture">
                         <img src={album?.cover_medium} alt="artist picture" />
