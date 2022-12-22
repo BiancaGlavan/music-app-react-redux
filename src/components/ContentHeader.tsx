@@ -21,6 +21,9 @@ const StyledContentHeader = styled("div")`
     display: flex;
     gap: 10px;
     margin-top: 20px;
+    width: 100%;
+    justify-content: center;
+    
 
     .fav-btn {
       color: ${(props) => props.theme.palette.primary.main};

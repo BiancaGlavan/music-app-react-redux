@@ -6,9 +6,9 @@ import TrackListSkeleton from "./TrackListSkeleton";
 const PlaylistPageLoader = () => {
   return (
     <Container>
-            <PlaylistHeaderSkeleton />
-            <TrackListSkeleton />
-        </Container>
+      <PlaylistHeaderSkeleton />
+      <TrackListSkeleton />
+    </Container>
   )
 }
 

@@ -4,6 +4,7 @@ import AlbumHeaderSkeleton from "../components/loaders/AlbumHeaderSkeleton";
 import ArtistsFiltersSkeleton from "../components/loaders/ArtistsFiltersSkeleton";
 import ArtistsListSkeleton from "../components/loaders/ArtistsListSkeleton";
 import ContentSliderSkeleton from "../components/loaders/ContentSliderSkeleton";
+import PlaylistHeaderSkeleton from "../components/loaders/PlaylistHeaderSkeleton";
 import PlaylistHeaderLoader from "../components/loaders/PlaylistHeaderSkeleton";
 import TrackListSkeleton from "../components/loaders/TrackListSkeleton";
 import TrackListLoader from "../components/loaders/TrackListSkeleton";
@@ -13,7 +14,7 @@ const LoadersPage = () => {
   return (
     <Container>
       <NavigateBack />
-      <AlbumHeaderSkeleton />
+      <PlaylistHeaderSkeleton />
       <TrackListSkeleton />
     </Container>
   );
