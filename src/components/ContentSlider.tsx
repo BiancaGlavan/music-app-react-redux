@@ -40,9 +40,21 @@ const StyledContentSlider = styled("div")`
       text-overflow: ellipsis;
     }
 
-    .slide-img {
+    .container-slide-img {
+      position: relative;
       width: calc(100% - 20px);
+      padding-top: 100%;
       margin: 10px;
+
+      .slide-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+      }
     }
 
     .cover {
@@ -50,9 +62,24 @@ const StyledContentSlider = styled("div")`
       margin: 10px;
       position: relative;
 
-      .track-img {
-        width: 100%;
+      .container-slide-img {
+        position: relative;
+        width: calc(100% - 20px);
+        padding-top: 100%;
+        margin: 10px;
+
+        .track-img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+        }
       }
+
+      
 
       &:hover {
         .play-pause {
@@ -139,7 +166,9 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
       <SwiperSlide key={artist.id} className="swiper-slide">
         <Link to={`/artists/${artist.id}`}>
           <Box className="content-slide">
-            <img className="slide-img" src={artist.picture} alt="" />
+            <Box className="container-slide-img">
+              <img className="slide-img" src={artist.picture} alt="" />
+            </Box>
             <Typography className="truncate" variant="body1">
               {artist.name}
             </Typography>
@@ -154,7 +183,9 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
       <SwiperSlide key={album.id} className="swiper-slide">
         <Link to={`/album/${album.id}`}>
           <Box className="content-slide">
-            <img className="slide-img" src={album.cover} alt="" />
+            <Box className="container-slide-img">
+              <img className="slide-img" src={album.cover} alt="" />
+            </Box>
             <Typography className="truncate" variant="body1">
               {album.title}
             </Typography>
@@ -172,7 +203,9 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
       <SwiperSlide key={playlist.id} className="swiper-slide">
         <Link to={`/playlist/${playlist.id}`}>
           <Box className="content-slide">
-            <img className="slide-img" src={playlist.picture} alt="" />
+            <Box className="container-slide-img">
+              <img className="slide-img" src={playlist.picture} alt="" />
+            </Box>
             <Typography className="truncate" variant="body1">
               {playlist.title}
             </Typography>
@@ -201,7 +234,9 @@ const ContentSlider = ({ artists = [], albums = [], playlists = [], tracks = [],
       <SwiperSlide key={track.id} className="swiper-slide">
         <Box className="content-slide">
           <Box className="cover">
-            <img className="track-img" src={track.album.cover_medium} alt="" />
+            <Box className="container-slide-img">
+              <img className="track-img" src={track.album.cover_medium} alt="" />
+            </Box>
             <IconButton
               size="large"
               onClick={() => handleAddTrack(track, idx)}
