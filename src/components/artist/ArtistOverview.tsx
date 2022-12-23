@@ -19,7 +19,9 @@ interface IPropsArtistOverview {
 }
 
 const StyledArtistOverview = styled("div")`
- 
+  .track-list {
+    margin-top: 30px;
+  }
 `;
 
 const ArtistOverview = ({ onTabChange }: IPropsArtistOverview) => {
@@ -38,7 +40,9 @@ const ArtistOverview = ({ onTabChange }: IPropsArtistOverview) => {
       <Grid container spacing={2}>
         {!isLoading && topSongs && topSongs.total > 0 && album && (
           <Grid item xs={12} sm={12} lg={8}>
-            <TrackList tracks={topSongs?.data} cover={album.cover_small} />
+            <Box className="track-list">
+            <TrackList hideHeader tracks={topSongs?.data} cover={album.cover_small} />
+            </Box>
           </Grid>
         )}
 

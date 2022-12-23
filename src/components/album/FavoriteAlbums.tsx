@@ -59,8 +59,8 @@ const FavoriteAlbums = ({albums}: IPropsFavAlbums) => {
                    <Box className="artist-picture">
                         <img src={album?.cover_medium} alt="artist picture" />
                     </Box>
-                    <Typography className="artist-details" variant="body2">{album?.title}</Typography>
-                    <Typography className="artist-details" variant="caption" color="textSecondary">{album?.artist}</Typography>
+                    <Typography className="artist-details" variant="body1">{album?.title}</Typography>
+                    <Typography className="artist-details" variant="h6" color="textSecondary">{album?.artist}</Typography>
                    </Link>
                 </Grid>)}
             </Grid>

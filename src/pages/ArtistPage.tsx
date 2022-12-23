@@ -8,6 +8,7 @@ import ArtistOverview from "../components/artist/ArtistOverview";
 import Playlists from "../components/artist/Playlists";
 import SimilarArtists from "../components/artist/SimilarArtists";
 import ContentHeader from "../components/ContentHeader";
+import ArtistPageSkeleton from "../components/loaders/ArtistPageSkeleton";
 import NavigateBack from "../components/NavigateBack";
 import {
   useGetArtistAlbumsQuery,
@@ -48,7 +49,7 @@ const ArtistPage = () => {
       <NavigateBack />
       {!isFetching && artist && <ContentHeader type="artist" artist={artist} />}
       {isFetching ? (
-        <div>is loading...</div>
+        <ArtistPageSkeleton />
       ) : (
         <>
           <Box className="artist-tabs">

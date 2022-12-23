@@ -45,8 +45,8 @@ const StyledSimilarArtistsTab = styled(Box)`
     }
 
     .artist-img {
-      width: 80px;
-      height: 80px;
+      width: 68px;
+      height: 68px;
       border-radius: 100%;
     }
   }

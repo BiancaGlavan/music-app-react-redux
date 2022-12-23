@@ -1,6 +1,7 @@
 import { Box, Container } from "@mui/material";
 import React from "react";
 import AlbumHeaderSkeleton from "../components/loaders/AlbumHeaderSkeleton";
+import ArtistPageSkeleton from "../components/loaders/ArtistPageSkeleton";
 import ArtistsFiltersSkeleton from "../components/loaders/ArtistsFiltersSkeleton";
 import ArtistsListSkeleton from "../components/loaders/ArtistsListSkeleton";
 import ContentSliderSkeleton from "../components/loaders/ContentSliderSkeleton";
@@ -12,10 +13,9 @@ import NavigateBack from "../components/NavigateBack";
 
 const LoadersPage = () => {
   return (
-    <Container>
+    <Container sx={{minHeight: '110vh'}}>
       <NavigateBack />
-      <PlaylistHeaderSkeleton />
-      <TrackListSkeleton />
+      <ArtistPageSkeleton />
     </Container>
   );
 };

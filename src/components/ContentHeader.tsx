@@ -23,7 +23,22 @@ const StyledContentHeader = styled("div")`
     margin-top: 20px;
     width: 100%;
     justify-content: center;
-    
+
+    ${(props) => props.theme.breakpoints.up("sm")} {
+      justify-content: flex-start;
+    }
+
+    .fav-btn {
+      color: ${(props) => props.theme.palette.primary.main};
+    }
+  }
+
+  .artist-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+    justify-content: center;
 
     .fav-btn {
       color: ${(props) => props.theme.palette.primary.main};
@@ -224,7 +239,7 @@ const ContentHeader = ({ artist, playlist, album, type }: IPropsContentHeader) =
               {new Intl.NumberFormat().format(artist.nb_fan)} listeners
             </Typography>
           )}
-          <Box className="buttons">
+          <Box className="artist-buttons">
             <IconButton className="fav-btn" onClick={handleAddArtistToFav}>
               {!isFavorite ? <FavoriteBorderOutlinedIcon /> : <FavoriteIcon />}
             </IconButton>
