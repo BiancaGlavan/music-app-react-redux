@@ -28,14 +28,6 @@ const StyledPlaylistHeaderSkeleton = styled("div")`
         margin-top: 10px;
         align-items: center;
       }
-
-      .buttons {
-        display: flex;
-        gap: 15px;
-        width: 100%;
-        justify-content: center;
-          margin-top: 25px;
-      }
     }
 
   .artist {
@@ -79,10 +71,6 @@ const PlaylistHeaderSkeleton = () => {
           <Skeleton className="details" variant="rectangular" width={40} height={8} />
           <Skeleton className="details" variant="rectangular" width={80} height={8} />
           <Skeleton className="details" variant="rectangular" width={60} height={8} />
-        </Box>
-        <Box className="buttons">
-          <Skeleton variant="circular" width={30} height={30} />
-          <Skeleton variant="circular" width={30} height={30} />
         </Box>
       </Box>
     </StyledPlaylistHeaderSkeleton>
