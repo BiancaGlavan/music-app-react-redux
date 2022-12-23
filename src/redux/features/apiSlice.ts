@@ -76,6 +76,28 @@ export const backendApi = createApi({
   tagTypes: ["Profile", "Artists", "Albums", "Playlists", "Songs"],
 
   endpoints: (builder) => ({
+    uploadImage: builder.mutation<string, FormData>({
+      query(data) {
+        return {
+          url: `upload`,
+          method: "POST",
+          body: data,
+          mode: 'cors',
+          credentials: 'same-origin',
+          cache: 'no-cache',
+        };
+      }
+    }),
+    updateProfile: builder.mutation<IUser, Partial<IUser>>({
+      query(data) {
+        return {
+          url: `auth/profile`,
+          method: "POST",
+          body: data,
+        }
+      },
+      invalidatesTags: ["Profile"],
+    }),
     addArtistToFav: builder.mutation<IAddToFavResponse, { artist: IArtistPayload }>({
       query({ artist }) {
         return {
@@ -164,6 +186,8 @@ export const {
   useGetFavoritePlaylistsQuery,
   useAddSongToFavMutation,
   useGetFavoriteSongsQuery,
+  useUploadImageMutation,
+  useUpdateProfileMutation,
 } = backendApi;
 
 export default backendApi;
