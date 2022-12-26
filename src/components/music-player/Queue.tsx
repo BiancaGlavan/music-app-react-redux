@@ -6,23 +6,26 @@ import CloseIcon from '@mui/icons-material/Close';
 import QueueContent from "./QueueContent";
 
 const StyledDrawerBox = styled(Box)`
-  ::-webkit-scrollbar {
-    width: 10px;
+
+  ${props => props.theme.breakpoints.up("sm")} {
+    ::-webkit-scrollbar {
+      width: 10px;
+      }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: none;
     }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: none;
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: ${props => props.theme.palette.grey[800]};        
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: ${props => props.theme.palette.grey[700]}; 
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: ${props => props.theme.palette.grey[800]};        
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: ${props => props.theme.palette.grey[700]}; 
+    }
   }
 
 `;
