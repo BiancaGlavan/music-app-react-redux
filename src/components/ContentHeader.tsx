@@ -29,7 +29,7 @@ const StyledContentHeader = styled("div")`
     }
 
     .fav-btn {
-      color: ${(props) => props.theme.palette.primary.main};
+      color: ${(props) => props.theme.palette.secondary.main};
     }
   }
 
@@ -41,7 +41,7 @@ const StyledContentHeader = styled("div")`
     justify-content: center;
 
     .fav-btn {
-      color: ${(props) => props.theme.palette.primary.main};
+      color: ${(props) => props.theme.palette.secondary.main};
     }
   }
 

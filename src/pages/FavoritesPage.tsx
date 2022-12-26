@@ -26,7 +26,7 @@ const StyledFavoritesPage = styled(Container)`
 
     .chip {
       &.active {
-        background: ${(props) => props.theme.palette.primary.main};
+        background: ${(props) => props.theme.palette.secondary.main};
       }
     }
   }

@@ -101,7 +101,7 @@ const StyledTrack = styled(Paper)`
     margin-right: 10px;
 
     .fav-btn {
-      color: ${(props) => props.theme.palette.primary.main};
+      color: ${(props) => props.theme.palette.secondary.main};
     }
 
     .duration {

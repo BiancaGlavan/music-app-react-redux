@@ -52,7 +52,7 @@ const StyledSimilarArtistsTab = styled(Box)`
   }
 
   .fav-btn {
-    color: ${(props) => props.theme.palette.primary.main};
+    color: ${(props) => props.theme.palette.secondary.main};
   }
 `;
 

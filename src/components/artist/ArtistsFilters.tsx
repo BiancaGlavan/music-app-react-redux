@@ -15,8 +15,8 @@ const StyledArtistsFilters = styled('div')`
     padding-bottom: 10px;
 
 
-        ::-webkit-scrollbar {
-        height: 4px;
+      ::-webkit-scrollbar {
+      height: 4px;
       }
       
       /* Track */
@@ -26,10 +26,7 @@ const StyledArtistsFilters = styled('div')`
        
       /* Handle */
       ::-webkit-scrollbar-thumb {
-        background: ${props => props.theme.palette.grey[800]}; 
-     
-
-       
+        background: ${props => props.theme.palette.grey[800]};        
       }
       
       /* Handle on hover */
@@ -42,7 +39,7 @@ const StyledArtistsFilters = styled('div')`
         margin: 10px;
 
         &.active {
-            background: ${props => props.theme.palette.primary.dark};
+            background: ${props => props.theme.palette.secondary.main};
         }
     }
 `;
