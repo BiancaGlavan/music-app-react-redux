@@ -99,7 +99,6 @@ const ProfilePage = () => {
           variant="outlined"
           autoComplete="off"
         />
-        <TextField label="Password" type="password" variant="outlined" autoComplete="off" />
         <Button onClick={handleProfileUpdate} className="btn" variant="contained">
           Update
         </Button>

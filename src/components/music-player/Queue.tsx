@@ -11,6 +11,17 @@ const StyledQueue = styled(Box)`
   align-items: center;
   margin-left: 10px;
 
+  .queue-btn {
+    border: 1px solid ${(props) => props.theme.palette.secondary.main};
+    color: ${(props) => props.theme.palette.secondary.main};
+
+    &:hover {
+      background: ${(props) => props.theme.palette.secondary.dark};
+      color: #fff;
+      border: 1px solid ${(props) => props.theme.palette.secondary.dark};
+    }
+  }
+
   ${props => props.theme.breakpoints.up("sm")} {
     margin-left: 20px;
   }
@@ -41,9 +52,9 @@ const Queue = () => {
 
 
     <StyledQueue>
-      {isMobile ? <IconButton onClick={handleDrawerToggle}>
+      {isMobile ? <IconButton className="queue-btn" onClick={handleDrawerToggle}>
         <QueueMusicIcon />
-      </IconButton> : <Button variant="outlined" onClick={handleDrawerToggle} startIcon={<QueueMusicIcon />}>
+      </IconButton> : <Button className="queue-btn" variant="outlined" onClick={handleDrawerToggle} startIcon={<QueueMusicIcon />}>
         Queue
       </Button>}
       {/* <Button variant="outlined" onClick={handleDrawerToggle} startIcon={<QueueMusicIcon />}>
