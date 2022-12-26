@@ -10,7 +10,7 @@ interface IPropsQueueContent {
 
 const StyledQueueContent = styled('div')`
     margin: 10px;
-
+    
     .artist {
         display: flex;
         flex-direction: column;
