@@ -5,6 +5,28 @@ import QueueMusicIcon from '@mui/icons-material/QueueMusic';
 import CloseIcon from '@mui/icons-material/Close';
 import QueueContent from "./QueueContent";
 
+const StyledDrawerBox = styled(Box)`
+  ::-webkit-scrollbar {
+    width: 10px;
+    }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: none;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${props => props.theme.palette.grey[800]};        
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${props => props.theme.palette.grey[700]}; 
+  }
+
+`;
+
 const StyledQueue = styled(Box)`
 
   display: flex;
@@ -57,31 +79,7 @@ const Queue = () => {
       </IconButton> : <Button className="queue-btn" variant="outlined" onClick={handleDrawerToggle} startIcon={<QueueMusicIcon />}>
         Queue
       </Button>}
-      {/* <Button variant="outlined" onClick={handleDrawerToggle} startIcon={<QueueMusicIcon />}>
-        {!isMobile && 'Queue'}
-      </Button> */}
-
-
-      {/* <Drawer
-        variant="temporary"
-        anchor="bottom"
-        open={open}
-        onClose={handleDrawerToggle}
-        ModalProps={{
-          keepMounted: true, // Better open performance on mobile.
-        }}
-        sx={{
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', height: 'calc(100vh - 90px)', marginBottom: {xs: '93px', sm: '90px'} },
-        }}
-      >
-        <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
-          <IconButton onClick={handleDrawerToggle}>
-            <CloseIcon />
-          </IconButton>
-        </Box>
-        <QueueContent />
-      </Drawer> */}
-
+     
       <SwipeableDrawer
         anchor="bottom"
         open={open}
@@ -93,14 +91,14 @@ const Queue = () => {
           keepMounted: true,
         }}
       >
-        <Box sx={{ maxHeight: 'calc(100vh - 80px)', overflow: 'auto' }}>
+        <StyledDrawerBox sx={{ maxHeight: 'calc(100vh - 80px)', overflow: 'auto' }}>
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: '10px' }}>
             <IconButton onClick={handleDrawerToggle}>
               <CloseIcon />
             </IconButton>
           </Box>
           <QueueContent />
-        </Box>
+        </StyledDrawerBox>
 
       </SwipeableDrawer>
     </StyledQueue>
