@@ -1,6 +1,5 @@
-import { Box, Divider, Drawer, IconButton, Input, Paper, TextField } from "@mui/material";
+import { Drawer, IconButton, Paper } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import SearchIcon from "@mui/icons-material/Search";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -8,7 +7,6 @@ import { useEffect, useState } from "react";
 import SidebarMenu from "./SidebarMenu";
 import Search from "./search/Search";
 import classNames from "classnames";
-import Button from "@mui/material/Button";
 import LoginRegister from "./login-register/LoginRegister";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { useGetMyProfileQuery } from "../redux/features/apiSlice";

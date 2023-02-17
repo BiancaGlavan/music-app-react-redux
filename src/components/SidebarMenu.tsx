@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import { Button, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper } from "@mui/material";
+import { List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper } from "@mui/material";
 import { Link, useLocation } from "react-router-dom";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LibraryMusicOutlinedIcon from '@mui/icons-material/LibraryMusicOutlined';

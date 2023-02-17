@@ -4,7 +4,7 @@ import SidebarMenu from './components/SidebarMenu';
 import ArtistPage from './pages/ArtistPage';
 import ExplorePage from './pages/ExplorePage';
 import Homepage from './pages/Homepage';
-import { createTheme, ThemeProvider, styled, useTheme } from '@mui/material/styles';
+import { ThemeProvider, styled, useTheme } from '@mui/material/styles';
 import { CssBaseline, useMediaQuery } from '@mui/material';
 import darkTheme from './theme/dark';
 import AlbumPage from './pages/AlbumPage';

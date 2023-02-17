@@ -6,7 +6,6 @@ import { IPlaylist } from "../../redux/features/apiDeezerSlice";
 interface IPropsPlaylists {
   playlists: IPlaylist[];
   title?: string;
-
   totalItems?: number;
   currentOffset?: number;
   onNextPage?: () => void;
