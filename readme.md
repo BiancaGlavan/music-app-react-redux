@@ -33,9 +33,11 @@ Users should be able to:
 - Classnames
 - Swiper
 - Deezer API
+
+
+### Backend 
+
 - Express js
 - MongoDB
 - Mongoose
-
-### Backend 
 - Repository: [https://github.com/BiancaGlavan/music-app-backend](https://github.com/BiancaGlavan/music-app-backend)
